@@ -31,7 +31,7 @@ bot.on("channelCreate", async ch => {
     if (logs) {
         logsEmbed.setTitle("Action: Create Channel")
             .addField("Channel Name", ch.name)
-            .setDescription("`Channel ID: " + ch.id + "`");
+            .addField("IDs", "```Channel: " + ch.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -43,7 +43,7 @@ bot.on("channelDelete", async ch => {
     if (logs) {
         logsEmbed.setTitle("Action: Delete Channel")
             .addField("Channel Name", ch.name)
-            .setDescription("`Channel ID: " + ch.id + "`");
+            .addField("IDs", "```Channel ID: " + ch.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -55,10 +55,8 @@ bot.on("emojiCreate", async e => {
     if (logs) {
         logsEmbed.setTitle("Action: Create Emoji")
             .addField("Emoji Name", e.name)
-            .addField("Author", e.fetchAuthor()
-                .username)
             .addField("URL", e.url)
-            .setDescription("`Emoji ID: " + e.id + "`");
+            .addField("IDs", "```Emoji ID: " + e.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -70,10 +68,20 @@ bot.on("emojiDelete", async e => {
     if (logs) {
         logsEmbed.setTitle("Action: Delete Emoji")
             .addField("Emoji Name", e.name)
-            .addField("Author", e.fetchAuthor()
-                .username)
             .addField("URL", e.url)
-            .setDescription("`Emoji ID: " + e.id + "`");
+            .addField("IDs", "```Emoji ID: " + e.id + "```");
+        logs.send(logsEmbed);
+    }
+});
+bot.on("guildBanRemove", (g, m) => {
+      logsEmbed.setDescription("")
+    .setTitle("");
+    logsEmbed.fields=[];
+    const logs = g.channels.find(r => r.name === ("logs"));
+    if (logs) {
+        logsEmbed.setTitle("Action: Ban")
+            .addField("Banned User", m.username)
+            .addField("IDs", "```User ID: " + m.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -85,7 +93,7 @@ bot.on("guildBanRemove", (g, m) => {
     if (logs) {
         logsEmbed.setTitle("Action: Unban")
             .addField("Unbanned User", m.username)
-            .setDescription("`User ID: " + m.id + "`");
+            .addField("IDs", "```User ID: " + m.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -107,7 +115,7 @@ bot.on("guildMemberAdd", async mem => {
                     .addField("Avatar URL", mem.user.avatarURL)
                     .addField("Account Creation Date", mem.user.createdAt)
                     .addField("Invite Used", invite.code + " created by " + inviter.tag + ", used " + invite.uses + " times.")
-                    .setDescription("`User ID: " + mem.user.id + "`");
+                    .addField("IDs", "```User ID: " + mem.user.id + "\nInviter ID: " + inviter.id + "```");
                 logs.send(logsEmbed);
             }
         });
@@ -116,15 +124,24 @@ bot.on("guildMemberRemove", async mem => {
       logsEmbed.setDescription("")
     .setTitle("");
     logsEmbed.fields=[];
+             mem.guild.fetchInvites()
+        .then(guildInvites => {
+            const ei = invites[mem.guild.id];
+            invites[mem.guild.id] = guildInvites;
+            const invite = guildInvites.find(i => ei.get(i.code)
+                .uses < i.uses);
+            const inviter = bot.users.get(invite.inviter.id);
             const logs = mem.guild.channels.find(r => r.name === ("logs"));
             if (logs) {
                 logsEmbed.setTitle("User Left")
                     .addField("User", mem.user.username)
                     .addField("Avatar URL", mem.user.avatarURL)
                     .addField("Account Creation Date", mem.user.createdAt)
-                    .setDescription("`User ID: " + mem.user.id + "`");
+                    .addField("Invite Used", invite.code + " created by " + inviter.tag + ", used " + invite.uses + " times.")
+                    .addField("IDs", "```User ID: " + mem.user.id + "\nInviter ID: " + inviter.id + "```");
                 logs.send(logsEmbed);
             }
+        });
 });
 bot.on("messageDelete", async m => {
       logsEmbed.setDescription("")
@@ -137,7 +154,7 @@ bot.on("messageDelete", async m => {
             .addField("Content", m.content)
             .addField("Channel", m.channel.name)
             .addField("Message Time", m.createdAt)
-            .setDescription("`Message ID: " + m.id + "`\n`User ID: " + m.author.id + "`");
+            .addField("IDs", "```Message ID: " + m.id + "\nUser ID: " + m.author.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -151,7 +168,7 @@ bot.on("messageUpdate", (o, n) => {
             .addField("User", o.author.username)
             .addField("Was", o.content)
             .addField("Now Is", n.content)
-            .setDescription("`Message ID: " + o.id + "`\n`User ID: " + o.author.id + "`");
+            .addField("IDs", "```Message ID: " + o.id + "\nUser ID: " + o.author.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -165,7 +182,7 @@ bot.on("roleCreate", async r => {
             .addField("Name", r.name)
             .addField("Position", r.calculatedPosition)
             .addField("Hex", r.hexColor)
-            .setDescription("`Role ID: " + r.id + "`");
+            .addField("IDs", "```Role ID: " + r.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -179,7 +196,7 @@ bot.on("roleDelete", async r => {
             .addField("Name", r.name)
             .addField("Position", r.calculatedPosition)
             .addField("Hex", r.hexColor)
-            .setDescription("`Role ID: " + r.id + "`");
+            .addField("IDs", "```Role ID: " + r.id + "```");
         logs.send(logsEmbed);
     }
 });
@@ -227,7 +244,7 @@ bot.on("message", async msg => {
     const guild = msg.guild; // shortens code
     const logs = guild.channels.find(ch => ch.name === 'logs' && ch.type == "text"); // logs channel
     const log = new Discord.RichEmbed()
-        .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+        .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
         .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
             .toString(16)
@@ -236,7 +253,7 @@ bot.on("message", async msg => {
         var member = msg.mentions.members.first(); // the mentioned member
         var send = (member.displayName + " can not be nominated now. " + member.displayName + " must be impeached from their current position in order to be nominated at this time."); // used to save space
         const nom = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL) // just embed stuff :)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -255,18 +272,18 @@ bot.on("message", async msg => {
                     msg.channel.send(send);
                 } else {
                     if (role.name === "Congress") {
-                        msg.channel.send("Nominate for House or Senate?");
+                        msg.channel.send("Nominate for House or Senate?"); // Note: you need to have at least 9 house members per senate member
                         msg.channel.awaitMessages(m => m.author.id == msg.author.id, {
                                 max: 1,
                                 time: 30000
-                            })
+                            }) // waits 30 secs for a message...
                             .then(collected => {
                                 if (collected.first()
-                                    .content.toLowerCase() == 'house') {
-                                    member.addRole(guild.roles.find(r => r.name === "House"));
+                                    .content.toLowerCase() == 'house') { // ...and if its content is "house"...
+                                    member.addRole(guild.roles.find(r => r.name === "House")); // ...give them house!
                                 } else if (collected.first()
-                                    .content.toLowerCase() == 'senate') {
-                                    member.addRole(guild.roles.find(r => r.name === "Senate"));
+                                    .content.toLowerCase() == 'senate') { // same thing here
+                                    member.addRole(guild.roles.find(r => r.name === "Senate")); // ^
                                 } else {
                                     msg.channel.send("Please choose either House or Senate.");
                                     return;
@@ -282,12 +299,12 @@ bot.on("message", async msg => {
                     nom.setDescription(msg.member.displayName + ", you have successfully nominated " + member.displayName + " for " + role.name + "!");
                     nom.setFooter('Nominated ' + member.displayName + ' for ' + role + ".");
                     log.setTitle("Action: Nominate");
-                    log.setDescription("User: " + member.displayName + "\n\nPerpetrator: " + msg.member.displayName + "\n\nPosition: " + role.name);
+                    log.setDescription("User: " + member.displayName + "\n\nPerpetrator: " + msg.member.displayName + "\n\nPosition: " + role.name); // i plan to format this just like the logs you saw in the events earlie but im too lazy tb honest
                     logs.send(log);
                 }
             } else {
                 nom.setDescription("You lack the proper role to use this command.")
-                    .setFooter("You lack permission module nominate.cmdHandlePermission[0].large()");
+                    .setFooter("You lack any branch-leading role in the Permissions Object."); // i'm just putting what the permission module is because 1. i plan to remove them 2. its cancer 3. i don't share them lol 4. it's far less efficient than the permission handling here
             }
         } else {
             nom.setDescription("Please mention someone to nominate.");
@@ -297,9 +314,9 @@ bot.on("message", async msg => {
     } // a lot of stuff has already been explained so I won't put more comments here mostly
     if (cmd === "impeach" || cmd === "peach") {
         let member = msg.mentions.members.first();
-        let send = ("You either do not have the correct role for you to impeach " + member.user.username + ", or another error has occured. Please try again later."); // saves space
+        let send = ("You either do not have the correct role for you to impeach " + member.user.username + ", or another error has occured. Please try again later.");
         const peach = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -319,6 +336,14 @@ bot.on("message", async msg => {
                 if (member.roles.find(r => r.name === role.name)) {
                     member.removeRole(role)
                         .catch(console.error);
+                        if(role.name==="Congress") {
+                          if(member.roles.find(r => r.name==="House")) {
+                            member.removeRole(guild.roles.find(r => r.name==="House"));
+                          }
+                          if(member.roles.find(r => r.name==="Senate")) {
+                            member.removeRole(guild.roles.find(r => r.name==="Senate"));
+                          }
+                        }
                     peach.setDescription(msg.member.displayName + ", I have impeached " + member.displayName + " from " + role.name + ".");
                     peach.setFooter('Impeached ' + member.displayName + ' from ' + role.name + ".");
                     log.setTitle("Action: Impeach");
@@ -329,30 +354,30 @@ bot.on("message", async msg => {
                 }
             } else {
                 peach.setDescription("You lack the proper role to use this command.")
-                    .setFooter("You lack permission module impeach.cmdHandlePermission[0].large()");
+                    .setFooter("You lack a branch role in the Permissions Object.");
             }
         } else {
-            peach.setDescription("Args not found. Please resend the command with proper arguments.");
-            peach.setFooter('Couldn\'t find args.');
+            peach.setDescription("Args not found. Please resend the command with proper arguments.")
+            .setFooter('Couldn\'t find args.');
         }
         msg.channel.send(peach);
     }
     if (cmd === "poll") {
         if (msg.member.roles.find(r => r.name === "Bot Admin")) {
-            let argString = args.join(" ");
-            let parsedArgs = argString.split('"');
-            console.log(parsedArgs);
-            parsedArgs.splice(0, 1);
-            parsedArgs.splice(1, 1);
-            parsedArgs.splice(2, 1);
-            parsedArgs.splice(3, 1);
+            let argString = args.join(" "); // this turns the args into a string...
+            let parsedArgs = argString.split('"'); // ...then splits it by the " keychar... 
+            console.log(parsedArgs); // ...and then...
+            parsedArgs.splice(0, 1); // ...removes the blank value in front...
+            parsedArgs.splice(1, 1); // ...removes the blank value after the first argument...
+            parsedArgs.splice(2, 1); // ...removes the blank value after the second argument...
+            parsedArgs.splice(3, 1); // ...and removes the blank value at the end!
             console.log(parsedArgs); // figured this out myself, pretty proud of it tbh
             const upvote = guild.emojis.find(e => e.name === "Upvote");
             const downvote = guild.emojis.find(e => e.name === "Downvote");
             msg.channel.send("@everyone, " + parsedArgs[0] + " Vote here:\n\n" + upvote + ": " + parsedArgs[1] + "\n\n" + downvote + ": " + parsedArgs[2])
-                .then(async msg => { // required to get async to work
+                .then(async msg => { // required to get awaits to work
                     try {
-                        await msg.react(upvote); // await is really good
+                        await msg.react(upvote); // await is really good, one of the best functions in EScript
                         await msg.react(downvote);
                     } catch (error) { // in case any await errors out, this catches them
                         console.log(error);
@@ -362,9 +387,9 @@ bot.on("message", async msg => {
             msg.channel.send("You lack permissions to use this command.");
         }
     }
-    if (cmd === "elect") { // syntax: ;elect [number of candidates] [position to run for, e.g. CJ, CP, Pres, VP, Speaker] [candidate 1] [candidate 2] etc...
+    if (cmd === "elect") {
         const elect = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -402,7 +427,7 @@ bot.on("message", async msg => {
                             }
                             if (num > 8) {
                                 await msg.react("9️⃣");
-                            }
+                            } // without await, these got all jumbled up
                         } catch (error) {
                             console.log(error);
                         }
@@ -412,11 +437,11 @@ bot.on("message", async msg => {
                 logs.send(log);
             } else {
                 elect.setDescription("You are unable to use this command.");
-                elect.setFooter('You lack permission module elect.cmd.send');
+                elect.setFooter('You lack the President role in the Permissions Object.');
                 msg.channel.send(elect);
             }
         } else {
-            elect.setDescription("Not enough args. Please check the bot code's comments to understand the syntax.");
+            elect.setDescription("Not enough args. Please do `;help elect` and try again.");
             elect.setFooter('Not enough args have been found.');
             msg.channel.send(elect);
         }
@@ -424,7 +449,7 @@ bot.on("message", async msg => {
     if (cmd === "resign") {
         let pos = undefined;
         const resign = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -435,7 +460,7 @@ bot.on("message", async msg => {
         cj = msg.member.roles.find(r => r.name === "Chief Justice");
         cp = msg.member.roles.find(r => r.name === "Chief of Police");
         let speaker = msg.member.roles.find(r => r.name === "Speaker of the House");
-        if (officer || congress || judge || cj || cp || speaker) {
+        if (officer || congress || judge || cj || cp || speaker) { // checks if they have any roles
             if (officer) {
                 pos = "Officer";
             }
@@ -470,16 +495,18 @@ bot.on("message", async msg => {
             logs.send(log);
         } else {
             resign.setDescription("You are currently unable to resign. If you are in a position which you believe you should be able to resign, please contact Sperg.");
-            resign.setFooter('You lack permission module role.member.resign');
+            resign.setFooter('You lack any governmental position.');
         }
         msg.channel.send(resign);
     }
     if (cmd === "detain") {
         let argString = args.join(" ");
         let parsedArgs = argString.split('"', 2);
+        parsedArgs.splice(0,1);
+        parsedArgs.splice(1,1);
         let member = msg.mentions.members.first();
         const det = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -488,14 +515,14 @@ bot.on("message", async msg => {
         let role = guild.roles.find(r => r.name === "Detained");
         if (parsedArgs.length < 1) {
             det.setDescription("Please specify which user to detain.");
-            det.setFooter('Arg detain.arg.userDetain is undefined');
+            det.setFooter('Arg detainArg.user.to("Action", "Detain") is undefined');
         } else if (parsedArgs.length < 2) {
             det.setDescription("Please specify the reason.");
-            det.setFooter('Arg detain.arg.detainReason is undefined');
+            det.setFooter('Arg detainArg.user.to("Reason", "Detain") is undefined');
         } else {
             if (!msg.member.roles.find(r => r.name === "Officer") && !msg.member.roles.find(r => r.name === "Chief of Police")) {
                 det.setDescription("You must be an officer to use this command.");
-                det.setFooter('You lack permission module detain.canUse.member.role');
+                det.setFooter('You lack the Officer role in the Permission Object.');
             } else {
                 det.setDescription(msg.member.displayName + ", I have detained " + member.displayName + ", for reason " + args[1] + ". A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!");
                 reason = (parsedArgs[1]);
@@ -503,7 +530,7 @@ bot.on("message", async msg => {
                 log.setTitle("Action: Detain");
                 log.setDescription("User: " + member.displayName + "\n\nPerpetrator: " + msg.member.displayName + "\n\nReason: " + reason);
                 logs.send(log);
-                member.addRole(role)
+                member.addRole(role) // the good stuff starts now..
                     .catch(console.error);
                 setTimeout(
                     () => {
@@ -515,7 +542,7 @@ bot.on("message", async msg => {
                             det.setDescription(msg.member.displayName + ", you have been impeached because no judges approved this detainment in the 5 minutes.");
                             det.setFooter('Impeached from Officer.');
                         }
-                    }, 300000); // waits 5 minutes to check whether they been approved, does nothing if it has but impeaches you if it hasn't
+                    }, 300000); // waits 5 minutes to check whether they have been approved, does nothing if it has but impeaches you if it hasn't
             }
         }
         msg.channel.send(det);
@@ -524,30 +551,30 @@ bot.on("message", async msg => {
         courtThing = msg.mentions.members.first();
         let detained = guild.roles.find(r => r.name === "Detained");
         const approve = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
                 .substr(1, 6));
         if (msg.member.roles.find(r => r.name === "Judge") || msg.member.roles.find(r => r.name === "Chief Justice")) {
-            if (courtThing.roles.find(r => r.name === "Detained")) {
+            if (courtThing.roles.find(r => r.name === "Detained")) { // checks for detainment
                 courtThing.removeRole(detained)
                     .catch(console.error);
                 const sender = msg.member;
                 courtThing.addRole(guild.roles.find(r => r.name === "Court"));
                 approve.setDescription(sender.displayName + ", " + courtThing.displayName + " has been PUT IN COURT.");
                 approve.setFooter('Put ' + courtThing.displayName + ' in court.');
-                var judgesStuff = [];
+                var judgesStuff = []; // blank array
                 guild.members.forEach(member => {
                     if (member.roles.find(r => r.name === "Judge")) {
-                        if (member !== courtThing) {
-                            judgesStuff.push(member);
+                        if (member !== courtThing&&member!==msg.member) {
+                            judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
                         } else {
                             console.log(member, courtThing);
                         }
                     }
                 });
-                judgeToUse = judgesStuff[Math.floor(Math.random() * judgesStuff.length)];
+                judgeToUse = judgesStuff[Math.floor(Math.random() * judgesStuff.length)]; // chooses a random judge
                 console.log(judgeToUse.user.id);
                 console.log(judgeToUse.user);
                 cj = guild.roles.find(r => r.name === "Chief Justice");
@@ -594,9 +621,9 @@ bot.on("message", async msg => {
             }
         } else {
             approve.setDescription("You must be a Judge to use this command.");
-            approve.setFooter('You lack permission modules approve.cmd.selectArgs.role and approve.cmd.module.args');
+            approve.setFooter('You lack the Judge role in the Permissions Object.');
         }
-        msg.channel.send(approve);
+        msg.channel.send(approve); // this took so long to get to work im so proud of myself ahadgjasbh
     }
     if (cmd === "restart" || cmd === "reset") {
         if (msg.member.roles.find(r => r.name === "Bot Owner")) {
@@ -609,7 +636,7 @@ bot.on("message", async msg => {
             courtThing.removeRole(guild.roles.find(r => r.name === "Muted"));
         };
         const guilty = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -618,7 +645,7 @@ bot.on("message", async msg => {
             if (msg.member.user.id === judgeToUse.user.id) { // makes sure it's used in court by the selected judge
                 if (args.length > 1) {
                     courtThing.addRole(guild.roles.find(r => r.name === "Muted"));
-                    guilty.setDescription(msg.member.displayName + ", " + courtThing.displayName + " has been found **GUILTY.** If a time other than 0 has been put on a crime not punishable by imprisonment, you will be IMPEACHED!"); // you will, Eli.
+                    guilty.setDescription(msg.member.displayName + ", " + courtThing.displayName + " has been found **GUILTY.** If a time other than 0 has been put on a crime not punishable by imprisonment, you will be IMPEACHED!"); // you will
                     guilty.setFooter('Ruled the case as guilty.');
                     msg.channel.send(guilty);
                     msg.channel.replacePermissionOverwrites({
@@ -653,13 +680,13 @@ bot.on("message", async msg => {
             }
         } else {
             guilty.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-            guilty.setFooter('Category ' + msg.channel.parent + ' module server.channel.category does not match category "court"');
+            guilty.setFooter('Category ' + msg.channel.parent + ' does not match category "court"');
         }
         msg.channel.send(guilty);
     }
     if (cmd === "innocent" || cmd === "inno") {
         const inno = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -698,13 +725,13 @@ bot.on("message", async msg => {
             }
         } else {
             inno.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-            inno.setFooter('Category ' + msg.channel.parent + ' module server.channel.category does not match category "court".');
+            inno.setFooter('Category ' + msg.channel.parent + ' does not match category "court".');
         }
         msg.channel.send(inno);
     }
     if (cmd === "mistrial") {
         const mis = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -738,14 +765,14 @@ bot.on("message", async msg => {
             }
         } else {
             mis.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-            mis.setFooter('Category ' + msg.channel.parent + ' module server.channel.category does not match category "court".');
+            mis.setFooter('Category ' + msg.channel.parent + ' does not match category "court".');
             msg.channel.send(mis);
         }
     }
     if (cmd === "law") {
         var lawThing = (laws[args[0] - 1]);
         const lawSend = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -758,7 +785,7 @@ bot.on("message", async msg => {
     if (cmd === "right") {
         var rightThing = (rights[args[0] - 1]);
         const rightSend = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -770,7 +797,7 @@ bot.on("message", async msg => {
     }
     if (cmd === "update") {
         const update = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -785,13 +812,13 @@ bot.on("message", async msg => {
             update.setFooter('Bot update!');
         } else {
             update.setDescription("Only a bot owner or admin may use this command.");
-            update.setFooter('You lack permission module update.command.sendArgs.msg');
+            update.setFooter('You lack the Bot Owner and Bot Admin roles in the Permissions Object.');
         }
         msg.channel.send(update);
     }
     if (cmd === "module" || cmd === "modules") {
         const module = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -802,7 +829,7 @@ bot.on("message", async msg => {
             module.setFooter('Modules available');
         } else if (args[0] === "Owners" || args[0] === "Owner") {
             module.setTitle("Module Owners:");
-            module.setDescription("Update, Elect, Reset, Poll");
+            module.setDescription("Update, Elect, Reset, Eval");
             module.setFooter('Owners Module');
         } else if (args[0] === "Admins" || args[0] === "Admin") {
             module.setTitle("Module Admins:");
@@ -814,7 +841,7 @@ bot.on("message", async msg => {
             module.setFooter('Branches Module');
         } else if (args[0] === "Congress") {
             module.setTitle("Module Congress:");
-            module.setDescription("Bill, Resign");
+            module.setDescription("Bill, Resign, Clear");
             module.setFooter('Congress Module');
         } else if (args[0] === "Police" || args[0] === "Officers") {
             module.setTitle("Module Police:");
@@ -826,7 +853,7 @@ bot.on("message", async msg => {
             module.setFooter('Judicial Module');
         } else if (args[0] === "General" || args[0] === "General") {
             module.setTitle("Module General:");
-            module.setDescription("Help, Modules");
+            module.setDescription("Help, Modules, ping");
             module.setFooter('General Module');
         } else {
             module.setDescription("Invalid module!");
@@ -836,7 +863,7 @@ bot.on("message", async msg => {
     }
     if (cmd === "bill") {
         const bill = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -901,7 +928,7 @@ bot.on("message", async msg => {
             }
         } else {
             const bruh = new Discord.RichEmbed()
-                .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+                .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
                 .setTimestamp()
                 .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                     .toString(16)
@@ -911,7 +938,7 @@ bot.on("message", async msg => {
         }
     }
     if (cmd === "ping") {
-      let start = Date.now()
+      let start = Date.now();
       console.log(start);
         msg.channel.send("```API Ping: " + bot.ping + "```")
             .then(async ms => {
@@ -921,7 +948,7 @@ bot.on("message", async msg => {
     }
     if (cmd === "help") {
         const help = new Discord.RichEmbed()
-            .setAuthor(msg.author, msg.author.avatarURL, msg.author.avatarURL)
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
@@ -935,9 +962,9 @@ bot.on("message", async msg => {
             help.addField(";detain", "For officers to detain someone for breaking a law. A judge must use `;approve` on the detained user to put them in court.");
             help.addField(";approve", "For judges to approve any detainments put on by officers, which sends them to court.");
             help.addField(";reset", "For bot owners to restart the process of FederalBot.");
+            help.addField(";guilty", "For the judge of a case to rule the defendant as `guilty`.");
             help.setFooter('Page 1 of 2');
         } else if (args[0] === '2') {
-            help.addField(";guilty", "For the judge of a case to rule the defendant as `guilty`.");
             help.addField(";innocent", "For the judge of a case to rule the defendant as `not guilty`.");
             help.addField(";mistrial", "For the judge of a case to rule the case as a `mistrial`.");
             help.addField(";law", "Displays any of the 9 current laws.");
@@ -945,6 +972,9 @@ bot.on("message", async msg => {
             help.addField(";update", "For bot owners/admins to display updates to the bot.");
             help.addField(";module", "Displays the various modules of FederalBot Reborn.");
             help.addField(";bill", "Creates a bill in Congress.");
+            help.addField(";eval", "For owners to evaluate code.");
+            help.addField(";clear", "Members of Congress can clear messages in a channel.");
+            help.addField(";ping", "Gets the ping from the API and Client.");
             help.setFooter('Page 2 of 2');
         } else {
             if (args[0] === "nominate") {
@@ -998,7 +1028,7 @@ bot.on("message", async msg => {
                 help.setTitle(";guilty");
                 help.setDescription("For the judge of a case to rule the defendant `guilty`. Note: if a prison sentence is put on a 1st or 2nd misdemeanor, you will be immediately impeached and the user will be freed.");
                 help.addField("Usage", ";guilty (reason) (prison sentence)");
-                help.addField("Example:", ";guilty 'Proven to be sperg's alt. Sperg already has another alt in the server, bug. Law 3 states that you may only have one alt in the server at ANY time, and can not use it to your advantage, thus breaking Law 3. Sperg and his other alt will be put on trial accordingly.' 24h // Rules the case `guilty`, sentences 'nigward#6969' to a 1 day prison sentence, and closes the case.");
+                help.addField("Example:", ";guilty \"Proven to be sperg's alt. Sperg already has another alt in the server, bug. Law 3 states that you may only have one alt in the server at ANY time, and can not use it to your advantage, thus breaking Law 3. Sperg and his other alt will be put on trial accordingly.\" 24h // Rules the case `guilty`, sentences 'nigward#6969' to a 1 day prison sentence, and closes the case.");
                 help.setFooter(';guilty command');
             } else if (args[0] === "innocent") {
                 help.setTitle(";innocent");
@@ -1043,7 +1073,24 @@ bot.on("message", async msg => {
                 help.addField("Usage", ";bill (bill)");
                 help.addField("Examples:", ";bill Impeach John from Congress! // Returns a bill with content \"Impeach John from Congress!\" and reacts with a yes and no emote.");
                 help.setFooter(';bill command');
-            } else {
+            } else if(args[0]==="eval") {
+              help.setTitle(";eval");
+                help.setDescription("For Owners to evaluate JS code. Can also be used as a calculator.");
+                help.addField("Usage", ";eval (code)");
+                help.addField("Examples:", ";eval function run() {\n   return Math.PI*4;\n}\nrun(); // Outputs a response containing the input, and returns 12.68 (pi*4).");
+            } else if(args[0]==="clear") {
+              help.setTitle(";clear");
+                help.setDescription("Clears out messages in a channel.");
+                help.addField("Aliases", ";clear, ;purge");
+                help.addField("Usage", ";clear (amount)");
+                help.addField("Examples:", ";clear 50 // Clears 50 messages. \n\n;clear // Defaults to 20.");
+                help.setFooter(';module command');
+            } else if(args[0]==="ping") {
+              help.setTitle(";ping");
+                help.setDescription("Shows the bot's ping to the API and the Client() object.");
+                help.addField("Usage", ";eval");
+            }
+            else {
                 help.setDescription("This is not a command! Please use a command shown on the list.");
                 help.setFooter('Error in syntax: "' + args[0] + '" is not a valid command."');
             }
