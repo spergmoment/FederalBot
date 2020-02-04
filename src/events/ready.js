@@ -9,8 +9,8 @@ const wait = require('util')
         .substr(1, 6))
     .setTimestamp()
     .setDescription("")
-    .setTitle("");
-    logsEmbed.fields=[];
+    .setTitle("")
+    .fields=[];
     wait(1000);
     bot.user.setActivity('with your feelings');
     bot.guilds.forEach(g => {
