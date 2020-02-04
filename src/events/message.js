@@ -17,5 +17,5 @@ module.exports = (bot, msg) => {
             .toString(16)
             .substr(1, 6)); // the logs embed lol
     if (!cmd) return;
-    cmd.run(bot, msg, args);
-}; 
+    cmd.run(msg, bot, args);
+};
