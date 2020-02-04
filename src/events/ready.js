@@ -1,7 +1,7 @@
 module.exports = (bot) => {
 const wait = require('util')
-bot.invites = {};
     .promisify(setTimeout);
+    bot.invites = {};
   bot.logsEmbed = new Discord.RichEmbed()
     .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
         .toString(16)
