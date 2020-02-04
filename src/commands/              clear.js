@@ -1,6 +1,7 @@
 exports.run = (msg,bot,args) => {
     const Discord = require("discord.js");
   if (msg.member.roles.find(r => r.name === "Congress")) {
+      msg.delete();
             if (args) {
                 msg.channel.fetchMessages({
                         limit: args[0],
@@ -9,7 +10,11 @@ exports.run = (msg,bot,args) => {
                         msg.channel.bulkDelete(msgs)
                             .catch(error => console.log(error.stack));
                     });
-                msg.channel.send("Cleared " + args[0] + " messages.");
+                msg.channel.send("Cleared " + args[0] + " messages.").then(async m => {
+                    setTimeout(async () => {
+                        await m.delete();
+                    }, 2500);
+                });
             } else {
                 msg.channel.fetchMessages({
                         limit: 20,
