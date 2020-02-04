@@ -1,4 +1,5 @@
 module.exports = (bot) => {
+    const Discord = require("discord.js");
 const wait = require('util')
     .promisify(setTimeout);
     bot.invites = {};
