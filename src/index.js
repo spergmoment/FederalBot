@@ -6,13 +6,13 @@ const bot = new Discord.Client();
 const config = require("./config.json");
 bot.config = config;
 bot.logsEmbed = new Discord.RichEmbed()
-    .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-        .toString(16)
-        .substr(1, 6))
-    .setTimestamp()
-    .setDescription("")
-    .setTitle("")
-    .fields=[];
+.setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
+    .toString(16)
+    .substr(1, 6))
+.setTimestamp()
+.setDescription("")
+.setTitle("")
+.fields=[];
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -29,7 +29,7 @@ fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
-    let props = require(`./commands/${file}`);
+    let props = require((`./commands/${file}`).trim());
     let commandName = file.split(".")[0];
     console.log(`Attempting to load command ${commandName}`);
     bot.commands.set(commandName, props);

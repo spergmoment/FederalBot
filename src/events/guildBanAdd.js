@@ -1,8 +1,9 @@
 module.exports = (bot, g, m) => {
-      logsEmbed.setDescription("")
-    .setTitle("");
-    logsEmbed.fields=[];
     const logs = g.channels.find(r => r.name === ("logs"));
+    const Discord = require("discord.js");
+    const logsEmbed = new Discord.RichEmbed()
+    .setDescription("")
+    .setTitle("")
     if (logs) {
         logsEmbed.setTitle("Action: Ban")
             .addField("Banned User", m.username)

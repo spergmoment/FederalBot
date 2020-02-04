@@ -1,10 +1,11 @@
 module.exports = (bot, o, n) => {
-    botlogsEmbed.setDescription("")
+    const Discord = require("discord.js");
+    const logsEmbed = new Discord.RichEmbed()
+    .setDescription("")
     .setTitle("")
-    .fields=[];
     const logs = o.guild.channels.find(r => r.name === ("logs"));
     if (logs && o.content !== n.content) {
-        bot.logsEmbed.setTitle("Action: Edit Message")
+        logsEmbed.setTitle("Action: Edit Message")
             .addField("User", o.author.username)
             .addField("Was", o.content)
             .addField("Now Is", n.content)
