@@ -9,7 +9,7 @@ exports.run = (msg,bot,args) => {
         if (args.length === 0 || args[0] === "1") {
             help.addField(";nominate", "For CP, CJ, or Speaker to nominate police officers, Judges, and members of Congress respectively.");
             help.addField(";impeach", "For CP, CJ, or Speaker to impeach police officers, Judges, and members of Congress respectively.");
-            help.addField(";elect", "For Pres or Sperg to create elections for Pres, VP, Speaker, CJ, or CP.");
+            help.addField(";elect", "For Pres or Bot Owners to create elections for Pres, VP, Speaker, CJ, or CP.");
             help.addField(";poll", "For bot owners to create polls.");
             help.addField(";resign", "For anyone in a governmental position (Besides VP/Pres) to resign from their positions.");
             help.addField(";detain", "For officers to detain someone for breaking a law. A judge must use `;approve` on the detained user to put them in court.");
@@ -46,7 +46,7 @@ exports.run = (msg,bot,args) => {
                 help.setFooter(';impeach command');
             } else if (args[0] === "elect") {
                 help.setTitle(";elect");
-                help.setDescription("For Pres or Sperg to create elections for CJ, CP, Speaker, Pres, or VP.");
+                help.setDescription("For Pres or Bot Owners to create elections for CJ, CP, Speaker, Pres, or VP.");
                 help.addField("Usage", ";elect (Number of candidates) (Position to elect for) (Candidates...)");
                 help.addField("Example:", ";elect 2 President @bruh#2366 @sperg#6969 // Creates an election with the position being President, and the candidates being bruh and sperg");
                 help.setFooter(';elect command');
@@ -76,7 +76,7 @@ exports.run = (msg,bot,args) => {
                 help.setFooter(';approve command');
             } else if (args[0] === "reset") {
                 help.setTitle(";reset");
-                help.setDescription("For Sperg or any bot owner to reset the FederalBot process.");
+                help.setDescription("For Bot Owners to reset the FederalBot process.");
                 help.addField("Usage", ";reset");
                 help.addField("Extra notes", "Due to node.js complications, the Client() object is killed, and the process as well, thus it's impossible to fully \"reset\" the bot.");
                 help.setFooter(";reset command");
