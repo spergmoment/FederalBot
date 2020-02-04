@@ -1,4 +1,9 @@
 exports.run = (msg, bot, args) => {
+    var updates = [
+        'Fixed some bugs.',
+        'Cleaned up various areas in code.',
+        'Fixed or changed permissions.'
+    ];
     const Discord = require("discord.js")
     const update = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
