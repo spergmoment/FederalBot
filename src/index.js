@@ -11,8 +11,8 @@ bot.logsEmbed = new Discord.RichEmbed()
         .substr(1, 6))
     .setTimestamp()
     .setDescription("")
-    .setTitle("");
-    logsEmbed.fields=[];
+    .setTitle("")
+    .fields=[];
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -23,7 +23,7 @@ fs.readdir("./events/", (err, files) => {
   });
 });
 
-client.commands = new Enmap();
+bot.commands = new Enmap();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
