@@ -42,4 +42,4 @@ exports.run = (msg, bot, args) => {
             msg.channel.send(mis);
         }
     }
-};i
+};
