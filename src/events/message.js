@@ -18,4 +18,4 @@ module.exports = (bot, msg) => {
             .substr(1, 6)); // the logs embed lol
     if (!cmd) return;
     cmd.run(bot, msg, args);
-};var 
+}; 
