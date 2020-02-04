@@ -7,6 +7,7 @@ exports.run = (msg, bot, args) => {
                 .toString(16)
                 .substr(1, 6));
         if (args.length > 3) {
+            msg.delete();
             let num = args[0]; // this saves some space too
             let pos = args[1];
             if (msg.member.roles.find(r => r.name === "President")) {
