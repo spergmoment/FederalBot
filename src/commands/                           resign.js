@@ -51,4 +51,4 @@ exports.run = (msg, bot, args) => {
             resign.setFooter('You lack any governmental position.');
         }
         msg.channel.send(resign);
-};guildguildguild
+};
