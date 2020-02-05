@@ -1,9 +1,11 @@
 # FederalBot: Discord's Democracy
 A bot that was specifically made for my server, "United Discord Democracy", or U.D.D for short. It's a democratic server, with the people put first. This bot is the basis for the entire system.
 
+This server is based off of "Reborn", which you can find the bot for [here.](https://github.com/Lunerr/reborn)
+
 This is not a school project, or anything like that. Just wanted to make a good, unique bot for Discord.
 
-Want to join? Join [here](https://discord.gg/M672RYY)
+Want to join? Join [here.](https://discord.gg/M672RYY)
 # Useful Stuff
 For understanding what discord.js is: https://www.discordjs.guide 
 
