@@ -18,7 +18,7 @@ For API reference: https://www.discordapp.com/developers/docs/intro
 Only make a PR if:
 * You know where the problem is.
 * You know how to fix it.
-* You are 100% sure that what you are doing will help the bot
+* You are 100% sure that what you are doing will help the bot.
 
 OR, you have an approved suggestion.
 
@@ -30,7 +30,8 @@ Only make an issue if:
 * For bugs:
   * You know what the bug is.
   * You know what thing this bug prevents from working.
+  * The bug is a big issue (Don't worry about this; I'll tell you).
 * For suggestions:
   * You are 100% sure what you are doing.
   * Your suggestion will help the bot.
-  * I am able to implement this (I'll tell you if I can)
+  * I am able to implement this (I'll tell you if I can).
