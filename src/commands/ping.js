@@ -4,6 +4,6 @@ exports.run = (msg, bot, args) => {
         msg.channel.send("```API Ping: " + bot.ping + "```")
             .then(async ms => {
               console.log(msg.createdTimestamp);
-                ms.edit("```API Ping: " + bot.ping + "\nClient Ping: " + (start - msg.createdTimestamp) + "```");
+              await ms.edit("```API Ping: " + bot.ping + "\nClient Ping: " + (start - msg.createdTimestamp) + "```");
             });
 }
