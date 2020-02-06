@@ -14,7 +14,7 @@ exports.run = (msg, bot, args) => {
                             depth: 0
                         });
                     }
-                    result = result.replace(msg.client.token, ' ');
+                    result = result.replace(msg.bot.token, ' ');
                     const evalEmbed = new Discord.RichEmbed()
                         .setColor("RANDOM")
                         .addField('Eval', '```js\n' + args.join(" ") + '```')
