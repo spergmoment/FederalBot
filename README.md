@@ -7,6 +7,7 @@ This is not a school project, or anything like that. Just wanted to make a good,
 
 Want to join? Join [here.](https://discord.gg/M672RYY)
 # Useful Stuff
+### PLEASE READ THESE BEFORE SUBMITTING ANY PR'S OR CODE ISSUE REPORTS!
 discord.js [guide](https://www.discordjs.guide) ([github](https://github.com/discordjs/guide))
 
 discord.js bot [guide](https://www.anidiots.guide) ([github](https://github.com/AnIdiotsGuide/discordjs-bot-guide))
