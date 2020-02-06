@@ -1,7 +1,7 @@
 exports.run = (msg, bot, args) => {
-    if(bot.reason&&bot.courtThing&&bot.judgeToUse) {
-    const Discord = require("discord.js");
-    bot.courtThing = msg.mentions.members.first();
+    if (bot.reason && bot.courtThing && bot.judgeToUse) {
+        const Discord = require("discord.js");
+        bot.courtThing = msg.mentions.members.first();
         let detained = msg.guild.roles.find(r => r.name === "Detained"); // do they have the detained role?
         const approve = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -20,7 +20,7 @@ exports.run = (msg, bot, args) => {
                 var judgesStuff = []; // blank array
                 msg.guild.members.forEach(member => {
                     if (member.roles.find(r => r.name === "Judge")) {
-                        if (member !== bot.courtThing&&member!==msg.member) {
+                        if (member !== bot.courtThing && member !== msg.member) {
                             judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
                         } else {
                             console.log(member, bot.courtThing);
@@ -54,18 +54,18 @@ exports.run = (msg, bot, args) => {
                             allow: ['SEND_MESSAGES'],
                     }, ],
                     })
-                    .then(channel => {
+                    .then(async channel => {
                         let category = msg.guild.channels.find(c => c.name == "court" && c.type == "category");
                         if (!category) {
                             throw new Error("Category channel does not exist");
                         }
-                        channel.setParent(category.id);
-                        channel.send("**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.displayName + ". Reason for court case: " + bot.reason + "\n\n" + bot.judgeToUse.displayName + " will be looking over this case. \n\n" + bot.judgeToUse.displayName + ", remember to read the laws, rights, and interpretations before delivering your verdict. And always remember, feel free to ping Sperg (AKA doctor mario/bug/rend), the President, VP, CJ, or CP to get any help needed. \n\nNow, we don\'t have infinite time, **GET GOING!**")
+                        await channel.setParent(category.id);
+                        await channel.send("**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.displayName + ". Reason for court case: " + bot.reason + "\n\n" + bot.judgeToUse.displayName + " will be looking over this case. \n\n" + bot.judgeToUse.displayName + ", remember to read the laws, rights, and interpretations before delivering your verdict. And always remember, feel free to ping Sperg (AKA doctor mario/bug/rend), the President, VP, CJ, or CP to get any help needed. \n\nNow, we don\'t have infinite time, **GET GOING!**")
                             .catch(console.error);
                         bot.logEmbed.setTitle("Action: Approve Detainment");
                         bot.logEmbed.setDescription("User: " + bot.courtThing.displayName + "\n\nPerpetrator: " + msg.member.displayName);
-                        bot.logs.send(bot.logEmbed);
-                        console.log(channel);
+                        await bot.logs.send(bot.logEmbed);
+                        console.log(channel.name);
                     })
                     .catch(console.error);
             } else {
