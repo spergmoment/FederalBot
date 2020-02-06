@@ -1,4 +1,8 @@
-exports.run = (msg, bot, args) => {
+module.exports = {
+    name:'impeach',
+    description:'impeach a member',
+    aliases:['peach'],
+    execute(msg, bot, args) {
     const Discord = require("discord.js");
     let member = msg.mentions.members.first();
         let send = ("You either do not have the correct role for you to impeach " + member.user.username + ", or another error has occured. Please try again later."); // saves some space
@@ -48,4 +52,5 @@ exports.run = (msg, bot, args) => {
             .setFooter('Couldn\'t find args.');
         }
         msg.channel.send(peach);
+},
 };
