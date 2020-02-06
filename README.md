@@ -7,15 +7,15 @@ This is not a school project, or anything like that. Just wanted to make a good,
 
 Want to join? Join [here.](https://discord.gg/M672RYY)
 # Useful Stuff
-For understanding what discord.js is: https://www.discordjs.guide 
+discord.js [guide](https://www.discordjs.guide) ([github](https://github.com/discordjs/guide))
 
-For making your own bot in discord.js: https://www.anidiots.guide
+discord.js bot [guide](https://www.anidiots.guide) ([github](https://github.com/AnIdiotsGuide/discordjs-bot-guide))
 
-For Javascript reference and tutorials: https://developer.mozilla.org/en-US/docs/Web/JavaScript/
+Javascript [reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) and [tutorials](https://developer.mozilla.org/en-US/docs/Web/JavaScript/) ([github](https://github.com/mdn))
 
-For discord.js reference: https://discord.js.org
+discord.js [reference](https://discord.js.org) ([github](https://www.github.com/discordjs/discord.js))
 
-For API reference: https://www.discordapp.com/developers/docs/intro
+API [reference](https://www.discordapp.com/developers/docs/intro) ([github](https://github.com/discordapp/discord-api-docs))
 
 Looked through those and still don't understand? Here are your options:
 * Contact me on Discord (HH#0558)
@@ -42,3 +42,20 @@ Only make an issue if:
   * You are 100% sure what you are doing.
   * Your suggestion will help the bot.
   * I am able to implement this (I'll tell you if I can).
+# FAQ's that are not frequently asked at all
+Q: Can I help make this?
+* A: Yes, but only if you have joined the server and are an experienced-enough JS/discord.js dev.
+
+Q: Why did you make this?
+* A: Your guess is as good as mine, but from what I remember it was to improve my JS skills as a whole.
+
+Q: What's the point?
+* A: Democracy. It doesn't work in the real world because free speech was a mistake, but works great on discord.
+
+Q: Do you have other bots?
+* A: Many. I may release them on github soon, but for now just this is here.
+
+Q: Can I add this to my own server?
+* A: Absolutely! Contact me on discord (shown at the top section) and I will tell you how you can set up the bot for your own server.
+# Extra Info
+nothing yet lol
