@@ -3,11 +3,13 @@ module.exports = (bot, ch) => {
     const Discord = require("discord.js");
     const logsEmbed = new Discord.RichEmbed()
     .setDescription("")
-    .setTitle("")
+    .setTitle("");
+    const entry = ch.guild.fetchAuditLogs({type: 10}).then(audit => audit.entries.first());
     if (logs) {
         logsEmbed.setTitle("Action: Create Channel")
             .addField("Channel Name", ch.name)
+            .addField("Perpetrator", entry.executor.username)
             .addField("IDs", "```Channel: " + ch.id + "```");
         logs.send(logsEmbed);
     }
-}
+};
