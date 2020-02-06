@@ -4,12 +4,12 @@ module.exports = (bot, e) => {
     .setDescription("")
     .setTitle("")
     const logs = e.guild.channels.find(r => r.name === ("logs"));
-    const entry = e.guild.fetchAuditLogs({type: 61}).then(audit => audit.entries.first());
+    const entry = e.guild.fetchAuditLogs({type: 62}).then(audit => audit.entries.first());
     if (logs) {
         logsEmbed.setTitle("Action: Delete Emoji")
             .addField("Emoji Name", e.name)
             .addField("URL", e.url)
-            .addField("Author", entry.executor.username)
+            .addField("Perpetrator", entry.executor.username)
             .addField("IDs", "```Emoji ID: " + e.id + "```");
         logs.send(logsEmbed);
     }
