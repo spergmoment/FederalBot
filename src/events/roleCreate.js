@@ -4,7 +4,7 @@ module.exports = (bot, r) => {
     .setDescription("")
     .setTitle("");
     const logs = r.guild.channels.find(r => r.name === ("logs"));
-    const entry = ch.guild.fetchAuditLogs({type: 30}).then(audit => audit.entries.first());
+    const entry = r.guild.fetchAuditLogs({type: 30}).then(audit => audit.entries.first());
     if (logs) {
         logsEmbed.setTitle("Action: Create Role")
             .addField("Name", r.name)
