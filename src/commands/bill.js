@@ -29,9 +29,6 @@ exports.run = (msg, bot, args) => {
                             console.log(error);
                         }
                     });
-                log.setTitle("Action: Create Bill");
-                log.setDescription("Perpetrator: " + msg.member + "\n\Bill: " + billMsg);
-                logs.send(log);
             }
         }
 };
