@@ -59,4 +59,8 @@ Q: Do you have other bots?
 Q: Can I add this to my own server?
 * A: Absolutely! Contact me on discord (shown at the top section) and I will tell you how you can set up the bot for your own server.
 # Extra Info
-nothing yet lol
+Version currently running: v0.9
+
+Running on: Arch linux 5.4.15, running on LXDE desktop env
+
+Currently working on: logs reformatting
