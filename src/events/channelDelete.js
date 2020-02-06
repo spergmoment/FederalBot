@@ -10,6 +10,6 @@ module.exports = (bot, ch) => {
             .addField("Channel Name", ch.name)
             .addField("Perpetrator", entry.executor.username)
             .addField("IDs", "```Channel ID: " + ch.id + "```");
-        send(bot.logsEmbed);
+        logs.send(logsEmbed);
     }
 }
