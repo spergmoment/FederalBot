@@ -16,6 +16,11 @@ For Javascript reference and tutorials: https://developer.mozilla.org/en-US/docs
 For discord.js reference: https://discord.js.org
 
 For API reference: https://www.discordapp.com/developers/docs/intro
+
+Looked through those and still don't understand? Here are your options:
+* Contact me on Discord (HH#0558)
+* Look up other guides
+* Go to dedicated JS servers
 # PR's and Issues
 Only make a PR if:
 * You know where the problem is.
