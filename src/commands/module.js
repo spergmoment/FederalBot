@@ -1,4 +1,8 @@
-exports.run = (msg, bot, args) => {
+module.exports = {
+    name: 'module',
+    description: 'Show all modules available',
+    aliases: ['modules'],
+    execute(msg, bot, args) {
     const Discord = require("discord.js");
     const module = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -43,4 +47,5 @@ exports.run = (msg, bot, args) => {
             module.setFooter('Error in syntax: module "' + args.join(" ") + '" is invalid or not available.');
         }
         msg.channel.send(module);
+    },
 };
