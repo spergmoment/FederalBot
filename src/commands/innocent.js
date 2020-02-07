@@ -1,8 +1,4 @@
-module.exports = {
-    name: 'innocent',
-    description: 'marks someone in a court case as innocent',
-    aliases: ['inno', 'not_guilty', 'not-guilty'],
-    execute(msg, bot, args) {
+exports.run = (msg, bot, args) {
         if (bot.judgeToUse && bot.detainer && bot.courtThing) {
             const Discord = require("discord.js");
             const inno = new Discord.RichEmbed()
@@ -51,5 +47,4 @@ module.exports = {
             }
             msg.channel.send(inno);
         }
-    },
-};
+    };
