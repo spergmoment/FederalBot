@@ -27,6 +27,7 @@ Looked through those and still don't understand? Here are your options:
 * Look up other guides
 * Go to dedicated JS servers
 
+Don't go and complain to me if you don't know how to get these to work. Not my fault.
 # PR's and Issues
 
 Only make a PR if:
@@ -49,7 +50,8 @@ Only make an issue if:
   * You are 100% sure what you are doing.
   * Your suggestion will help the bot.
   * I am able to implement this (I'll tell you if I can).
-  
+
+If you don't follow these, I may temporarily lock you, or warn you, depending on the severity.
 # FAQ's that are not frequently asked at all
 
 Q: Can I help make this?
@@ -67,6 +69,7 @@ Q: Do you have other bots?
 Q: Can I add this to my own server?
 * A: Absolutely! Contact me on discord (shown at the top section) and I will tell you how you can set up the bot for your own server.
 
+Ask me any questions on the discord server and I will happily answer them!
 # Extra Info
 
 Version currently running: v0.9
