@@ -1,4 +1,5 @@
 # FederalBot: Discord's Democracy
+
 A bot that was specifically made for my server, "United Discord Democracy", or U.D.D for short. It's a democratic server, with the people put first. This bot is the basis for the entire system.
 
 This server is based off of "Reborn", which you can find the bot for [here.](https://github.com/Lunerr/reborn)
@@ -6,8 +7,11 @@ This server is based off of "Reborn", which you can find the bot for [here.](htt
 This is not a school project, or anything like that. Just wanted to make a good, unique bot for Discord.
 
 Want to join? Join [here.](https://discord.gg/M672RYY)
+
 # Useful Stuff
+
 ### PLEASE READ THESE BEFORE SUBMITTING ANY PR'S OR CODE ISSUE REPORTS!
+
 discord.js [guide](https://www.discordjs.guide) ([github](https://github.com/discordjs/guide))
 
 discord.js bot [guide](https://www.anidiots.guide) ([github](https://github.com/AnIdiotsGuide/discordjs-bot-guide))
@@ -22,7 +26,9 @@ Looked through those and still don't understand? Here are your options:
 * Contact me on Discord (HH#0558)
 * Look up other guides
 * Go to dedicated JS servers
+
 # PR's and Issues
+
 Only make a PR if:
 * You know where the problem is.
 * You know how to fix it.
@@ -43,7 +49,9 @@ Only make an issue if:
   * You are 100% sure what you are doing.
   * Your suggestion will help the bot.
   * I am able to implement this (I'll tell you if I can).
+  
 # FAQ's that are not frequently asked at all
+
 Q: Can I help make this?
 * A: Yes, but only if you have joined the server and are an experienced-enough JS/discord.js dev.
 
@@ -58,7 +66,9 @@ Q: Do you have other bots?
 
 Q: Can I add this to my own server?
 * A: Absolutely! Contact me on discord (shown at the top section) and I will tell you how you can set up the bot for your own server.
+
 # Extra Info
+
 Version currently running: v0.9
 
 Running on: Arch linux 5.4.15, running on LXDE desktop env
