@@ -1,4 +1,4 @@
-exports.run = (msg, bot, args) {
+exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
     const module = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
