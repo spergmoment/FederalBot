@@ -1,8 +1,4 @@
-module.exports = {
-    name: 'clear',
-    description: 'clears out messages in a channel',
-    aliases: ['purge'],
-    execute(msg, bot, args) {
+    exports.run = (msg, bot, args) {
         const Discord = require("discord.js");
         if (msg.member.roles.find(r => r.name === "Congress")) {
             msg.delete()
@@ -47,5 +43,4 @@ module.exports = {
             bruh.setDescription("You lack permissions to use this command.");
             msg.channel.send(bruh);
         }
-    },
-};
+    };
