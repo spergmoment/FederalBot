@@ -1,4 +1,4 @@
-exports.run = (msg, bot, args) {
+exports.run = (msg, bot, args) => {
         if (bot.judgeToUse && bot.detainer && bot.courtThing) {
             const Discord = require("discord.js");
             const inno = new Discord.RichEmbed()
