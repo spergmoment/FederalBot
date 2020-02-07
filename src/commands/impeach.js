@@ -1,4 +1,4 @@
-exports.run = (msg, bot, args) {
+exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
     let member = msg.mentions.members.first();
         let send = ("You either do not have the correct role for you to impeach " + member.user.username + ", or another error has occured. Please try again later."); // saves some space
