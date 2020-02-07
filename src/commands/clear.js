@@ -1,4 +1,4 @@
-    exports.run = (msg, bot, args) {
+    exports.run = (msg, bot, args) => {
         const Discord = require("discord.js");
         if (msg.member.roles.find(r => r.name === "Congress")) {
             msg.delete()
