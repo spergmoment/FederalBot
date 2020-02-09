@@ -1,9 +1,5 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
-    let argString = args.join(" ");
-    let parsedArgs = argString.split('"', 2);
-    parsedArgs.splice(0, 1);
-    parsedArgs.splice(1, 1); // same as with ;poll
     let member = msg.mentions.members.first();
     const det = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -13,10 +9,10 @@ exports.run = (msg, bot, args) => {
             .substr(1, 6));
     bot.detainer = msg.author;
     let role = msg.guild.roles.find(r => r.name === "Detained");
-    if (parsedArgs.length < 1) {
+    if (args.length < 1) {
         det.setDescription("Please specify which user to detain.");
         det.setFooter('Argument 0 is undefined');
-    } else if (parsedArgs.length < 2) {
+    } else if (args.length < 2) {
         det.setDescription("Please specify the reason.");
         det.setFooter('Argument 1 is undefined');
     } else {
@@ -27,7 +23,7 @@ exports.run = (msg, bot, args) => {
             det.setDescription(msg.member.displayName + ", I have detained " + member.displayName + 
             ", for reason " + args[1] + ". A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!"); 
           /*the above was split in 2 to take up less space*/
-            bot.reason = (parsedArgs[1]);
+            bot.reason = (args[1]);
             det.setFooter('User ' + member.displayName + " has been detained.");
             bot.logEmbed.setTitle("Action: Detain");
             bot.logEmbed.setDescription("User: " + member.displayName + "\n\nPerpetrator: " + msg.member.displayName + "\n\nReason: " + bot.reason);
