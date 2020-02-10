@@ -74,6 +74,6 @@ Ask me any questions on the discord server and I will happily answer them!
 
 Version currently running: v0.9
 
-Running on: Arch linux 5.4.15, running on LXDE desktop env
+Running on: Arch linux 5.4.15, LXDE desktop env
 
-Currently working on: logs reformatting
+Currently working on: Client object scoping issues, ping efficiency, methods, and grabbing
