@@ -1,5 +1,6 @@
 exports.run = (msg, bot, args) => {
   const Discord = require("discord.js");
+  let start = Date.now();
   const ping = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -29,18 +30,18 @@ exports.run = (msg, bot, args) => {
           time: 30000
         }).then(async c => {
           if (collected.first().content.toLowercase() === "message") {
-            let start = Date.now();
+            let start = Date.now()
             msg.channel.send("API to Message ping: " + start - collected.first().createdTimestamp);
           } else if (collected.first().content.toLowercase() === "client") {
             msg.channel.send("API to Client ping: " + Math.round(bot.ping));
           } else if (collected.first().content.toLowercase() === "discord") {
-            let start = Date.now();
+            let start = Date.now()
             msg.channel.send("API to Your Client ping: " + start - collected.first().client.ping);
           } else {
-            msg.channel.send("Sorry, that is not an available option. Try again, please.");
+            msg.channel.send("Sorry, that is not an available option. Try again, please.")
           }
         }).catch(() => {
-          msg.channel.send("No reply after 30 seconds. Try again, please.");
+          msg.channel.send("No reply after 30 seconds. Try again, please.")
         });
       } else if (collected.first().content.toLowerCase() === "client") {
         const ping2 = new Discord.RichEmbed()
@@ -56,19 +57,19 @@ exports.run = (msg, bot, args) => {
           max: 1,
           time: 30000
         }).then(async c => {
-          if (collected.first().content.toLowercase() === "message") {
-            let start = Date.now();
-            msg.channel.send("Client to Message ping: " + (start + (collected.first().createdTimestamp - bot.ping)));
-          } else if (collected.first().content.toLowercase() === "client") {
+          if (c.first().content.toLowercase() === "message") {
+            let start = Date.now()
+            msg.channel.send("Client to Message ping: " + (start + (c.first().createdTimestamp - bot.ping)));
+          } else if (c.first().content.toLowercase() === "client") {
             msg.channel.send("Client to API ping: " + Math.round(bot.ping));
-          } else if (collected.first().content.toLowercase() === "discord") {
-            let start = Date.now();
-            msg.channel.send("Client to Your Client ping: " + (start + (collected.first().client.ping - bot.ping)));
+          } else if (c.first().content.toLowercase() === "discord") {
+            let start = Date.now()
+            msg.channel.send("Client to Your Client ping: " + (start + (c.first().client.ping + bot.ping)));
           } else {
-            msg.channel.send("Sorry, that is not an available option. Try again, please.");
+            msg.channel.send("Sorry, that is not an available option. Try again, please.")
           }
         }).catch(() => {
-          msg.channel.send("No reply after 30 seconds. Try again, please.");
+          msg.channel.send("No reply after 30 seconds. Try again, please.")
         });
       }
     })
@@ -76,4 +77,4 @@ exports.run = (msg, bot, args) => {
       msg.channel.send("No reply after 30 seconds. Try again, please.");
       return;
     });
-};
+}
