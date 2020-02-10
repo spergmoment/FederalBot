@@ -1,4 +1,4 @@
-exports.run = (msg, bot, args) => {
+  exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
     const bill = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -22,13 +22,17 @@ exports.run = (msg, bot, args) => {
                     .then(async msg => {
                         try {
                             await msg.pin();
-                            await msg.react(guild.emojis.find(emoji => emoji.name === "Upvote"));
-                            await msg.react(guild.emojis.find(emoji => emoji.name === "Downvote"));
-                            await msg.channel.send("<&" + guild.roles.find(r => r.name==="Congress").id + "> bill in <#" + guild.channels.find(c => c.name==="congress"&&c.type==="text").id + ">"); // @Congress bill in #congress
+                            await msg.react(msg.guild.emojis.find(emoji => emoji.name === "Upvote"));
+                            await msg.react(msg.guild.emojis.find(emoji => emoji.name === "Downvote"));
+                            await msg.channel.send("<&" + msg.guild.roles.find(r => r.name==="Congress").id + "> bill in <#" + msg.guild.channels.find(c => c.name==="congress"&&c.type==="text").id + ">"); // @Congress bill in #congress
                         } catch (error) {
                             console.log(error);
                         }
                     });
             }
+        } else {
+            bill.setDescription("You must be in Congress to use this command");
+            bill.setFooter("Missing role: \"Congress\"");
+            msg.channel.send(bill);
         }
 };
