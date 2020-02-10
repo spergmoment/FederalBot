@@ -56,7 +56,11 @@ If you don't follow these, I may temporarily lock you, or warn you, depending on
 # FAQ's that are not frequently asked at all
 
 Q: Can I help make this?
-* A: Yes, but only if you have joined the server and are an experienced-enough JS/discord.js dev.
+* A: Yes, but only if you have joined the server and are an experienced-enough JS/discord.js dev. 
+* Q: But what does "experienced-enough" mean? Is there any concrete answer?
+  * A: No. I will ask you to make something simple, then gradually go up in difficulty to see your spatial reasoning skills/how "advanced" you are at JS. I will also ask you to make me a simple bot in discord.js or discord.eris, whether you aren't able to do any JS besides discord.js and .eris, or you passed enough base JS tests. Contact me on Discord for more info.
+   * Q: Okay, I've done that. What happens now?
+     * A: You get a special role on the Discord server. I will not grant write access in the repo until you have proven to be a great help to the bot. Make PR's and issues frequently, and you can gain write access!
 
 Q: Why did you make this?
 * A: Your guess is as good as mine, but from what I remember it was to improve my JS skills as a whole.
