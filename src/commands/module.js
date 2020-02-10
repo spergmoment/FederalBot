@@ -37,7 +37,7 @@ exports.run = (msg, bot, args) => {
         module.setFooter('Judicial Module');
     } else if (d === "general") {
         module.setTitle("Module General:");
-        module.setDescription("Help, Modules, ping");
+        module.setDescription("Help, Modules, Ping");
         module.setFooter('General Module');
     } else {
         module.setDescription("Invalid module!");
