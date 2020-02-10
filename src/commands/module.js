@@ -1,6 +1,6 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
-    if(args[0]) let d = args[0].toLowerCase();
+    if(args[0]) var d = args[0].toLowerCase();
     const module = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
