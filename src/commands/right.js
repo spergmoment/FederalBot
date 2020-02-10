@@ -9,7 +9,7 @@ exports.run = (msg, bot, args) => {
   "**Right 6**\n All communications during governmental proceedings must be readily available to the public.",
   "**Right 7**\n The accused shall not be prosecuted for the same crime more than once.",
   "**Right 8**\n The people may only be prosecuted for a crime within two weeks of the date it was committed.",
-  "**Right 9**\n The people shall not be subject to vague or unreasonable legislation, including \"annoying\" or otherwise pushing against someone.",
+  "**Right 9**\n The people shall not be subject to vague or unreasonable legislation, including \"annoying\", pushing, or otherwise unlawful behavior against someone.",
   "**Right 10**\n Individual conduct in a court proceeding shall have no bearing on the verdict."
 ];
     var rightThing = (rights[args[0] - 1]);
