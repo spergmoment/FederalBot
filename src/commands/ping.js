@@ -29,14 +29,14 @@ exports.run = (msg, bot, args) => {
           max: 1,
           time: 30000
         }).then(async c => {
-          if (collected.first().content.toLowercase() === "message") {
+          if (c.first().content.toLowercase() === "message") {
             let start = Date.now()
-            msg.channel.send("API to Message ping: " + start - collected.first().createdTimestamp);
-          } else if (collected.first().content.toLowercase() === "client") {
+            msg.channel.send("API to Message ping: " + start - c.first().createdTimestamp);
+          } else if (c.first().content.toLowercase() === "client") {
             msg.channel.send("API to Client ping: " + Math.round(bot.ping));
-          } else if (collected.first().content.toLowercase() === "discord") {
+          } else if (c.first().content.toLowercase() === "discord") {
             let start = Date.now()
-            msg.channel.send("API to Your Client ping: " + start - collected.first().client.ping);
+            msg.channel.send("API to Your Client ping: " + start - c.first().client.ping);
           } else {
             msg.channel.send("Sorry, that is not an available option. Try again, please.")
           }
@@ -77,4 +77,4 @@ exports.run = (msg, bot, args) => {
       msg.channel.send("No reply after 30 seconds. Try again, please.");
       return;
     });
-}
+};
