@@ -1,18 +1,19 @@
 exports.run = (msg, bot, args) => {
   const Discord = require("discord.js");
-  let start = Date.now();
   const ping = new Discord.RichEmbed()
     .setColor('RANDOM')
     .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
     .setTimestamp()
-    .setTitle("Choose something to get the ping to.")
+    .setTitle("Choose something to get the ping from.")
     .addField("API", "Gets the ping from the API.")
     .addField("Client", "Get the ping from the Client.");
   msg.channel.send(ping);
-  msg.channel.awaitMessages(m => m.author.id == msg.author.id, {
+  var filter = m => m.author.id == msg.author.id;
+  msg.channel.awaitMessages(filter, {
     max: 1,
-    time: 30000
-  }) // waits 30 secs for a message...
+    time: 30000,
+    errors: ['time']
+  })
     .then(async collected => {
       if (collected.first()
         .content.toLowerCase() == 'api') {
@@ -25,23 +26,24 @@ exports.run = (msg, bot, args) => {
           .addField("Client", "Get the ping from the API to the Client.")
           .addField("Discord", "Gets the ping from the API to your client.");
         msg.channel.send(ping2);
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+        msg.channel.awaitMessages(filter, {
           max: 1,
-          time: 30000
-        }).then(async c => {
-          if (c.first().content.toLowercase() === "message") {
-            let start = Date.now()
-            msg.channel.send("API to Message ping: " + start - c.first().createdTimestamp);
-          } else if (c.first().content.toLowercase() === "client") {
+          time: 30000,
+          errors: ['time']
+        }).then(async collected => {
+          if (collected.first().content.toLowerCase() === "message") {
+            let start = Date.now();
+            msg.channel.send("API to Message ping: " + (start - collected.first().createdTimestamp));
+          } else if (collected.first().content.toLowerCase() === "client") {
             msg.channel.send("API to Client ping: " + Math.round(bot.ping));
-          } else if (c.first().content.toLowercase() === "discord") {
-            let start = Date.now()
-            msg.channel.send("API to Your Client ping: " + start - c.first().client.ping);
+          } else if (collected.first().content.toLowerCase() === "discord") {
+            let start = Date.now();
+            msg.channel.send("API to Your Client ping: " + Math.round(collected.first().client.ping));
           } else {
-            msg.channel.send("Sorry, that is not an available option. Try again, please.")
+            msg.channel.send("This isn't an option!");
           }
         }).catch(() => {
-          msg.channel.send("No reply after 30 seconds. Try again, please.")
+          msg.channel.send("No reply after 30 seconds. Please try again.")
         });
       } else if (collected.first().content.toLowerCase() === "client") {
         const ping2 = new Discord.RichEmbed()
@@ -49,32 +51,33 @@ exports.run = (msg, bot, args) => {
           .setTimestamp()
           .setColor('RANDOM')
           .setTitle('Choose something to get the ping to.')
-          .addField("Message", "Gets the ping from the Client to the message.")
+          .addField("Message", "Gets the ping from the Client to the message. (THIS SHOULD ALWAYS BE ZERO - CONTACT ME IF IT ISN'T!)")
           .addField("API", "Get the ping from the Client to the Discord API.")
           .addField("Discord", "Gets the ping from the Client to your client.");
         msg.channel.send(ping2);
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+        msg.channel.awaitMessages(filter, {
           max: 1,
-          time: 30000
-        }).then(async c => {
-          if (c.first().content.toLowercase() === "message") {
-            let start = Date.now()
-            msg.channel.send("Client to Message ping: " + (start + (c.first().createdTimestamp - bot.ping)));
-          } else if (c.first().content.toLowercase() === "client") {
+          time: 30000,
+          errors: ['time']
+        }).then(async collected => {
+          if (collected.first().content.toLowerCase() === "message") {
+            let start = Date.now();
+            msg.channel.send("Client to Message ping: " + Math.round(Date.now() - start));
+          } else if (collected.first().content.toLowerCase() === "client") {
             msg.channel.send("Client to API ping: " + Math.round(bot.ping));
-          } else if (c.first().content.toLowercase() === "discord") {
-            let start = Date.now()
-            msg.channel.send("Client to Your Client ping: " + (start + (c.first().client.ping + bot.ping)));
+          } else if (collected.first().content.toLowerCase() === "discord") {
+            let start = Date.now();
+            msg.channel.send("Client to Your Client ping: " + Math.round(Math.abs(collected.first().client.ping - (start - collected.first().createdTimestamp))));
           } else {
-            msg.channel.send("Sorry, that is not an available option. Try again, please.")
+            msg.channel.send("This isn't an option!");
           }
         }).catch(() => {
-          msg.channel.send("No reply after 30 seconds. Try again, please.")
+          msg.channel.send("No reply after 30 seconds. Please try again.")
         });
+      } else {
+        msg.channel.send("This isn't an option!");
       }
-    })
-    .catch(() => {
-      msg.channel.send("No reply after 30 seconds. Try again, please.");
-      return;
+    }).catch(() => {
+      msg.channel.send("No reply after 30 seconds. Please try again.")
     });
 };
