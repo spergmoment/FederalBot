@@ -96,7 +96,7 @@ exports.run = (msg, bot, args) => {
             help.setTitle(";mistrial");
             help.setDescription("For the judge of a case to rule the case as a `mistrial`.");
             help.addField("Usage", ";mistrial");
-            help.addField("Extra Notes", "A mistrial is for an accidental, or otherwise unlawful, incorrect, or overall wrong detainment."
+            help.addField("Extra Notes", "A mistrial is for an accidental, or otherwise unlawful, incorrect, or overall wrong detainment.");
             help.setFooter(';mistrial command');
         } else if (args[0] === "law") {
             help.setTitle(";law");
