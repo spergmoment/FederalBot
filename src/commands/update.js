@@ -12,6 +12,7 @@ exports.run = (msg, bot, args) => {
                 .toString(16)
                 .substr(1, 6));
         if (msg.member.roles.find(r => r.name === "Bot Owner") || msg.member.roles.find(r => r.name === "Bot Admin")) {
+            msg.delete();
             update.setTitle("New update:");
             if (args[0] === '1' || args[0] === '2' || args[0] === '3') {
                 update.setDescription(updates[args[0] - 1]);

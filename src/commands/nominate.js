@@ -40,7 +40,7 @@ exports.run = (msg, bot, args) => {
                             }
                         })
                         .catch(() => {
-                            msg.channel.send("No reply after 30 seconds. Pleae choose either House or Senate.");
+                            msg.channel.send("No reply after 30 seconds. Please choose either House or Senate.");
                             return;
                         });
                 }
