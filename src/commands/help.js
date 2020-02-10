@@ -90,12 +90,13 @@ exports.run = (msg, bot, args) => {
             help.setTitle(";innocent");
             help.setDescription("For the judge of a case to rule the defendant `not guilty`, or otherwise `innocent`.");
             help.addField("Usage", ";innocent (reason)");
-            help.addField("Example:", ";innocent \"The defendant, nigward, just happens to be a friend of Sperg\'s. Interogations from other members have shown that nigward is a classic member of the server, and has been consistently active for a while.\" // 'nigward#6969' is ruled `innocent`, and the case is closed.");
+            help.addField("Example:", ";innocent \"The defendant, nigward, just happens to be a friend of Sperg\'s. Interrogations from other members have shown that nigward is a classic member of the server, and has been consistently active for a while.\" // 'nigward#6969' is ruled `innocent`, and the case is closed.");
             help.setFooter(';innocent command');
         } else if (args[0] === "mistrial") {
             help.setTitle(";mistrial");
-            help.setDescription("For the judge of a case to rule the case as a `mistrial`. Note: A mistrial is for an accidental detainment or an otherwise incorrect detainment.");
+            help.setDescription("For the judge of a case to rule the case as a `mistrial`.");
             help.addField("Usage", ";mistrial");
+            help.addField("Extra Notes", "A mistrial is for an accidental, or otherwise unlawful, incorrect, or overall wrong detainment."
             help.setFooter(';mistrial command');
         } else if (args[0] === "law") {
             help.setTitle(";law");
