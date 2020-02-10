@@ -132,7 +132,7 @@ exports.run = (msg, bot, args) => {
             help.setTitle(";eval");
             help.setDescription("For Owners to evaluate JS code. Can also be used as a calculator.");
             help.addField("Usage", ";eval (code)");
-            help.addField("Examples:", ";eval function run() {\n   return Math.PI\*4;\n}\nrun(); // Outputs a response containing the input, and returns 12.68 (pi\*4).");
+            help.addField("Examples:", ";eval function run() {\n   return Math.PI\*4;\n}\nrun(); // Outputs a response containing the input, and returns 12.68.");
             help.addField("Extra notes", "If the code detects an error, it returns that error.");
             help.setFooter(";eval command");
         } else if (args[0] === "clear") {
