@@ -31,7 +31,10 @@ exports.run = (msg, bot, args) => {
                         }, {
                                 id: bot.courtThing.user.id,
                                 deny: ['SEND_MESSAGES'],
-                        }, ],
+                        }, {
+                            id: msg.guild.defaultRole.id,
+                            deny: ["SEND_MESSAGES"],
+                        },],
                         });
                         bot.logEmbed.setTitle("Action: Rule case as Innocent");
                         bot.logEmbed.setDescription("Perpetrator: " + msg.member.displayName);
