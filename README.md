@@ -28,6 +28,8 @@ Looked through those and still don't understand? Here are your options:
 * Go to dedicated JS servers
 
 Don't go and complain to me if you don't know how to get these to work. Not my fault.
+
+Also, it may be worth checking out my [JS demonstrations](https://github.com/spergmoment/js-demonstrations) repo.
 # PR's and Issues
 
 Only make a PR if:
