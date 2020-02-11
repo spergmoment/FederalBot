@@ -1,7 +1,7 @@
 exports.run = (msg, bot, args) => {
     if (bot.judgeToUse && bot.detainer && bot.courtThing) {
         const Discord = require("discord.js");
-        let free = function() {
+        let free = function () {
             bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Muted"));
         };
         const guilty = new Discord.RichEmbed()
@@ -35,7 +35,10 @@ exports.run = (msg, bot, args) => {
                         }, {
                             id: bot.courtThing.user.id,
                             deny: ['SEND_MESSAGES'],
-                        }, ],
+                        }, {
+                            id: guild.defaultRole.id,
+                            deny: ["SEND_MESSAGES"],
+                        },],
                     });
                     setTimeout(free, (args[0] * 3600000));
                     bot.logEmbed.setTitle("Action: Rule case as Guilty");
