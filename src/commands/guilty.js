@@ -36,7 +36,7 @@ exports.run = (msg, bot, args) => {
                             id: bot.courtThing.user.id,
                             deny: ['SEND_MESSAGES'],
                         }, {
-                            id: guild.defaultRole.id,
+                            id: msg.guild.defaultRole.id,
                             deny: ["SEND_MESSAGES"],
                         },],
                     });
