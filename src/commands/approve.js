@@ -18,15 +18,18 @@ exports.run = (msg, bot, args) => {
                 approve.setDescription(sender.displayName + ", " + bot.courtThing.displayName + " has been PUT IN COURT.");
                 approve.setFooter('Put ' + bot.courtThing.displayName + ' in court.');
                 var judgesStuff = []; // blank array
-                msg.guild.members.forEach(member => {
-                    if (member.roles.find(r => r.name === "Judge")) {
-                        if (member !== bot.courtThing && member !== msg.member) {
-                            judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
-                        } else {
-                            console.log(member, bot.courtThing);
-                        }
-                    }
-                });
+                msg.guild.fetchMembers()
+                    .then(async members => {
+                        members.forEach(member => {
+                            if (member.roles.find(r => r.name === "Judge")) {
+                                if (member !== bot.courtThing && member !== msg.member) {
+                                    judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
+                                } else {
+                                    console.log(member, bot.courtThing);
+                                }
+                            }
+                        });
+                    });
                 bot.judgeToUse = judgesStuff[Math.floor(Math.random() * judgesStuff.length)]; // chooses a random judge
                 console.log(bot.judgeToUse.user.id);
                 console.log(bot.judgeToUse.user);
