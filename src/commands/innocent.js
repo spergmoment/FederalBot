@@ -7,7 +7,7 @@ exports.run = (msg, bot, args) => {
                 .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                     .toString(16)
                     .substr(1, 6));
-            if (msg.channel.parent === "court") {
+            if (msg.channel.parent.name === "court") {
                 if (msg.member.user.id === bot.judgeToUse.user.id) {
                     if (args.length > 0) {
                         inno.setDescription(msg.member.displayName + ", " + bot.courtThing.displayName + " has been found **INNOCENT.**");
@@ -43,7 +43,7 @@ exports.run = (msg, bot, args) => {
                 }
             } else {
                 inno.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-                inno.setFooter('Category ' + msg.channel.parent + ' does not match category "court".');
+                inno.setFooter('Category ' + msg.channel.parent.name + ' does not match category "court".');
             }
             msg.channel.send(inno);
         }
