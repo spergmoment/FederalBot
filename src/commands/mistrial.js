@@ -30,7 +30,10 @@ exports.run = (msg, bot, args) => {
                     }, {
                         id: bot.courtThing.user.id,
                         deny: ['SEND_MESSAGES'],
-                    }, ],
+                    }, {
+                            id: msgguild.defaultRole.id,
+                            deny: ["SEND_MESSAGES"],
+                        }, ],
                 });
                 bot.logEmbed.setTitle("Action: Rule case as a Mistrial");
                 bot.logEmbed.setDescription("Perpetrator: " + msg.member.displayName);
