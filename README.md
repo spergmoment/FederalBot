@@ -1,4 +1,3 @@
-# **IMPORTANT: I MAY BE SWITCHING TO DISCORD.ERIS!**
 # FederalBot: Discord's Democracy
 
 A bot that was specifically made for my server, "United Discord Democracy", or U.D.D for short. It's a democratic server, with the people put first. This bot is the basis for the entire system.
@@ -77,7 +76,7 @@ Q: Can I add this to my own server?
 Ask me any questions on the discord server and I will happily answer them!
 # Extra Info
 
-Version currently running: v1.0.7.1 (hidden release)
+Version currently running: v1.0.6 (hidden release)
 
 Running on: Arch linux 5.4.15, LXDE desktop env
 
