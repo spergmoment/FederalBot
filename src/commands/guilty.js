@@ -10,7 +10,7 @@ exports.run = (msg, bot, args) => {
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
                 .substr(1, 6));
-        if (msg.channel.parent === "court") {
+        if (msg.channel.parent.name === "court") {
             if (msg.member.user.id === bot.judgeToUse.user.id) { // makes sure it's used in court by the selected judge
                 if (args.length > 1) {
                     bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Muted"));
@@ -51,7 +51,7 @@ exports.run = (msg, bot, args) => {
             }
         } else {
             guilty.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-            guilty.setFooter('Category ' + msg.channel.parent + ' does not match category "court"');
+            guilty.setFooter('Category ' + msg.channel.parent.name + ' does not match category "court"');
         }
         msg.channel.send(guilty);
     }
