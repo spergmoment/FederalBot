@@ -63,7 +63,7 @@ exports.run = (msg, bot, args) => {
           if (collected.first().content.toLowerCase() === "message") {
             let start = Date.now();
             msg.channel.send("Client to Message ping: " + Math.round(Date.now() - start));
-          } else if (collected.first().content.toLowerCase() === "client") {
+          } else if (collected.first().content.toLowerCase() === "api") {
             msg.channel.send("Client to API ping: " + Math.round(bot.ping));
           } else if (collected.first().content.toLowerCase() === "discord") {
             let start = Date.now();
