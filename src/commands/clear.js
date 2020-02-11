@@ -1,8 +1,9 @@
-    exports.run = (msg, bot, args) => {
-        const Discord = require("discord.js");
-        if (msg.member.roles.find(r => r.name === "Congress")) {
-            msg.delete()
-                .then(async m => {
+exports.run = (msg, bot, args) => {
+    const Discord = require("discord.js");
+    if (msg.member.roles.find(r => r.name === "Congress")) {
+        msg.delete()
+            .then(async m => {
+                try {
                     if (args[0]) {
                         await msg.channel.fetchMessages({
                                 limit: args[0],
@@ -32,15 +33,18 @@
                                 }, 2500);
                             });
                     }
-                });
-        } else {
-            const bruh = new Discord.RichEmbed()
-                .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
-                .setTimestamp()
-                .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-                    .toString(16)
-                    .substr(1, 6));
-            bruh.setDescription("You lack permissions to use this command.");
-            msg.channel.send(bruh);
-        }
-    };
+                } catch (err) {
+                    msg.channel.send("An error occurred:\n" + err);
+                }
+            });
+    } else {
+        const bruh = new Discord.RichEmbed()
+            .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
+            .setTimestamp()
+            .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
+                .toString(16)
+                .substr(1, 6));
+        bruh.setDescription("You lack permissions to use this command.");
+        msg.channel.send(bruh);
+    }
+};
