@@ -4,9 +4,7 @@ exports.run = (msg, bot, args) => {
         const mis = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
-            .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-                .toString(16)
-                .substr(1, 6));
+            .setColor("RANDOM");
         if (msg.channel.parent.name === "court") {
             if (msg.member.user.id === bot.judgeToUse.user.id) {
                 mis.setDescription(msg.member.displayName + ", you have declared this case as a MISTRIAL.");
@@ -31,7 +29,7 @@ exports.run = (msg, bot, args) => {
                         id: bot.courtThing.user.id,
                         deny: ['SEND_MESSAGES'],
                     }, {
-                            id: msgguild.defaultRole.id,
+                            id: msg.guild.defaultRole.id,
                             deny: ["SEND_MESSAGES"],
                         }, ],
                 });
