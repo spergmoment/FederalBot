@@ -83,3 +83,5 @@ Version currently running: v1.0.6.1
 Running on: Arch linux 5.4.15, LXDE desktop env
 
 Currently working on: Client object scoping issues, ping efficiency, methods, and grabbing
+
+Current prefix: ;
