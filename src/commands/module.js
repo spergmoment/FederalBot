@@ -4,9 +4,7 @@ exports.run = (msg, bot, args) => {
     const module = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
-        .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-            .toString(16)
-            .substr(1, 6));
+        .setColor('RANDOM');
     if (args.length === 0) {
         module.setTitle("Modules available:");
         module.setDescription("Owners, Admins, Branches, Congress,\nPolice, Judicial, General");
