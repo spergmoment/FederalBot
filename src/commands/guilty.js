@@ -7,9 +7,7 @@ exports.run = (msg, bot, args) => {
         const guilty = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
-            .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-                .toString(16)
-                .substr(1, 6));
+            .setColor('RANDOM');
         if (msg.channel.parent.name === "court") {
             if (msg.member.user.id === bot.judgeToUse.user.id) { // makes sure it's used in court by the selected judge
                 if (args.length > 1) {
