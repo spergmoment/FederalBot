@@ -6,9 +6,7 @@ exports.run = (msg, bot, args) => {
         const approve = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
-            .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-                .toString(16)
-                .substr(1, 6));
+            .setColor("RANDOM");
         if (msg.member.roles.find(r => r.name === "Judge") || msg.member.roles.find(r => r.name === "Chief Justice")) { // are you a judge?
             if (bot.courtThing.roles.find(r => r.name === "Detained")) { // checks for detainment
                 bot.courtThing.removeRole(detained) // detained role is gone!
@@ -23,7 +21,7 @@ exports.run = (msg, bot, args) => {
                         members.forEach(member => {
                             if (member.roles.find(r => r.name === "Judge")) {
                                 if (member !== bot.courtThing && member !== msg.member) {
-                                    judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
+                                    await judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
                                 } else {
                                     console.log(member, bot.courtThing);
                                 }
@@ -31,8 +29,7 @@ exports.run = (msg, bot, args) => {
                         });
                     });
                 bot.judgeToUse = judgesStuff[Math.floor(Math.random() * judgesStuff.length)]; // chooses a random judge
-                console.log(bot.judgeToUse.user.id);
-                console.log(bot.judgeToUse.user);
+                console.log(bot.judgeToUse.user.tag);
                 var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
                 var cp = msg.guild.roles.find(r => r.name === "Chief of Police");
                 msg.guild.createChannel(bot.detainer.displayName + "-vs-" + bot.courtThing.displayName, {
