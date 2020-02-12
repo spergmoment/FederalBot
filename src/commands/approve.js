@@ -21,7 +21,7 @@ exports.run = (msg, bot, args) => {
                         members.forEach(member => {
                             if (member.roles.find(r => r.name === "Judge")) {
                                 if (member !== bot.courtThing && member !== msg.member) {
-                                    await judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
+                                    judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
                                 } else {
                                     console.log(member, bot.courtThing);
                                 }
