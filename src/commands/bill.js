@@ -3,9 +3,7 @@
     const bill = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
-            .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-                .toString(16)
-                .substr(1, 6));
+            .setColor('RANDOM');
         if (msg.member.roles.find(r => r.name === "Congress")) {
             if (args.length === 0) {
                 bill.setDescription("Please enter content for the bill.");
