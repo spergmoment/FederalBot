@@ -4,9 +4,7 @@ exports.run = (msg, bot, args) => {
             const inno = new Discord.RichEmbed()
                 .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
                 .setTimestamp()
-                .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-                    .toString(16)
-                    .substr(1, 6));
+                .setColor("RANDOM");
             if (msg.channel.parent.name === "court") {
                 if (msg.member.user.id === bot.judgeToUse.user.id) {
                     if (args.length > 0) {
