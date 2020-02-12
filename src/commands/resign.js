@@ -4,9 +4,7 @@ exports.run = (msg, bot, args) => {
     const resign = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
-        .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-            .toString(16)
-            .substr(1, 6));
+        .setColor("RANDOM");
     let officer = msg.member.roles.find(r => r.name === "Officer");
     let congress = msg.member.roles.find(r => r.name === "Congress");
     let judge = msg.member.roles.find(r => r.name === "Judge");
