@@ -5,9 +5,7 @@ exports.run = (msg, bot, args) => {
     const nom = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL) // just embed stuff :)
         .setTimestamp()
-        .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-            .toString(16)
-            .substr(1, 6)); // this will be shwon on all embeds. Sets a random color, the author, and a timestamp
+        .setColor('RANDOM'); // this will be shwon on all embeds. Sets a random color, the author, and a timestamp
     if (args) {
         let role = undefined; // this is required to prevent scoping issues 
         if (msg.member.roles.find(r => r.name === "Speaker of the House")) { // checks the role
