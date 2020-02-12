@@ -3,9 +3,7 @@ exports.run = (msg, bot, args) => {
     const help = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
-        .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-            .toString(16)
-            .substr(1, 6));
+        .setColor("RANDOM");
     if (args.length === 0 || args[0] === "1") {
         help.addField(";nominate", "For CP, CJ, or Speaker to nominate police officers, Judges, and members of Congress respectively.");
         help.addField(";impeach", "For CP, CJ, or Speaker to impeach police officers, Judges, and members of Congress respectively.");
