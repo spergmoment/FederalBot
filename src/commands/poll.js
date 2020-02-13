@@ -1,6 +1,6 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
-    if (msg.member.roles.find(r => r.name === "Bot Admin")) {
+    if (msg.member.roles.find(r => r.name === "Bot Admin")||msg.member.roles.ind(r => r.name==="Bot Owner")||msg.member.roles.ind(r => r.name==="President")) {
         msg.delete();
         let argString = args.join(" "); // this turns the args into a string...
         let parsedArgs = argString.split('"'); // ...then splits it by the " keychar... 
