@@ -78,7 +78,7 @@ Q: Can I add this to my own server?
 Ask me any questions on the discord server and I will happily answer them!
 # Extra Info
 
-Version currently running: v1.0.6.1
+Version currently running: v1.0.8.5
 
 Running on: Arch linux 5.4.15, LXDE desktop env
 
