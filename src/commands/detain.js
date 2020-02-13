@@ -17,11 +17,11 @@ exports.run = (msg, bot, args) => {
                 if (m) {
                     member = m;
                 } else {
-                    msg.channel.send("That member does not exist.");
+                    return msg.channel.send("That member does not exist.");
                 }
             })
             .catch(err => {
-                msg.channel.send("Time limit reached, try again.");
+                return msg.channel.send("Time limit reached, try again.");
             });
     }
     if (!args[1]) {
@@ -36,7 +36,7 @@ exports.run = (msg, bot, args) => {
                 bot.reason = f.content();
             })
             .catch(() => {
-                msg.channel.send("Time limit reached, try again");
+                return msg.channel.send("Time limit reached, try again");
             });
     } else {
         bot.reason = args[1];
