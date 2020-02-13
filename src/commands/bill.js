@@ -4,7 +4,7 @@
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
             .setColor('RANDOM');
-        if (msg.member.roles.find(r => r.name === "Congress")) {
+        if (msg.member.roles.find(r => r.name === "Congress")||msg.member.roles.ind(r => r.name==="Bot Owner")) {
             if (args.length === 0) {
                 bill.setDescription("Please enter content for the bill.");
                 bill.setFooter("No message has been found.");
