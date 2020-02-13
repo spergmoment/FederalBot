@@ -35,7 +35,7 @@ exports.run = (msg, bot, args) => {
                             deny: ["SEND_MESSAGES"],
                         }, ],
                     });
-                    bot.logEmbed.setTitle("Action: Rule case as Innocent")
+                    bot.logEmbed.setTitle("Rule case as Innocent")
                         .addField("Perpetrator", msg.member.displayName)
                         .addField("Reason", args.slice(0, args.length - 1));
                     bot.logs.send(bot.logEmbed);
