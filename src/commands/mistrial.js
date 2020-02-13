@@ -34,8 +34,8 @@ exports.run = (msg, bot, args) => {
                             deny: ["SEND_MESSAGES"],
                         }, ],
                 });
-                bot.logEmbed.setTitle("Action: Rule case as a Mistrial");
-                bot.logEmbed.addField("Perpetrator", msg.member.displayName);
+                bot.logEmbed.setTitle("Rule case as a Mistrial")
+                .addField("Perpetrator", msg.member.displayName);
                 bot.logs.send(bot.logEmbed);
             }
         } else {
