@@ -2,7 +2,7 @@ exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
     let member = msg.mentions.members.first();
     if(!member) {
-        msg.channel.send("Who are you nominating?");
+        msg.channel.send("Who are you impeaching?");
         msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
             max:1,
             time:30000,
