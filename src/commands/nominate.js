@@ -1,6 +1,24 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
-    var member = msg.mentions.members.first(); // the mentioned member
+     let member = msg.mentions.members.first();
+    if(!member) {
+        msg.channel.send("Who are you nominating?");
+        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+            max:1,
+            time:30000,
+            errors:['time']
+        }).then(async c => {
+            const f = c.first();
+            const m = f.mentions.members.first();
+            if(m) {
+                member = m;
+            } else {
+                return msg.channel.send("Please mention a valid member.");
+            }
+        }).catch(() => {
+            return msg.channel.send("Time limit reached, try again.");
+        });
+    }
     var send = (member.displayName + " can not be nominated now. " + member.displayName + " must be impeached from their current position in order to be nominated at this time."); // used to save space
     const nom = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL) // just embed stuff :)
