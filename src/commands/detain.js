@@ -54,8 +54,10 @@ exports.run = (msg, bot, args) => {
     det.setDescription(msg.member.displayName + ", I have detained " + member.displayName + ", for reason " + args[1] + ". A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!");
     /*the above was split in 2 to take up less space*/
     det.setFooter('User ' + member.displayName + " has been detained.");
-    bot.logEmbed.setTitle("Action: Detain");
-    bot.logEmbed.setDescription("User: " + member.displayName + "\n\nPerpetrator: " + msg.member.displayName + "\n\nReason: " + bot.reason);
+    bot.logEmbed.setTitle("Detain")
+    .addField("User" ,member.displayName)
+    .addField("Perpetrator", msg.member.displayName)
+    .addField("Reason", bot.reason);
     bot.logs.send(bot.logEmbed);
     member.addRole(role) // the good stuff starts now..
         .catch(console.error);
