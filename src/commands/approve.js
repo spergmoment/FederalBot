@@ -82,8 +82,9 @@ exports.run = (msg, bot, args) => {
                     await channel.setParent(category.id);
                     await channel.send("**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + ". Reason for court case: " + bot.reason + "\n\n" + bot.judgeToUse.user + " will be looking over this case. \n\n" + bot.judgeToUse.displayName + ", remember to read the laws, rights, and interpretations before delivering your verdict. And always remember, feel free to ping Sperg (AKA bug, HH, rend, white people, or stuff), the President, VP, CJ, or CP to get any help needed. \n\nNow, we don\'t have infinite time, **GET GOING!**")
                         .catch(console.error);
-                    bot.logEmbed.setTitle("Action: Approve Detainment");
-                    bot.logEmbed.setDescription("User: " + bot.courtThing.displayName + "\n\nPerpetrator: " + msg.member.displayName);
+                    bot.logEmbed.setTitle("Approve Detainment")
+                    .addField("User", bot.courtThing.displayName)
+                    .addField("Perpetrator", msg.member.displayName);
                     await bot.logs.send(bot.logEmbed);
                     console.log(channel.name);
                 })
