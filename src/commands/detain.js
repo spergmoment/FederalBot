@@ -33,7 +33,11 @@ exports.run = (msg, bot, args) => {
             })
             .then(async c => {
                 const f = c.first();
-                bot.reason = f.content();
+                if (parseInt(f.content, 10) && parseInt(f.content, 10) < 10) {
+                    bot.reason = f.content;
+                } else {
+                    return msg.channel.send("Please use a valid law.");
+                }
             })
             .catch(() => {
                 return msg.channel.send("Time limit reached, try again");
