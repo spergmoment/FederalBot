@@ -19,7 +19,9 @@ exports.run = (msg, bot, args) => {
                     } else {
                         return msg.channel.send("Please mention a valid member.");
                     }
-                });
+                }).catch(() => {
+                    return msg.channel.send("Time limit reached, try again.");
+            });
         }
         let detained = msg.guild.roles.find(r => r.name === "Detained"); // do they have the detained role?
         const approve = new Discord.RichEmbed()
