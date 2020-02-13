@@ -10,7 +10,7 @@ exports.run = (msg, bot, args) => {
             msg.delete();
             let num = args[0]; // this saves some space too
             let pos = args[1];
-            if (msg.member.roles.find(r => r.name === "President")) {
+            if (msg.member.roles.find(r => r.name === "President")||msg.member.roles.ind(r => r.name==="Bot Owner")) {
                 let electTo = "Yo @everyone, it's election time. Vote here for the " + pos + ". Note: Using alts to vote is *not* allowed and will get you disqualified.";
                 for (let i = 0; i < num; i++) {
                     electTo += ("\n\n" + (i + 1) + ": " + args[i + 2]); // basically the number of the candidate
