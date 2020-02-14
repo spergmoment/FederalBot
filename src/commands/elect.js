@@ -45,9 +45,6 @@ exports.run = (msg, bot, args) => {
                             console.log(error);
                         }
                     });
-                bot.logEmbed.setTitle("Action: Create Election");
-                bot.logEmbed.setDescription("Perpetrator: " + msg.member.displayName);
-                bot.logs.send(bot.logEmbed);
             } else {
                 elect.setDescription("You are unable to use this command.");
                 elect.setFooter('You lack the President role in the Permissions Object.');

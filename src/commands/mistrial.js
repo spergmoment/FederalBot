@@ -9,6 +9,7 @@ exports.run = (msg, bot, args) => {
             if (msg.member.user.id === bot.judgeToUse.user.id) {
                 mis.setDescription(msg.member.displayName + ", you have declared this case as a MISTRIAL.");
                 mis.setFooter('Case declared a mistrial');
+                bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Court"));
                 msg.channel.send(mis);
                 var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
                 var cp = msg.guild.roles.find(r => r.name === "Chief of Police");
@@ -33,8 +34,8 @@ exports.run = (msg, bot, args) => {
                             deny: ["SEND_MESSAGES"],
                         }, ],
                 });
-                bot.logEmbed.setTitle("Action: Rule case as a Mistrial");
-                bot.logEmbed.setDescription("Perpetrator: " + msg.member.displayName);
+                bot.logEmbed.setTitle("Rule case as a Mistrial")
+                .addField("Perpetrator", msg.member.displayName);
                 bot.logs.send(bot.logEmbed);
             }
         } else {

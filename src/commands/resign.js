@@ -49,8 +49,9 @@ exports.run = (msg, bot, args) => {
             .catch(console.error);
         resign.setDescription(msg.member.displayName + ", you have successfully resigned from the position of " + pos + ".");
         resign.setFooter('Resigned from ' + pos);
-        bot.logEmbed.setTitle("Action: Resign");
-        bot.logEmbed.setDescription("Perpetrator: " + msg.member.displayName + "\n\nPosition: " + pos);
+        bot.logEmbed.setTitle("Action: Resign")
+        .addField("Perpetrator", msg.member.displayName)
+        .addField("Position", pos);
         bot.logs.send(bot.logEmbed);
     } else {
         resign.setDescription("You are currently unable to resign. If you are in a position which you believe you should be able to resign, please contact Sperg.");

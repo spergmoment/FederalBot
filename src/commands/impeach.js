@@ -1,6 +1,24 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
     let member = msg.mentions.members.first();
+    if(!member) {
+        msg.channel.send("Who are you impeaching?");
+        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+            max:1,
+            time:30000,
+            errors:['time']
+        }).then(async c => {
+            const f = c.first();
+            const m = f.mentions.members.first();
+            if(m) {
+                member = m;
+            } else {
+                return msg.channel.send("Please mention a valid member.");
+            }
+        }).catch(() => {
+            return msg.channel.send("Time limit reached, try again.");
+        });
+    }
         let send = ("You either do not have the correct role for you to impeach " + member.user.username + ", or another error has occured. Please try again later."); // saves some space
         const peach = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -31,8 +49,10 @@ exports.run = (msg, bot, args) => {
                         }
                     peach.setDescription(msg.member.displayName + ", I have impeached " + member.displayName + " from " + role.name + ".");
                     peach.setFooter('Impeached ' + member.displayName + ' from ' + role.name + ".");
-                    bot.logEmbed.setTitle("Action: Impeach");
-                    bot.logEmbed.setDescription("User: " + member.displayName + "\n\nPerpetrator: " + msg.member.displayName + "\n\nPosition: " + role.name);
+                    bot.logEmbed.setTitle("Impeach")
+                    .addField("User", member.displayName)
+                    .addField("Perpetrator", msg.member.displayName)
+                    .addField("Position", role.name);
                     bot.logs.send(bot.logEmbed);
                 } else {
                     peach.setDescription(send);
