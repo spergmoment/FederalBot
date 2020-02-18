@@ -39,6 +39,7 @@ exports.run = (msg, bot, args) => {
                         .addField("Perpetrator", msg.member.displayName)
                         .addField("Reason", args.slice(0, args.length - 1));
                     bot.logs.send(bot.logEmbed);
+                    bot.courtThing="";
                 } else if (args.length === 0) {
                     inno.setDescription(msg.member.displayName + ", please provide a reason.");
                     inno.setFooter('Reason unspecified.');
