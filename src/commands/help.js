@@ -14,9 +14,9 @@ exports.run = (msg, bot, args) => {
         help.addField(";approve", "For judges to approve any detainments put on by officers, which sends them to court.");
         help.addField(";reset", "For bot owners to restart the process of FederalBot.");
         help.addField(";guilty", "For the judge of a case to rule the defendant as `guilty`.");
+        help.addField(";innocent", "For the judge of a case to rule the defendant as `not guilty`.");
         help.setFooter('Page 1 of 2');
     } else if (args[0] === '2') {
-        help.addField(";innocent", "For the judge of a case to rule the defendant as `not guilty`.");
         help.addField(";mistrial", "For the judge of a case to rule the case as a `mistrial`.");
         help.addField(";law", "Displays any of the 9 current laws.");
         help.addField(";right", "Displays any of the 10 current rights.");
@@ -26,6 +26,8 @@ exports.run = (msg, bot, args) => {
         help.addField(";eval", "For owners to evaluate code.");
         help.addField(";clear", "Members of Congress can clear messages in a channel.");
         help.addField(";ping", "Get various pings from the API or Client to the message, API/Client, or your client.");
+        help.addField(";warrant", "Grant a warrant for arrest.");
+        help.addField(";arrest", "Arrest on a granted warrant.");
         help.setFooter('Page 2 of 2');
     } else {
         if (args[0] === "nominate") {
@@ -145,7 +147,18 @@ exports.run = (msg, bot, args) => {
             help.setDescription("Shows the API/Client ping to the message, API/Client, or your client.");
             help.addField("Usage", ";ping, (API, Client), (Message, API/Client, Discord)");
             help.setFooter(";ping command");
-        }
+        } else if(args[0]==="warrant") {
+            help.setTitle(";warrant");
+            help.setDescription("Grant a warrant to be `;arrest`ed by an officer.");
+            help.addField("Usage", ";warrant (member) (law) (evidence)");
+            help.addField("Examples:", ";warrant @sperg#6969 3 (link to image of him using the wrong alt) (link to another image) // grants a warrant against sperg, for law 3, andf the evidence is images of him accidentally using the wrong alt.");
+            help.setFooter(";warrant command");
+        }  if(args[0]==="arrest") {
+            help.setTitle(";arrest");
+            help.setDescription("Arrests a warrant that was granted by a judge with `;warrant`.");
+            help.addField("Usage", ";arrest (member)");
+            help.addField("Examples:", ";arrest @sperg#6969 // arrests sperg, creating a court case.");
+            help.setFooter(";arrest command");
         else {
             help.setDescription("This is not a command! Please use a command shown on the list.");
             help.setFooter('Error in syntax: "' + args[0] + '" is not a valid command.');
