@@ -37,6 +37,7 @@ exports.run = (msg, bot, args) => {
                 bot.logEmbed.setTitle("Rule case as a Mistrial")
                 .addField("Perpetrator", msg.member.displayName);
                 bot.logs.send(bot.logEmbed);
+                bot.courtThing = "";
             }
         } else {
             mis.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
