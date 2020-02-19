@@ -190,7 +190,7 @@ exports.run = (msg, bot, args) => {
                       "(link to another image) // grants a warrant against sperg, for law 3, " +
                       "and the evidence is images of him accidentally using the wrong alt.")
             .setFooter(";warrant command");
-        }  if(args[0]==="arrest") {
+        } else if(args[0]==="arrest") {
             help.setTitle(";arrest")
             .setDescription("Arrests a warrant that was granted by a judge with `;warrant`.")
             .addField("Usage", ";arrest (member)")
