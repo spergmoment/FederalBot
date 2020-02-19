@@ -27,7 +27,7 @@ exports.run = (msg, bot, args) => {
         .setTimestamp()
         .setColor('RANDOM'); // this will be shwon on all embeds. Sets a random color, the author, and a timestamp
     if (args) {
-        let role = undefined; // this is required to prevent scoping issues 
+        let role;
         if (msg.member.roles.find(r => r.name === "Speaker of the House")) { // checks the role
             role = msg.guild.roles.find(r => r.name === "Congress"); // the role to give
         } else if (msg.member.roles.find(r => r.name === "Chief Justice")) {
