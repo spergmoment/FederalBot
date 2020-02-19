@@ -27,7 +27,7 @@ exports.run = (msg, bot, args) => {
         .setTimestamp()
         .setColor('RANDOM');
     if (args) {
-        let role = undefined;
+        let role;
         if (msg.member.roles.find(r => r.name === "Speaker of the House")) {
             role = msg.guild.roles.find(r => r.name === "Congress");
         }
