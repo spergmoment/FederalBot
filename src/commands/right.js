@@ -1,6 +1,9 @@
 exports.run = (msg, bot, args) => {
-    const Discord = require("discord.js");
-    var rights = [
+    if (args[0] > 10 || args[0] < 1) return msg.channel.send("That is not a valid right.");
+    msg.channel.send("Fetching right " + args[0] + "...")
+        .then(m => {
+            const Discord = require("discord.js");
+            var rights = [
         "**Right 1**\n The people have the right to freedom of speech.",
         "**Right 2**\n The executive branch shall not suppress any protest demanding the government for a redress of grievances.",
         "**Right 3**\n The accused has the right to cross-examine witnesses and dispute evidence in a fair, public and speedy process with a qualified and earnest attorney.",
@@ -12,12 +15,14 @@ exports.run = (msg, bot, args) => {
         "**Right 9**\n The people shall not be subject to vague or unreasonable legislation, including \"annoying\", pushing, or otherwise unlawful behavior against someone.",
         "**Right 10**\n Individual conduct in a court proceeding shall have no bearing on the verdict."
     ];
-    var rightThing = (rights[args[0] - 1]);
-    const rightSend = new Discord.RichEmbed()
-        .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
-        .setTimestamp()
-        .setColor("RANDOM");
-    rightSend.setDescription(rightThing);
-    rightSend.setFooter('Right ' + args[0]);
-    msg.channel.send(rightSend);
+            var rightThing = (rights[args[0] - 1]);
+            const rightSend = new Discord.RichEmbed()
+                .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
+                .setTimestamp()
+                .setColor("RANDOM");
+            rightSend.setDescription(rightThing);
+            rightSend.setFooter('Right ' + args[0]);
+            msg.channel.send(rightSend);
+            m.delete();
+        });
 };
