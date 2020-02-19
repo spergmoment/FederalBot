@@ -62,24 +62,28 @@ exports.run = (msg, bot, args) => {
                 return msg.channel.send("Time limit reached, try again");
             });
     }
-    member.addRole(msg.guild.roles.find(r => r.name === "warrant"));
-    const Discord = require('discord.js');
-    const w = new Discord.RichEmbed()
-        .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
-        .setTimestamp()
-        .setColor('RANDOM')
-        .setDescription(msg.author.username + ", I have granted a warrant against " + member.user.username + ". An officer must **;arrest** this person for a case to take place.");
-    msg.channel.send(w);
-    bot.logEmbed.setTitle("Grant Warrant")
-        .addField("User", member.displayName)
-        .addField("Perpetrator", msg.member.displayName)
-        .addField("Reason", bot.warrantReason)
-        .addField("Evidence", bot.warrantEvidence);
-    bot.logs.send(bot.logEmbed);
-    setTimeout(() => {
-        if (member.roles.find(r => r.name === "warrant")) {
-            member.removeRole(msg.guild.roles.find(r => r.name === "warrant"));
-            msg.channel.send(msg.author + ", your warrant against " + member.user + " has not been arrested. The warrant is now gone.");
-        }
-    });
+    msg.channel.send("Granting warrant...")
+        .then(m => {
+            member.addRole(msg.guild.roles.find(r => r.name === "warrant"));
+            const Discord = require('discord.js');
+            const w = new Discord.RichEmbed()
+                .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
+                .setTimestamp()
+                .setColor('RANDOM')
+                .setDescription(msg.author.username + ", I have granted a warrant against " + member.user.username + ". An officer must **;arrest** this person for a case to take place.");
+            msg.channel.send(w);
+            bot.logEmbed.setTitle("Grant Warrant")
+                .addField("User", member.displayName)
+                .addField("Perpetrator", msg.member.displayName)
+                .addField("Reason", bot.warrantReason)
+                .addField("Evidence", bot.warrantEvidence);
+            bot.logs.send(bot.logEmbed);
+            setTimeout(() => {
+                if (member.roles.find(r => r.name === "warrant")) {
+                    member.removeRole(msg.guild.roles.find(r => r.name === "warrant"));
+                    msg.channel.send(msg.author + ", your warrant against " + member.user + " has not been arrested. The warrant is now gone.");
+                }
+                m.delete();
+            });
+        });
 };
