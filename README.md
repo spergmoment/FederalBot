@@ -78,10 +78,10 @@ Q: Can I add this to my own server?
 Ask me any questions on the discord server and I will happily answer them!
 # Extra Info
 
-Version currently running: v1.1.0
+Version currently running: v1.1.2
 
 Running on: Arch linux 5.4.15, LXDE desktop env
 
-Currently working on: Client object scoping issues, ping efficiency, methods, and grabbing
+Currently working on: The dreaded ping command, SQL dbs, performance
 
 Current prefix: ;
