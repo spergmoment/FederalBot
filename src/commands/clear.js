@@ -1,7 +1,8 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
     if (msg.member.roles.find(r => r.name === "Congress")) {
-        msg.delete()
+        msg.delete();
+        msg.channel.send("Clearing...")
             .then(async m => {
                 try {
                     if (args[0]) {
@@ -12,7 +13,7 @@ exports.run = (msg, bot, args) => {
                                 await msg.channel.bulkDelete(msgs)
                                     .catch(error => console.log(error.stack));
                             });
-                        await msg.channel.send("Cleared " + args[0] + " messages.")
+                        await m.edit("Cleared " + args[0] + " messages.")
                             .then(async m => {
                                 setTimeout(async () => {
                                     await m.delete();
@@ -26,7 +27,7 @@ exports.run = (msg, bot, args) => {
                                 await msg.channel.bulkDelete(msgs)
                                     .catch(error => console.log(error.stack));
                             });
-                        await msg.channel.send("Cleared 20 messages.")
+                        await m.edit("Cleared 20 messages.")
                             .then(async m => {
                                 setTimeout(async () => {
                                     await m.delete();

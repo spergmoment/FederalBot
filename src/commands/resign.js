@@ -1,6 +1,6 @@
 exports.run = (msg, bot, args) => {
     const Discord = require('discord.js');
-    let pos = undefined;
+    let pos;
     const resign = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
@@ -45,14 +45,18 @@ exports.run = (msg, bot, args) => {
             pos = "President";
         }
         console.log(pos);
-        msg.member.removeRole(msg.guild.roles.find(r => r.name === pos))
-            .catch(console.error);
-        resign.setDescription(msg.member.displayName + ", you have successfully resigned from the position of " + pos + ".");
-        resign.setFooter('Resigned from ' + pos);
-        bot.logEmbed.setTitle("Action: Resign")
-        .addField("Perpetrator", msg.member.displayName)
-        .addField("Position", pos);
-        bot.logs.send(bot.logEmbed);
+        msg.channel.send("Resigning from " + pos + "...")
+            .then(m => {
+                msg.member.removeRole(msg.guild.roles.find(r => r.name === pos))
+                    .catch(console.error);
+                resign.setDescription(msg.member.displayName + ", you have successfully resigned from the position of " + pos + ".");
+                resign.setFooter('Resigned from ' + pos);
+                bot.logEmbed.setTitle("Action: Resign")
+                    .addField("Perpetrator", msg.member.displayName)
+                    .addField("Position", pos);
+                bot.logs.send(bot.logEmbed);
+                m.delete();
+            });
     } else {
         resign.setDescription("You are currently unable to resign. If you are in a position which you believe you should be able to resign, please contact Sperg.");
         resign.setFooter('You lack any governmental position.');

@@ -19,9 +19,10 @@ exports.run = (msg, bot, args) => {
                     } else {
                         return msg.channel.send("Please mention a valid member.");
                     }
-                }).catch(() => {
+                })
+                .catch(() => {
                     return msg.channel.send("Time limit reached, try again.");
-            });
+                });
         }
         let detained = msg.guild.roles.find(r => r.name === "Detained"); // do they have the detained role?
         const approve = new Discord.RichEmbed()
@@ -29,66 +30,70 @@ exports.run = (msg, bot, args) => {
             .setTimestamp()
             .setColor("RANDOM");
         if (bot.courtThing.roles.find(r => r.name === "Detained")) { // checks for detainment
-            bot.courtThing.removeRole(detained) // detained role is gone!
-                .catch(console.error);
-            const sender = msg.member;
-            bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Court")); // but you're in court now
-            approve.setDescription(sender.displayName + ", " + bot.courtThing.displayName + " has been PUT IN COURT.");
-            approve.setFooter('Put ' + bot.courtThing.displayName + ' in court.');
-            var judgesStuff = []; // blank array
-            msg.guild.fetchMembers()
-                .then(async members => {
-                    members.forEach(member => {
-                        if (member.roles.find(r => r.name === "Judge")) {
-                            if (member !== bot.courtThing && member !== msg.member) {
-                                judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
-                            } else {
-                                console.log(member, bot.courtThing);
-                            }
-                        }
-                    });
-                });
-            bot.judgeToUse = judgesStuff[Math.floor(Math.random() * judgesStuff.length)]; // chooses a random judge
-            console.log(bot.judgeToUse.user.tag);
-            var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
-            var cp = msg.guild.roles.find(r => r.name === "Chief of Police");
-            msg.guild.createChannel(bot.detainer.displayName + "-vs-" + bot.courtThing.displayName, {
-                    type: 'text',
-                    permissionOverwrites: [{
-                        id: msg.guild.defaultRole.id,
-                        deny: ['SEND_MESSAGES'], // makes it so @everyone can't send stuff
-                    }, {
-                        id: cj.id,
-                        allow: ['SEND_MESSAGES'],
-                    }, {
-                        id: cp.id,
-                        allow: ['SEND_MESSAGES'],
-                    }, {
-                        id: bot.detainer.id,
-                        allow: ['SEND_MESSAGES'],
-                    }, {
-                        id: bot.judgeToUse.user.id,
-                        allow: ['SEND_MESSAGES'],
-                    }, {
-                        id: bot.courtThing.user.id,
-                        allow: ['SEND_MESSAGES'],
-                    }, ],
-                })
-                .then(async channel => {
-                    let category = msg.guild.channels.find(c => c.name == "court" && c.type == "category");
-                    if (!category) {
-                        throw new Error("Category channel does not exist");
-                    }
-                    await channel.setParent(category.id);
-                    await channel.send("**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + ". Reason for court case: " + bot.reason + "\n\n" + bot.judgeToUse.user + " will be looking over this case. \n\n" + bot.judgeToUse.displayName + ", remember to read the laws, rights, and interpretations before delivering your verdict. And always remember, feel free to ping Sperg (AKA bug, HH, rend, white people, or stuff), the President, VP, CJ, or CP to get any help needed. \n\nNow, we don\'t have infinite time, **GET GOING!**")
+            msg.channel.send("Approving detainment on " + bot.courtThing.displayName + "...")
+                .then(m => {
+                    bot.courtThing.removeRole(detained) // detained role is gone!
                         .catch(console.error);
-                    bot.logEmbed.setTitle("Approve Detainment")
-                    .addField("User", bot.courtThing.displayName)
-                    .addField("Perpetrator", msg.member.displayName);
-                    await bot.logs.send(bot.logEmbed);
-                    console.log(channel.name);
-                })
-                .catch(console.error);
+                    const sender = msg.member;
+                    bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Court")); // but you're in court now
+                    approve.setDescription(sender.displayName + ", " + bot.courtThing.displayName + " has been PUT IN COURT.");
+                    approve.setFooter('Put ' + bot.courtThing.displayName + ' in court.');
+                    var judgesStuff = []; // blank array
+                    msg.guild.fetchMembers()
+                        .then(async members => {
+                            members.forEach(member => {
+                                if (member.roles.find(r => r.name === "Judge")) {
+                                    if (member !== bot.courtThing && member !== msg.member) {
+                                        judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
+                                    } else {
+                                        console.log(member, bot.courtThing);
+                                    }
+                                }
+                            });
+                        });
+                    bot.judgeToUse = judgesStuff[Math.floor(Math.random() * judgesStuff.length)]; // chooses a random judge
+                    console.log(bot.judgeToUse.user.tag);
+                    var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
+                    var cp = msg.guild.roles.find(r => r.name === "Chief of Police");
+                    msg.guild.createChannel(bot.detainer.displayName + "-vs-" + bot.courtThing.displayName, {
+                            type: 'text',
+                            permissionOverwrites: [{
+                                id: msg.guild.defaultRole.id,
+                                deny: ['SEND_MESSAGES'], // makes it so @everyone can't send stuff
+                    }, {
+                                id: cj.id,
+                                allow: ['SEND_MESSAGES'],
+                    }, {
+                                id: cp.id,
+                                allow: ['SEND_MESSAGES'],
+                    }, {
+                                id: bot.detainer.id,
+                                allow: ['SEND_MESSAGES'],
+                    }, {
+                                id: bot.judgeToUse.user.id,
+                                allow: ['SEND_MESSAGES'],
+                    }, {
+                                id: bot.courtThing.user.id,
+                                allow: ['SEND_MESSAGES'],
+                    }, ],
+                        })
+                        .then(async channel => {
+                            let category = msg.guild.channels.find(c => c.name == "court" && c.type == "category");
+                            if (!category) {
+                                throw new Error("Category channel does not exist");
+                            }
+                            await channel.setParent(category.id);
+                            await channel.send("**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + ". Reason for court case: " + bot.reason + "\n\n" + bot.judgeToUse.user + " will be looking over this case. \n\n" + bot.judgeToUse.displayName + ", remember to read the laws, rights, and interpretations before delivering your verdict. And always remember, feel free to ping Sperg (AKA bug, HH, rend, white people, or stuff), the President, VP, CJ, or CP to get any help needed. \n\nNow, we don\'t have infinite time, **GET GOING!**")
+                                .catch(console.error);
+                            bot.logEmbed.setTitle("Approve Detainment")
+                                .addField("User", bot.courtThing.displayName)
+                                .addField("Perpetrator", msg.member.displayName);
+                            await bot.logs.send(bot.logEmbed);
+                            console.log(channel.name);
+                        })
+                        .catch(console.error);
+                    m.delete();
+                });
         } else {
             approve.setDescription("This user is not detained.");
             approve.setFooter('User ' + bot.courtThing.displayName + ' does not have the role "Detained"');

@@ -45,6 +45,7 @@ exports.run = (msg, bot, args) => {
     } else {
         bot.reason = args[1];
     }
+    msg.channel.send("Detaining " + member.displayName + "...").then(m => {
     const det = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
@@ -73,4 +74,6 @@ exports.run = (msg, bot, args) => {
             }
         }, 300000); // waits 5 minutes to check whether they have been approved, does nothing if it has but impeaches you if it hasn't
     msg.channel.send(det);
+    m.delete();
+});
 };
