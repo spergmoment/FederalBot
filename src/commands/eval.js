@@ -20,14 +20,14 @@ exports.run = (msg, bot, args) => {
                         .addField('Eval', '```js\n' + args.join(" ") + '```')
                         .addField('Returns', '```js\n' + result + '```');
                     msg.channel.send(evalEmbed);
-                    m.edit("Eval successful!");
+                    m.delete();
                 } catch (err) {
                     const evalEmbed = new Discord.RichEmbed()
                         .setColor("RED")
                         .addField('Eval', '```js\n' + args.join(" ") + '```')
                         .addField('Error', '```js\n' + err + '```');
                     msg.channel.send(evalEmbed);
-                    m.edit("Eval failed.");
+                    m.delete();
                 }
             });
     }
