@@ -4,6 +4,7 @@ exports.run = (msg, bot, args) => {
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
         .setTimestamp()
         .setColor("RANDOM");
+    if(args.length>0&&args[0]!=="1"&&args[0]!=="2") const m = msg.channel.send("Getting command " + args[0] + "...";
     if (args.length === 0 || args[0] === "1") {
         help.addField(";nominate", "For CP, CJ, or Speaker to nominate Officers, Judges, " +
                       "and members of Congress respectively.")
@@ -202,4 +203,5 @@ exports.run = (msg, bot, args) => {
         }
     }
     msg.channel.send(help);
+    if(m) m.delete();
 };
