@@ -1,4 +1,5 @@
 module.exports = (bot, o, n) => {
+    if(o.author.bot) return;
     const Discord = require("discord.js");
     const logsEmbed = new Discord.RichEmbed()
     .setDescription("")
