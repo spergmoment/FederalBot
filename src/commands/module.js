@@ -1,4 +1,5 @@
 exports.run = (msg, bot, args) => {
+    if(args.length > 0) const m = msg.channel.send("Getting module " + args[0] + "...");
     const Discord = require("discord.js");
     if(args[0]) var d = args[0].toLowerCase();
     const module = new Discord.RichEmbed()
