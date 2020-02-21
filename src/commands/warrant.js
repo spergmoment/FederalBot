@@ -1,6 +1,6 @@
 exports.run = (msg, bot, args) => {
     var member = msg.mentions.members.first();
-    bot.warrantReason = parseInt(args[1], 10);
+    bot.reason = parseInt(args[1], 10);
     bot.evidence = args.slice(2);
     if (!msg.member.roles.find(r => r.name === "Judge") && !msg.member.roles.find(r => r.name === "Chief Justice")) {
         return msg.channel.send("You must be a Judge to use this command.");
@@ -36,7 +36,7 @@ exports.run = (msg, bot, args) => {
                 const f = c.first();
                 const n = parseInt(f, 10);
                 if (typeof n !== Number) return msg.channel.send("That is not a valid law.");
-                bot.warrantReason = parseInt(f, 10);
+                bot.reason = parseInt(f, 10);
             })
             .catch(e => {
                 return msg.channel.send("Time limit reached, try again");
@@ -75,8 +75,8 @@ exports.run = (msg, bot, args) => {
             bot.logEmbed.setTitle("Grant Warrant")
                 .addField("User", member.displayName)
                 .addField("Perpetrator", msg.member.displayName)
-                .addField("Reason", bot.warrantReason)
-                .addField("Evidence", bot.warrantEvidence);
+                .addField("Reason", bot.reason)
+                .addField("Evidence", bot.evidence);
             bot.logs.send(bot.logEmbed);
             setTimeout(() => {
                 if (member.roles.find(r => r.name === "warrant")) {
