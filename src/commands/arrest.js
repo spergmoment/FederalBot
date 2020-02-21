@@ -87,7 +87,7 @@ exports.run = (msg, bot, args) => {
                     await channel.setParent(category.id);
                             var thing = "**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + 
                                 ". Reason for court case: " + bot.reason + "\n\n";
-                            if(bot.warrantEvidence) thing+=`Evidence: ${bot.evidence}`;
+                            if(bot.evidence) thing+=`Evidence: ${bot.evidence}`;
                             thing+=(`${bot.judgeToUse.user} will be looking over this case.\n\n${bot.judgeToUse.displayName}` + 
                                     ", please remember a few things before delivering your verdict:\n " +
                                     `1. Read the ${lawChannel}, ${rightChannel}, and ${interChannel}.\n` +
