@@ -78,12 +78,29 @@ exports.run = (msg, bot, args) => {
                     }, ],
                         })
                         .then(async channel => {
+                            var lawChannel = msg.guild.channels.find(c => c.name==="laws");
+                            var rightChannel = msg.guild.channels.find(c => c.name==="rights");
+                            var interChannel = msg.guild.channels.find(c => c.name==="interpretation");
                             let category = msg.guild.channels.find(c => c.name == "court" && c.type == "category");
                             if (!category) {
                                 throw new Error("Category channel does not exist");
                             }
                             await channel.setParent(category.id);
-                            await channel.send("**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + ". Reason for court case: " + bot.reason + "\n\n" + bot.judgeToUse.user + " will be looking over this case. \n\n" + bot.judgeToUse.displayName + ", remember to read the laws, rights, and interpretations before delivering your verdict. And always remember, feel free to ping Sperg (AKA bug, HH, rend, white people, or stuff), the President, VP, CJ, or CP to get any help needed. \n\nNow, we don\'t have infinite time, **GET GOING!**")
+                            var thing = "**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + 
+                                ". Reason for court case: " + bot.reason + "\n\n";
+                            if(bot.warrantEvidence) thing+=`Evidence: ${bot.warrantEvidence}`;
+                            thing+=(`${bot.judgeToUse.user} will be looking over this case.\n\n${bot.judgeToUse.displayName}` + 
+                                    ", please remember a few things before delivering your verdict:\n " +
+                                    `1. Read the ${lawChannel}, ${rightChannel}, and ${interChannel}.\n` +
+                                    "2. Listen to evidence from both sides. Do *NOT* take prejudice against the defendant or prosecutor.\n" +
+                                    "3. Everything in this case is subjective. Please declare your verdicts before using the `;guilty` or `;innocent` commands.\n" +
+                                    "4. feel free to ping Sperg (bug), the President, VP, CJ, or CP to get any help needed.\n\n" +
+                                    `${bot.detainer.displayName}, please remember a few things:\n` +
+                                    "1. Your opinion is your opinion. Don't try to sway the lawyer's opinion.\n" +
+                                    "2. Never, EVER force the judge to adapt to your opinions.\n\n" +
+                                    "And finally, for everyone, BE CIVIL!\n" +
+                                    "\n\nNow, we don\'t have infinite time, **GET GOING!**");
+                            channel.send(thing)
                                 .catch(console.error);
                             bot.logEmbed.setTitle("Approve Detainment")
                                 .addField("User", bot.courtThing.displayName)
