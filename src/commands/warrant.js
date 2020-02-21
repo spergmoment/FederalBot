@@ -1,7 +1,7 @@
 exports.run = (msg, bot, args) => {
     var member = msg.mentions.members.first();
     bot.warrantReason = parseInt(args[1], 10);
-    bot.warrantEvidence = args.slice(2);
+    bot.evidence = args.slice(2);
     if (!msg.member.roles.find(r => r.name === "Judge") && !msg.member.roles.find(r => r.name === "Chief Justice")) {
         return msg.channel.send("You must be a Judge to use this command.");
     }
@@ -53,7 +53,7 @@ exports.run = (msg, bot, args) => {
                 const f = c.first();
                 if (f.content.toLowerCase()
                     .startsWith("https")) {
-                    bot.warrantEvidence = f.content;
+                    bot.evidence = f.content;
                 } else {
                     return msg.channel.send("Invalid evidence.");
                 }
