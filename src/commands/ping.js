@@ -57,7 +57,7 @@ exports.run = (msg, bot, args) => {
           .setTimestamp()
           .setColor('RANDOM')
           .setTitle('Choose something to get the ping to.')
-          .addField("Message", "Gets the ping from the Client to the message. (THIS SHOULD ALWAYS BE ZERO - CONTACT ME IF IT ISN'T!)")
+          .addField("Message", "Gets the ping from the Client to the message.")
           .addField("API", "Get the ping from the Client to the Discord API.")
           .addField("Discord", "Gets the ping from the Client to your client.");
         msg.channel.send(ping2);
