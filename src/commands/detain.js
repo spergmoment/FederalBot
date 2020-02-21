@@ -1,6 +1,7 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
     let member = msg.mentions.members.first();
+    bot.evidence=args.slice(2);
     if (!msg.member.roles.find(r => r.name === "Officer") && !msg.member.roles.find(r => r.name === "Chief of Police")) {
         return msg.channel.send("You can not use this command!");
     }
@@ -45,6 +46,26 @@ exports.run = (msg, bot, args) => {
     } else {
         bot.reason = args[1];
     }
+    if(args.length<3) {
+       msg.channel.send("Please provide evidence.");
+        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+                max: 1,
+                time: 30000,
+                errors: ['time']
+            })
+            .then(async c => {
+                const f = c.first();
+                if (f.content.toLowerCase()
+                    .startsWith("https")) {
+                    bot.evidence = f.content;
+                } else {
+                    return msg.channel.send("Invalid evidence.");
+                }
+            })
+            .catch(e => {
+                return msg.channel.send("Time limit reached, try again");
+            });
+    }
     msg.channel.send("Detaining " + member.displayName + "...").then(m => {
     const det = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -52,11 +73,12 @@ exports.run = (msg, bot, args) => {
         .setColor('RANDOM');
     bot.detainer = msg.member;
     let role = msg.guild.roles.find(r => r.name === "Detained");
-    det.setDescription(msg.member.displayName + ", I have detained " + member.displayName + ", for reason " + args[1] + ". A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!");
+    det.setDescription(`${msg.member.displayName}, I have detained ${member.displayName}` + 
+                       `, for reason ${args[1]}, with evidence ${bot.evidence}. A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!`);
     /*the above was split in 2 to take up less space*/
-    det.setFooter('User ' + member.displayName + " has been detained.");
+    det.setFooter(`User ${member.displayName} has been detained.`);
     bot.logEmbed.setTitle("Detain")
-    .addField("User" ,member.displayName)
+    .addField("User", member.displayName)
     .addField("Perpetrator", msg.member.displayName)
     .addField("Reason", bot.reason);
     bot.logs.send(bot.logEmbed);
