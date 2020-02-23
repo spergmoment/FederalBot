@@ -1,4 +1,4 @@
-exports.run = (msg, bot, args) => {
+exports.run = async (msg, bot, args) => {
     const Discord = require("discord.js");
     let member = msg.mentions.members.first();
     bot.evidence=args.slice(2);
@@ -7,7 +7,7 @@ exports.run = (msg, bot, args) => {
     }
     if (!member) {
         msg.channel.send("Who are you detaining?");
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+        await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
                 max: 1,
                 time: 30000,
                 errors: ['time']
@@ -26,8 +26,9 @@ exports.run = (msg, bot, args) => {
             });
     }
     if (!args[1]) {
+        if(!member) return;
         msg.channel.send("Which law did they break?");
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+        await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
                 max: 1,
                 time: 30000,
                 errors: ['time']
@@ -47,8 +48,9 @@ exports.run = (msg, bot, args) => {
         bot.reason = args[1];
     }
     if(args.length<3) {
+        if(!bot.reason) return;
        msg.channel.send("Please provide evidence.");
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+    await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
                 max: 1,
                 time: 30000,
                 errors: ['time']
@@ -66,6 +68,7 @@ exports.run = (msg, bot, args) => {
                 return msg.channel.send("Time limit reached, try again");
             });
     }
+    if(!member||!bot.reason||!bot.evidence) return;
     msg.channel.send("Detaining " + member.displayName + "...").then(m => {
     const det = new Discord.RichEmbed()
         .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)

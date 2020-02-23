@@ -1,17 +1,18 @@
-exports.run = (msg, bot, args) => {
+exports.run = async (msg, bot, args) => {
     var member = msg.mentions.members.first();
     bot.reason = parseInt(args[1], 10);
     bot.evidence = args.slice(2);
+    bot.detainer = msg.member;
     if (!msg.member.roles.find(r => r.name === "Judge") && !msg.member.roles.find(r => r.name === "Chief Justice")) {
         return msg.channel.send("You must be a Judge to use this command.");
     }
     if (!member) {
         msg.channel.send("Who do you want to grant a warrant for?");
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
-                max: 1,
-                time: 30000,
-                errors: ['time']
-            })
+        await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+            max: 1,
+            time: 30000,
+            errors: ['time']
+        })
             .then(async c => {
                 const f = c.first();
                 const m = f.mentions.members.first();
@@ -25,30 +26,32 @@ exports.run = (msg, bot, args) => {
                 return msg.channel.send("Time limit reached, try again.");
             });
     }
-    if (parseInt(args[1], 10) > 9) {
+    if (parseInt(args[1], 10) > 9 || !args[1]) {
+        if (!member) return;
         msg.channel.send("What law was broken?");
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
-                max: 1,
-                time: 30000,
-                errors: ['time']
-            })
+        await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+            max: 1,
+            time: 30000,
+            errors: ['time']
+        })
             .then(async c => {
                 const f = c.first();
-                const n = parseInt(f, 10);
-                if (typeof n !== Number) return msg.channel.send("That is not a valid law.");
-                bot.reason = parseInt(f, 10);
+                const n = f.content;
+                if (n>9||n<1||typeof n===typeof NaN) return msg.channel.send("That is not a valid law.");
+                bot.reason = parseInt(f.content, 10);
             })
             .catch(e => {
                 return msg.channel.send("Time limit reached, try again");
             });
     }
     if (args.length < 3) {
+        if (!bot.reason) return;
         msg.channel.send("Please provide evidence.");
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
-                max: 1,
-                time: 30000,
-                errors: ['time']
-            })
+        await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+            max: 1,
+            time: 30000,
+            errors: ['time']
+        })
             .then(async c => {
                 const f = c.first();
                 if (f.content.toLowerCase()
@@ -62,6 +65,7 @@ exports.run = (msg, bot, args) => {
                 return msg.channel.send("Time limit reached, try again");
             });
     }
+    if (!member || !bot.reason || !bot.evidence) return;
     msg.channel.send("Granting warrant...")
         .then(m => {
             member.addRole(msg.guild.roles.find(r => r.name === "warrant"));
@@ -83,7 +87,9 @@ exports.run = (msg, bot, args) => {
                     member.removeRole(msg.guild.roles.find(r => r.name === "warrant"));
                     msg.channel.send(msg.author + ", your warrant against " + member.user + " has not been arrested. The warrant is now gone.");
                 }
-                m.delete();
-            });
+            }, 48 * 60 * 60 * 1000);
+            m.delete();
+
         });
+
 };

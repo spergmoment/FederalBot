@@ -1,11 +1,12 @@
-exports.run = (msg, bot, args) => {
+exports.run = async (msg, bot, args) => {
     if (!bot.reason || !bot.evidence) return;
     if (!msg.member.roles.find(r => r.name === "Officer") && !msg.member.roles.find(r => r.name)) {
         return msg.channel.send("You must be an Officer to use this command.");
     }
     bot.courtThing = msg.mentions.members.first();
     if (!bot.courtThing) {
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+        msg.channel.send("Who are you arresting?");
+        await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
                 max: 1,
                 time: 30000,
                 errors: ['time']
@@ -23,6 +24,7 @@ exports.run = (msg, bot, args) => {
                 return msg.channel.send("Time limit reached, try again.");
             });
     }
+    if(!bot.courtThing) return;
     if (!bot.courtThing.roles.find(r => r.name === "warrant")) return msg.channel.send("This user does not have a warrant on them.");
     msg.channel.send("Arresting " + bot.courtThing.displayName + "...")
         .then(m => {
@@ -38,18 +40,16 @@ exports.run = (msg, bot, args) => {
                 .setDescription(sender.displayName + ", " + bot.courtThing.displayName + " has been PUT IN COURT.")
                 .setFooter('Put ' + bot.courtThing.displayName + ' in court.');
             var judgesStuff = []; // blank array
-            msg.guild.fetchMembers()
-                .then(async members => {
-                    members.forEach(member => {
-                        if (member.roles.find(r => r.name === "Judge")) {
-                            if (member !== bot.courtThing) {
-                                judgesStuff.push(member); // puts the member in the array if they're a judge, and aren't the detained person
-                            } else {
-                                console.log(member, bot.courtThing);
-                            }
-                        }
-                    });
-                });
+            msg.guild.fetchMembers();
+                            msg.guild.members.forEach(member => {
+                                if (member.roles.find(r => r.name === "Judge")) {
+                                    if (member !== bot.courtThing && member !== msg.member) {
+                                        judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
+                                    } else {
+                                        console.log(member.displayName, bot.courtThing.displayName);
+                                    }
+                                }
+                        });
             bot.judgeToUse = judgesStuff[Math.floor(Math.random() * judgesStuff.length)]; // chooses a random judge
             console.log(bot.judgeToUse.user.tag);
             var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
@@ -88,7 +88,7 @@ exports.run = (msg, bot, args) => {
                             var thing = "**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + 
                                 ". Reason for court case: " + bot.reason + "\n\n";
                             if(bot.evidence) thing+=`Evidence: ${bot.evidence}`;
-                            thing+=(`${bot.judgeToUse.user} will be looking over this case.\n\n${bot.judgeToUse.displayName}` + 
+                            thing+=(`\n${bot.judgeToUse.user} will be looking over this case.\n\n${bot.judgeToUse.displayName}` + 
                                     ", please remember a few things before delivering your verdict:\n " +
                                     `1. Read the ${lawChannel}, ${rightChannel}, and ${interChannel}.\n` +
                                     "2. Listen to evidence from both sides. Do *NOT* take prejudice against the defendant or prosecutor.\n" +
