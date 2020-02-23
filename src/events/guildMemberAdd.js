@@ -3,14 +3,13 @@ module.exports = (bot, mem) => {
         .then(guildInvites => {
             const ei = bot.invites[mem.guild.id];
             bot.invites[mem.guild.id] = guildInvites;
-            const invite = guildInvites.find(i => ei.get(i.code)
-                .uses < i.uses);
+            const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
             const inviter = bot.users.get(invite.inviter.id);
             const logs = mem.guild.channels.find(r => r.name === ("logs"));
             const Discord = require("discord.js");
             const logsEmbed = new Discord.RichEmbed()
-            .setDescription("")
-            .setTitle("")
+                .setDescription("")
+                .setTitle("")
             if (logs) {
                 logsEmbed.setTitle("User Joined")
                     .addField("User", mem.user.username)

@@ -56,10 +56,11 @@ exports.run = (msg, bot, args) => {
                     .addField("Position", pos);
                 bot.logs.send(bot.logEmbed);
                 m.delete();
+                msg.channel.send(resign);
             });
     } else {
         resign.setDescription("You are currently unable to resign. If you are in a position which you believe you should be able to resign, please contact Sperg.");
         resign.setFooter('You lack any governmental position.');
+        msg.channel.send(resign);
     }
-    msg.channel.send(resign);
 };
