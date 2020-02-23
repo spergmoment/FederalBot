@@ -1,9 +1,6 @@
 exports.run = (msg, bot, args) => {
     if (bot.judgeToUse && bot.detainer && bot.courtThing) {
         const Discord = require("discord.js");
-        let free = function() {
-            bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Muted"));
-        };
         const guilty = new Discord.RichEmbed()
             .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
             .setTimestamp()
@@ -24,38 +21,31 @@ exports.run = (msg, bot, args) => {
                                 overwrites: [{
                                     id: cj.id,
                                     deny: ['SEND_MESSAGES'],
-                        }, {
+                                }, {
                                     id: cp.id,
                                     deny: ['SEND_MESSAGES'],
-                        }, {
+                                }, {
                                     id: bot.detainer.id,
                                     deny: ['SEND_MESSAGES'],
-                        }, {
+                                }, {
                                     id: bot.judgeToUse.user.id,
                                     deny: ['SEND_MESSAGES'],
-                        }, {
+                                }, {
                                     id: bot.courtThing.user.id,
                                     deny: ['SEND_MESSAGES'],
-                        }, {
+                                }, {
                                     id: msg.guild.defaultRole.id,
                                     deny: ["SEND_MESSAGES"],
-                        }, ],
+                                },],
                             });
-                            if (bot.reason === 1 || bot.reason === 9) {
-                                if (bot.courtThing.misdemeanors < 4) {
-                                    setTimeout(free, 0);
-                                    bot.courtThing.misdemeanors += 1;
-                                }
-                            } else {
-                                setTimeout(free, (args[0] * 3600000));
-                            }
+                            setTimeout(() => { bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Muted"));console.log(parseInt(args[1], 10)) }, (parseInt(args[1],10) * 60*60*1000));
                             bot.logEmbed.setTitle("Rule case as Guilty");
                             bot.logEmbed.addField("Perpetrator", msg.member.displayName)
                                 .addField("Reason", args.slice(0, args.length - 1));
                             bot.logs.send(bot.logEmbed);
-                            bot.courtThing = "";
                             m.delete();
                         });
+
                 } else if (args.length === 0) {
                     guilty.setDescription(msg.member.displayName + ", please provide a reason.");
                     guilty.setFooter('No reason found.');
@@ -70,6 +60,5 @@ exports.run = (msg, bot, args) => {
             guilty.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
             guilty.setFooter('Category ' + msg.channel.parent.name + ' does not match category "court"');
         }
-        msg.channel.send(guilty);
     }
 };
