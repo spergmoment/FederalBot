@@ -1,9 +1,9 @@
-exports.run = (msg, bot, args) => {
+exports.run = async (msg, bot, args) => {
     const Discord = require("discord.js");
     let member = msg.mentions.members.first();
     if (!member) {
         msg.channel.send("Who are you impeaching?");
-        msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
+        await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
                 max: 1,
                 time: 30000,
                 errors: ['time']
