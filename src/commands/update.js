@@ -19,8 +19,8 @@ exports.run = (msg, bot, args) => {
             }
             update.setFooter('Bot update!');
         } else {
-            update.setDescription("Only a bot owner or admin may use this command.");
-            update.setFooter('You lack the Bot Owner and Bot Admin roles in the Permissions Object.');
+            update.setDescription("Only a bot owner or admin may use this command.")
+            .setFooter('You lack the Bot Owner and Bot Admin roles in the Permissions Object.');
         }
         msg.channel.send(update);
 };

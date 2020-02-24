@@ -10,8 +10,9 @@ exports.run = (msg, bot, args) => {
                 if (args.length > 0) {
                     msg.channel.send("Ruling case as innocent...")
                         .then(m => {
-                            inno.setDescription(msg.member.displayName + ", " + bot.courtThing.displayName + " has been found **INNOCENT.**");
-                            inno.setFooter('Ruled this case as innocent.');
+                            inno.setDescription(msg.member.displayName + ", " + 
+                                                bot.courtThing.displayName + " has been found **INNOCENT.**")
+                            .setFooter('Ruled this case as innocent.');
                             msg.channel.send(inno);
                             bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Court"));
                             var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
@@ -38,19 +39,20 @@ exports.run = (msg, bot, args) => {
                         }, ],
                             });
                             bot.logEmbed.setTitle("Rule case as Innocent")
-                                .addField("Perpetrator", msg.member.displayName)
-                                .addField("Reason", args.slice(0, args.length - 1));
+                                .addField("Perpetrator", msg.member.tag)
+                                .addField("Defendant", bot.courtThing.tag)
+                                .addField("Reason", args.slice(0));
                             bot.logs.send(bot.logEmbed);
                             bot.courtThing = "";
                         });
                 } else if (args.length === 0) {
-                    inno.setDescription(msg.member.displayName + ", please provide a reason.");
-                    inno.setFooter('Reason unspecified.');
+                    inno.setDescription(msg.member.displayName + ", please provide a reason.")
+                    .setFooter('Reason unspecified.');
                 }
             }
         } else {
-            inno.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-            inno.setFooter('Category ' + msg.channel.parent.name + ' does not match category "court".');
+            inno.setDescription(msg.member.displayName + ", this command may only be used in a court case.")
+            .setFooter('Category ' + msg.channel.parent.name + ' does not match category "court".');
         }
         msg.channel.send(inno);
     }

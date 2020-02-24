@@ -44,8 +44,8 @@ exports.run = (msg, bot, args) => {
             .setTimestamp()
             .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
                 .toString(16)
-                .substr(1, 6));
-        bruh.setDescription("You lack permissions to use this command.");
+                .substr(1, 6))
+            .setDescription("You lack permissions to use this command.");
         msg.channel.send(bruh);
     }
 };

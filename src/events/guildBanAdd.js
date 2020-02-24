@@ -8,8 +8,9 @@ module.exports = (bot, g, m) => {
         const e = audit.entries.first();
         if (logs) {
             logsEmbed.setTitle("Action: Ban")
-                .addField("Banned User", m.username)
-                .addField("Perpetrator", e.executor.username)
+                .addField("Banned User", m.tag)
+                .addField("Perpetrator", e.executor.tag)
+                .addField("Time Banned", bot.dateConvert(e.createdAt))
                 .addField("IDs", "```User ID: " + m.id + "```");
             logs.send(logsEmbed);
         }

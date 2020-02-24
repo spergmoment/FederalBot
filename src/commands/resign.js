@@ -49,18 +49,21 @@ exports.run = (msg, bot, args) => {
             .then(m => {
                 msg.member.removeRole(msg.guild.roles.find(r => r.name === pos))
                     .catch(console.error);
-                resign.setDescription(msg.member.displayName + ", you have successfully resigned from the position of " + pos + ".");
-                resign.setFooter('Resigned from ' + pos);
+                resign.setDescription(msg.member.displayName + 
+                                      ", you have successfully resigned from the position of " + 
+                                      pos + ".")
+                .setFooter('Resigned from ' + pos);
                 bot.logEmbed.setTitle("Action: Resign")
-                    .addField("Perpetrator", msg.member.displayName)
+                    .addField("Perpetrator", msg.member.tag)
                     .addField("Position", pos);
                 bot.logs.send(bot.logEmbed);
                 m.delete();
                 msg.channel.send(resign);
             });
     } else {
-        resign.setDescription("You are currently unable to resign. If you are in a position which you believe you should be able to resign, please contact Sperg.");
-        resign.setFooter('You lack any governmental position.');
+        resign.setDescription("You are currently unable to resign. If you are in a position " +
+                              "which you believe you should be able to resign, please contact Sperg.")
+        .setFooter('You lack any governmental position.');
         msg.channel.send(resign);
     }
 };

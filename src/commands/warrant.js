@@ -77,8 +77,8 @@ exports.run = async (msg, bot, args) => {
                 .setDescription(msg.author.username + ", I have granted a warrant against " + member.user.username + ". An officer must **;arrest** this person for a case to take place.");
             msg.channel.send(w);
             bot.logEmbed.setTitle("Grant Warrant")
-                .addField("User", member.displayName)
-                .addField("Perpetrator", msg.member.displayName)
+                .addField("User", member.tag)
+                .addField("Perpetrator", msg.member.tag)
                 .addField("Reason", bot.reason)
                 .addField("Evidence", bot.evidence);
             bot.logs.send(bot.logEmbed);
