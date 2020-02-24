@@ -14,7 +14,8 @@ module.exports = (bot, mem) => {
                 logsEmbed.setTitle("User Joined")
                     .addField("User", mem.user.username)
                     .addField("Avatar URL", mem.user.avatarURL)
-                    .addField("Account Creation Date", mem.user.createdAt)
+                    .addField("Account Creation Date", bot.dateConvert(mem.user.createdAt))
+                    .addField("Time Joined", bot.dateConvert(mem.joinedAt))
                     .addField("Invite Used", invite.code + " created by " + inviter.tag + ", used " + invite.uses + " times.")
                     .addField("IDs", "```User ID: " + mem.user.id + "\nInviter ID: " + inviter.id + "```");
                 logs.send(logsEmbed);
