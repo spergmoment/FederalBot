@@ -37,8 +37,8 @@ exports.run = async (msg, bot, args) => {
                         .catch(console.error);
                     const sender = msg.member;
                     bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Court")); // but you're in court now
-                    approve.setDescription(sender.displayName + ", " + bot.courtThing.displayName + " has been PUT IN COURT.");
-                    approve.setFooter('Put ' + bot.courtThing.displayName + ' in court.');
+                    approve.setDescription(sender.displayName + ", " + bot.courtThing.displayName + " has been PUT IN COURT.")
+                    .setFooter('Put ' + bot.courtThing.displayName + ' in court.');
                     msg.channel.send(approve);
                     var judgesStuff = []; // blank array
                     msg.guild.fetchMembers();
@@ -115,8 +115,8 @@ exports.run = async (msg, bot, args) => {
                     m.delete();
                 });
         } else {
-            approve.setDescription("This user is not detained.");
-            approve.setFooter('User ' + bot.courtThing.displayName + ' does not have the role "Detained"');
+            approve.setDescription("This user is not detained.")
+            .setFooter('User ' + bot.courtThing.displayName + ' does not have the role "Detained"');
             msg.channel.send(approve); // this took so long to get to work im so proud of myself ahadgjasbh
 
         }
