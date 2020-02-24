@@ -9,7 +9,7 @@ module.exports = (bot, m) => {
     if (logs) {
         logsEmbed
         .setTitle("Deleted Message")
-            .addField("Author", m.author.username)
+            .addField("Author", m.author.tag)
             .addField("Content", m.content)
             .addField("Channel", m.channel.name)
             .addField("Message Time", bot.dateConvert(m.createdAt))
