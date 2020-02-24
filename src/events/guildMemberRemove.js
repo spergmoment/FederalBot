@@ -6,7 +6,7 @@ module.exports = (bot, mem) => {
     const logs = mem.guild.channels.find(r => r.name === ("logs"));
     if (logs) {
         logsEmbed.setTitle("User Left")
-            .addField("User", mem.user.username)
+            .addField("User", mem.user.tag)
             .addField("Avatar URL", mem.user.avatarURL)
             .addField("Account Creation Date", bot.dateConvert(mem.user.createdAt))
             .addField("Time Joined", bot.dateConvert(mem.joinedAt))
