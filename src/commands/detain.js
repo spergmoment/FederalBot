@@ -81,8 +81,8 @@ exports.run = async (msg, bot, args) => {
     /*the above was split in 2 to take up less space*/
     det.setFooter(`User ${member.displayName} has been detained.`);
     bot.logEmbed.setTitle("Detain")
-    .addField("User", member.displayName)
-    .addField("Perpetrator", msg.member.displayName)
+    .addField("User", member.tag)
+    .addField("Perpetrator", msg.member.tag)
     .addField("Reason", bot.reason);
     bot.logs.send(bot.logEmbed);
     member.addRole(role) // the good stuff starts now..
