@@ -13,7 +13,7 @@ module.exports = (bot, ch) => {
             if (logs) {
                 logsEmbed.setTitle("Action: Create Channel")
                     .addField("Channel Name", ch.name)
-                    .addField("Perpetrator", e.executor.username)
+                    .addField("Perpetrator", e.executor.tag)
                     .addField("Time Created", bot.dateConvert(ch.createdAt))
                     .addField("IDs", "```Channel: " + ch.id + "```");
                 logs.send(logsEmbed);
