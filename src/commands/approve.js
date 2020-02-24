@@ -106,8 +106,8 @@ exports.run = async (msg, bot, args) => {
                             channel.send(thing)
                                 .catch(console.error);
                             bot.logEmbed.setTitle("Approve Detainment")
-                                .addField("User", bot.courtThing.displayName)
-                                .addField("Perpetrator", msg.member.displayName);
+                                .addField("User", bot.courtThing.tag)
+                                .addField("Perpetrator", msg.member.tag);
                             await bot.logs.send(bot.logEmbed);
                             console.log(channel.name);
                         })
