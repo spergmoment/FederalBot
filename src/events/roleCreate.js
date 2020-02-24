@@ -11,7 +11,7 @@ module.exports = (bot, r) => {
                 .addField("Name", r.name)
                 .addField("Position", r.calculatedPosition)
                 .addField("Hex", r.hexColor)
-                .addField("Perpetrator", e.executor.username)
+                .addField("Perpetrator", e.executor.tag)
                 .addField("Time Created", bot.dateConvert(r.createdAt))
                 .addField("IDs", "```Role ID: " + r.id + "```");
             logs.send(logsEmbed);
