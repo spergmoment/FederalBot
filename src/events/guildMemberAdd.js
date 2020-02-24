@@ -12,7 +12,7 @@ module.exports = (bot, mem) => {
                 .setTitle("")
             if (logs) {
                 logsEmbed.setTitle("User Joined")
-                    .addField("User", mem.user.username)
+                    .addField("User", mem.user.tag)
                     .addField("Avatar URL", mem.user.avatarURL)
                     .addField("Account Creation Date", bot.dateConvert(mem.user.createdAt))
                     .addField("Time Joined", bot.dateConvert(mem.joinedAt))
