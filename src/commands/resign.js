@@ -52,7 +52,7 @@ exports.run = (msg, bot, args) => {
                 resign.setDescription(msg.member.displayName + ", you have successfully resigned from the position of " + pos + ".");
                 resign.setFooter('Resigned from ' + pos);
                 bot.logEmbed.setTitle("Action: Resign")
-                    .addField("Perpetrator", msg.member.displayName)
+                    .addField("Perpetrator", msg.member.tag)
                     .addField("Position", pos);
                 bot.logs.send(bot.logEmbed);
                 m.delete();
