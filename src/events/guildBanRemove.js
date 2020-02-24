@@ -10,6 +10,7 @@ module.exports = (bot, g, m) => {
             logsEmbed.setTitle("Action: Unban")
                 .addField("Unbanned User", m.username)
                 .addField("Perpetrator", e.executor.username)
+                .addField("Time Unbanned", bot.dateConvert(e.createdAt))
                 .addField("IDs", "```User ID: " + m.id + "```");
             logs.send(logsEmbed);
         }
