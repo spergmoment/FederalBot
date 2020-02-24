@@ -9,8 +9,8 @@ exports.run = (msg, bot, args) => {
             if (msg.member.user.id === bot.judgeToUse.user.id) {
                 msg.channel.send("Marking this case as a mistrial...")
                     .then(m => {
-                        mis.setDescription(msg.member.displayName + ", you have declared this case as a MISTRIAL.");
-                        mis.setFooter('Case declared a mistrial');
+                        mis.setDescription(msg.member.displayName + ", you have declared this case as a MISTRIAL.")
+                        .setFooter('Case declared a mistrial');
                         bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Court"));
                         msg.channel.send(mis);
                         var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
@@ -44,8 +44,8 @@ exports.run = (msg, bot, args) => {
                     });
             }
         } else {
-            mis.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-            mis.setFooter('Category ' + msg.channel.parent.name + ' does not match category "court".');
+            mis.setDescription(msg.member.displayName + ", this command may only be used in a court case.")
+            .setFooter('Category ' + msg.channel.parent.name + ' does not match category "court".');
             msg.channel.send(mis);
         }
     }
