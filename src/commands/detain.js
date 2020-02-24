@@ -77,7 +77,9 @@ exports.run = async (msg, bot, args) => {
                 .setColor('RANDOM');
             bot.detainer = msg.member;
             let role = msg.guild.roles.find(r => r.name === "Detained");
-            det.setDescription(`${msg.member.displayName}, I have detained ${member.displayName}` + `, for reason ${args[1]}, with evidence ${bot.evidence}. ` + `A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!`)
+            det.setDescription(`${msg.member.displayName}, I have detained ${member.displayName}` + 
+                               `, for reason ${args[1]}, with evidence ${bot.evidence}. ` + 
+                               `A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!`)
                 .setFooter(`User ${member.displayName} has been detained.`);
             bot.logEmbed.setTitle("Detain")
                 .addField("User", member.tag)
