@@ -83,7 +83,8 @@ exports.run = async (msg, bot, args) => {
     bot.logEmbed.setTitle("Detain")
     .addField("User", member.tag)
     .addField("Perpetrator", msg.member.tag)
-    .addField("Reason", bot.reason);
+    .addField("Reason", bot.reason)
+    .addField("Evidence", bot.evidence);
     bot.logs.send(bot.logEmbed);
     member.addRole(role) // the good stuff starts now..
         .catch(console.error);
