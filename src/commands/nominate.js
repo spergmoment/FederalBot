@@ -69,8 +69,8 @@ exports.run = async (msg, bot, args) => {
                         nom.setDescription(msg.member.displayName + ", you have successfully nominated " + member.displayName + " for " + role.name + "!");
                         nom.setFooter('Nominated ' + member.displayName + ' for ' + role + ".");
                         bot.logEmbed.setTitle("Nominate")
-                            .addField("User", member.displayName)
-                            .addField("Perpetrator", msg.member.displayName)
+                            .addField("User", member.tag)
+                            .addField("Perpetrator", msg.member.tag)
                             .addField("Position", role.name);
                         bot.logs.send(bot.log);
                         m.delete();
