@@ -39,8 +39,9 @@ exports.run = (msg, bot, args) => {
                                 },],
                             });
                             setTimeout(() => { bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Muted"));console.log(parseInt(args[1], 10)) }, (parseInt(args[1],10) * 60*60*1000));
-                            bot.logEmbed.setTitle("Rule case as Guilty");
-                            bot.logEmbed.addField("Perpetrator", msg.member.tag)
+                            bot.logEmbed.setTitle("Rule case as Guilty")
+                            .addField("Perpetrator", msg.member.tag)
+                            .addField("Defendant", bot.courtThing.tag)
                                 .addField("Reason", args.slice(0, args.length - 1));
                             bot.logs.send(bot.logEmbed);
                             m.delete();
