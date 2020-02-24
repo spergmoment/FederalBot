@@ -9,6 +9,7 @@ module.exports = (bot, mem) => {
             .addField("User", mem.user.username)
             .addField("Avatar URL", mem.user.avatarURL)
             .addField("Account Creation Date", bot.dateConvert(mem.user.createdAt))
+            .addField("Time Joined", bot.dateConvert(mem.joinedAt))
             .addField("Time Left", bot.dateConvert(Date()))
             .addField("IDs", "```User ID: " + mem.user.id + "```");
         logs.send(logsEmbed);
