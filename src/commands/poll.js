@@ -30,28 +30,17 @@ exports.run = (msg, bot, args) => {
                     });
                 if (parsedArgs[0].toLowerCase()
                     .includes('law ')) {
-                    var laws = [
-                "**Law 1: Spam**\nSending an unreasonably large amount of messages in a short amount of time. (Misdemeanor)",
-                "**Law 2: Raid**\nSending a massive amount of messages in a very short time, or otherwise participating in a large attack on our server, is prohibited. (Banishment)",
-                "**Law 3: Alt**\nUsing more than a single alternative account, or otherwise using an alt to your advantage, is prohibited. (Felony)",
-                "**Law 4: Misconduct**\nMisuse of government powers is hereby prohibited. (Misdemeanor, Felony, or Impeachment depending on severity)",
-                "**Law 5: NSFW/L**\nSending NSFW outside of <#644334931434274816>, or NSFL absolutely anywhere is prohibited. (Felony)",
-                "**Law 6: Slander**\Attempting to damage someone's reputation in a serious, harmful, or aggressive nature is prohibited. (Felony)",
-                "**Law 7: Corruption**\nGovernment officials participating in dishonest actions, bribery, or otherwise seriously threatening others in a way that directly benefits themselves is very strictly prohibited. (Felony, Impeachment)",
-                "**Law 8: Obstruction**\nDestroying evidence in any such way that it can be used for your own advantage is strictly prohibited. (Automatic loss of case, Impeachment (Both I/A))",
-                "**Law 9: Invite**\nPurposefully sending any valid invite link to any server other than our own is prohibited. (Misdemeanor)"
-            ];
                     msg.channel.send("Finding law...")
                         .then(msgs => {
                             let newArgs = parsedArgs[0].split("law ");
                             msg.channel.send("Reminder of law " + newArgs[1].charAt(0) + ":");
-                            var lawThing = (laws[newArgs[1].charAt(0) - 1]);
+                            var lawThing = (bot.laws[newArgs[1].charAt(0) - 1]);
                             const lawSend = new Discord.RichEmbed()
                                 .setAuthor(bot.user.tag, bot.user.avatarURL, bot.user.avatarURL)
                                 .setTimestamp()
-                                .setColor('RANDOM');
-                            lawSend.setDescription(lawThing);
-                            lawSend.setFooter('Law ' + args[0]);
+                                .setColor('RANDOM')
+                                .setDescription(lawThing)
+                                .setFooter('Law ' + args[0]);
                             msg.channel.send(lawSend);
                             msgs.delete();
                         });
