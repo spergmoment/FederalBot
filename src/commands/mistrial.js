@@ -37,7 +37,8 @@ exports.run = (msg, bot, args) => {
                         }, ],
                         });
                         bot.logEmbed.setTitle("Rule case as a Mistrial")
-                            .addField("Perpetrator", msg.member.tag);
+                            .addField("Perpetrator", msg.member.tag)
+                            .addField("Defendant", bot.courtThing.tag);
                         bot.logs.send(bot.logEmbed);
                         bot.courtThing = "";
                     });
