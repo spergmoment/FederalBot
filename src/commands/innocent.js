@@ -38,8 +38,8 @@ exports.run = (msg, bot, args) => {
                         }, ],
                             });
                             bot.logEmbed.setTitle("Rule case as Innocent")
-                                .addField("Perpetrator", msg.member.displayName)
-                                .addField("Reason", args.slice(0, args.length - 1));
+                                .addField("Perpetrator", msg.member.tag)
+                                .addField("Reason", args.slice(0));
                             bot.logs.send(bot.logEmbed);
                             bot.courtThing = "";
                         });
