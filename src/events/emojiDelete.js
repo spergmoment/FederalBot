@@ -11,6 +11,8 @@ module.exports = (bot, e) => {
                 .addField("Emoji Name", e.name)
                 .addField("Author", en.executor.username)
                 .addField("URL", e.url)
+                .addField("Time Created", bot.dateConvert(e.createdAt))
+                .addField("Time Deleted", bot.dateConvert(en.createdAt))
                 .addField("IDs", "```Emoji ID: " + e.id + "```");
             logs.send(logsEmbed);
         }
