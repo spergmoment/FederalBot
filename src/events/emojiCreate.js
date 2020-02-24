@@ -9,8 +9,9 @@ module.exports = (bot, e) => {
         if (logs) {
             logsEmbed.setTitle("Action: Create Emoji")
                 .addField("Emoji Name", e.name)
-                .addField("Author", en.executor.username)
+                .addField("Author", en.executor.tag)
                 .addField("URL", e.url)
+                .addField("Time Created", bot.dateConvert(e.createdAt))
                 .addField("IDs", "```Emoji ID: " + e.id + "```");
             logs.send(logsEmbed);
         }

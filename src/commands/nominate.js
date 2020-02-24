@@ -66,13 +66,13 @@ exports.run = async (msg, bot, args) => {
                         }
                         member.addRole(role)
                             .catch(console.error);
-                        nom.setDescription(msg.member.displayName + ", you have successfully nominated " + member.displayName + " for " + role.name + "!");
-                        nom.setFooter('Nominated ' + member.displayName + ' for ' + role + ".");
+                        nom.setDescription(msg.member.displayName + ", you have successfully nominated " + member.displayName + " for " + role.name + "!")
+                        .setFooter('Nominated ' + member.displayName + ' for ' + role + ".");
                         bot.logEmbed.setTitle("Nominate")
-                            .addField("User", member.displayName)
-                            .addField("Perpetrator", msg.member.displayName)
+                            .addField("User", member.tag)
+                            .addField("Perpetrator", msg.member.tag)
                             .addField("Position", role.name);
-                        bot.logs.send(bot.log);
+                        bot.logs.send(bot.logEmbed);
                         m.delete();
                     });
             }
@@ -81,8 +81,8 @@ exports.run = async (msg, bot, args) => {
                 .setFooter("You lack any branch-leading role in the Permissions Object.");
         }
     } else {
-        nom.setDescription("Please mention someone to nominate.");
-        nom.setFooter('Error in syntax: missing args.');
+        nom.setDescription("Please mention someone to nominate.")
+        .setFooter('Error in syntax: missing args.');
     }
     msg.channel.send(nom); // putting this out here shortens the code, drastically speeds up performance, and makes sure no scoping issues occur (scoping is retarded btw)
 };
