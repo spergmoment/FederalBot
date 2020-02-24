@@ -34,13 +34,13 @@ module.exports = (bot) => {
         var week = time.getDay(); // gets day of week, e.g. monday
         week = weeks[week];
         if (hr < 10) {
-            hr = "0" + hr.charAt(0);
+            hr = "0" + hr.toString().charAt(0);
         }
         if (min < 10) {
-            min = "0" + min.charAt(0);
+            min = "0" + min.toString().charAt(0);
         }
         if (sec < 10) {
-            sec = "0" + sec.charAt(0);
+            sec = "0" + sec.toString().charAt(0);
         }
         return week + ", " + mon + " " + day + ", " + yr + ", at " + hr + ":" + min + ":" + sec;
     }
