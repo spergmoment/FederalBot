@@ -54,8 +54,8 @@ exports.run = async (msg, bot, args) => {
                         peach.setDescription(msg.member.displayName + ", I have impeached " + member.displayName + " from " + role.name + ".");
                         peach.setFooter('Impeached ' + member.displayName + ' from ' + role.name + ".");
                         bot.logEmbed.setTitle("Impeach")
-                            .addField("User", member.displayName)
-                            .addField("Perpetrator", msg.member.displayName)
+                            .addField("User", member.tag)
+                            .addField("Perpetrator", msg.member.tag)
                             .addField("Position", role.name);
                         bot.logs.send(bot.logEmbed);
                         m.delete();
