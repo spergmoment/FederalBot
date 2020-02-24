@@ -10,10 +10,10 @@ exports.run = (msg, bot, args) => {
                 if (args.length > 1 && bot.reason !== 1 && bot.reason !== 9) {
                     msg.channel.send("Ruling case as guilty...")
                         .then(m => {
-                            bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Muted"));
-                            bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Court"));
-                            guilty.setDescription(msg.member.displayName + ", " + bot.courtThing.displayName + " has been found **GUILTY.**");
-                            guilty.setFooter('Ruled the case as guilty.');
+                            bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Muted"))
+                            .removeRole(msg.guild.roles.find(r => r.name === "Court"));
+                            guilty.setDescription(msg.member.displayName + ", " + bot.courtThing.displayName + " has been found **GUILTY.**")
+                            .setFooter('Ruled the case as guilty.');
                             msg.channel.send(guilty);
                             var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
                             var cp = msg.guild.roles.find(r => r.name === "Chief of Police");
@@ -38,28 +38,31 @@ exports.run = (msg, bot, args) => {
                                     deny: ["SEND_MESSAGES"],
                                 },],
                             });
-                            setTimeout(() => { bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Muted"));console.log(parseInt(args[1], 10)) }, (parseInt(args[1],10) * 60*60*1000));
+                            setTimeout(() => { 
+                                bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Muted"));
+                                console.log(parseInt(args[1], 10)) 
+                            }, (parseInt(args[1],10) * 60*60*1000));
                             bot.logEmbed.setTitle("Rule case as Guilty")
                             .addField("Perpetrator", msg.member.tag)
                             .addField("Defendant", bot.courtThing.tag)
-                                .addField("Reason", args.slice(0, args.length - 1));
+                            .addField("Reason", args.slice(0, args.length - 1));
                             bot.logs.send(bot.logEmbed);
                             m.delete();
                         });
 
                 } else if (args.length === 0) {
-                    guilty.setDescription(msg.member.displayName + ", please provide a reason.");
-                    guilty.setFooter('No reason found.');
+                    guilty.setDescription(msg.member.displayName + ", please provide a reason.")
+                    .setFooter('No reason found.');
                 } else {
                     if (bot.reason !== 1 && bot.reason !== 9 && bot.courtThing.misdemeanors < 4) {
-                        guilty.setDescription(msg.member.displayName + ", please set a time of imprisonment.");
-                        guilty.setFooter('No imprisonment time specified.');
+                        guilty.setDescription(msg.member.displayName + ", please set a time of imprisonment.")
+                        .setFooter('No imprisonment time specified.');
                     }
                 }
             }
         } else {
-            guilty.setDescription(msg.member.displayName + ", this command may only be used in a court case.");
-            guilty.setFooter('Category ' + msg.channel.parent.name + ' does not match category "court"');
+            guilty.setDescription(msg.member.displayName + ", this command may only be used in a court case.")
+            .setFooter('Category ' + msg.channel.parent.name + ' does not match category "court"');
         }
     }
 };
