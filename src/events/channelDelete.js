@@ -10,7 +10,7 @@ module.exports = (bot, ch) => {
         if (logs) {
             logsEmbed.setTitle("Action: Delete Channel")
                 .addField("Channel Name", ch.name)
-                .addField("Perpetrator", e.executor.username)
+                .addField("Perpetrator", e.executor.tag)
                 .addField("Time Created", bot.dateConvert(ch.createdAt))
                 .addField("Time Deleted", bot.dateConvert(e.createdAt))
                 .addField("IDs", "```Channel ID: " + ch.id + "```");
