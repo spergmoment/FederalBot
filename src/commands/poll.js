@@ -34,7 +34,7 @@ exports.run = (msg, bot, args) => {
                         .then(msgs => {
                             let newArgs = parsedArgs[0].split("law ");
                             msg.channel.send("Reminder of law " + newArgs[1].charAt(0) + ":");
-                            var lawThing = (bot.laws[newArgs[1].charAt(0) - 1]);
+                            let lawThing = (bot.laws[newArgs[1].charAt(0) - 1]);
                             const lawSend = new Discord.RichEmbed()
                                 .setAuthor(bot.user.tag, bot.user.avatarURL, bot.user.avatarURL)
                                 .setTimestamp()
@@ -42,6 +42,23 @@ exports.run = (msg, bot, args) => {
                                 .setDescription(lawThing)
                                 .setFooter('Law ' + args[0]);
                             msg.channel.send(lawSend);
+                            msgs.delete();
+                        });
+                }
+                if (parsedArgs[0].toLowerCase()
+                    .includes('right ')) {
+                    msg.channel.send("Finding right...")
+                        .then(msgs => {
+                            let newArgs = parsedArgs[0].split("right ");
+                            msg.channel.send("Reminder of right " + newArgs[1].charAt(0) + ":");
+                            let rightThing = (bot.rights[newArgs[1].charAt(0) - 1]);
+                            const rightSend = new Discord.RichEmbed()
+                                .setAuthor(bot.user.tag, bot.user.avatarURL, bot.user.avatarURL)
+                                .setTimestamp()
+                                .setColor('RANDOM')
+                                .setDescription(rightThing)
+                                .setFooter('Law ' + args[0]);
+                            msg.channel.send(rightSend);
                             msgs.delete();
                         });
                 }
