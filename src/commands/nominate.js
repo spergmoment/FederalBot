@@ -36,45 +36,42 @@ exports.run = async (msg, bot, args) => {
     }
     if (!role) return msg.channel.send("You lack permission to use this.");
     if (!args) return msg.channel.send("Please mention someone to nominate.");
-    if (member.roles.find(r => r.name === "Judge") || member.roles.find(r => r.name === "Officer") || member.roles.find(r => r.name === "Congress")) { // makes sure they aren't in the gov't already
-        msg.channel.send(send);
-    } else {
-        msg.channel.send("Nominating " + member.displayName + " for " + role.name + "...")
-            .then(async m => {
-                if (role.name === "Congress") {
-                    msg.channel.send("Nominate for House or Senate?"); // Note: you need to have at least 9 house members per senate member
-                    msg.channel.awaitMessages(m => m.author.id == msg.author.id, {
-                            max: 1,
-                            time: 30000
-                        }) // waits 30 secs for a message...
-                        .then(async collected => {
-                            if (collected.first()
-                                .content.toLowerCase() == 'house') { // ...and if its content is "house"...
-                                await member.addRole(msg.guild.roles.find(r => r.name === "House")); // ...give them house!
-                            } else if (collected.first()
-                                .content.toLowerCase() == 'senate') { // same thing here
-                                await member.addRole(msg.guild.roles.find(r => r.name === "Senate")); // ^
-                            } else {
-                                await msg.channel.send("Please choose either House or Senate.");
-                                return;
-                            }
-                        })
-                        .catch(() => {
-                            msg.channel.send("No reply after 30 seconds. Please choose either House or Senate.");
+    if (member.roles.find(r => r.name === "Judge") || member.roles.find(r => r.name === "Officer") || member.roles.find(r => r.name === "Congress")) return msg.channel.send(send);
+    msg.channel.send("Nominating " + member.displayName + " for " + role.name + "...")
+        .then(async m => {
+            if (role.name === "Congress") {
+                msg.channel.send("Nominate for House or Senate?"); // Note: you need to have at least 9 house members per senate member
+                msg.channel.awaitMessages(m => m.author.id == msg.author.id, {
+                        max: 1,
+                        time: 30000
+                    }) // waits 30 secs for a message...
+                    .then(async collected => {
+                        if (collected.first()
+                            .content.toLowerCase() == 'house') { // ...and if its content is "house"...
+                            await member.addRole(msg.guild.roles.find(r => r.name === "House")); // ...give them house!
+                        } else if (collected.first()
+                            .content.toLowerCase() == 'senate') { // same thing here
+                            await member.addRole(msg.guild.roles.find(r => r.name === "Senate")); // ^
+                        } else {
+                            await msg.channel.send("Please choose either House or Senate.");
                             return;
-                        });
-                }
-                member.addRole(role)
-                    .catch(console.error);
-                nom.setDescription(msg.member.displayName + ", you have successfully nominated " + member.displayName + " for " + role.name + "!")
-                    .setFooter('Nominated ' + member.displayName + ' for ' + role + ".");
-                bot.logEmbed.setTitle("Nominate")
-                    .addField("User", member.tag)
-                    .addField("Perpetrator", msg.member.tag)
-                    .addField("Position", role.name);
-                bot.logs.send(bot.logEmbed);
-                m.delete();
-                msg.channel.send(nom);
-            });
-    }
+                        }
+                    })
+                    .catch(() => {
+                        msg.channel.send("No reply after 30 seconds. Please choose either House or Senate.");
+                        return;
+                    });
+            }
+            member.addRole(role)
+                .catch(console.error);
+            nom.setDescription(msg.member.displayName + ", you have successfully nominated " + member.displayName + " for " + role.name + "!")
+                .setFooter('Nominated ' + member.displayName + ' for ' + role + ".");
+            bot.logEmbed.setTitle("Nominate")
+                .addField("User", member.tag)
+                .addField("Perpetrator", msg.member.tag)
+                .addField("Position", role.name);
+            bot.logs.send(bot.logEmbed);
+            m.delete();
+            msg.channel.send(nom);
+        });
 };
