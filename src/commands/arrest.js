@@ -25,7 +25,8 @@ exports.run = async (msg, bot, args) => {
             });
     }
     if(!bot.courtThing) return;
-    if (!bot.courtThing.roles.find(r => r.name === "warrant")) return msg.channel.send("This user does not have a warrant on them.");
+    if (!bot.courtThing.roles.find(r => r.name === "warrant")) 
+        return msg.channel.send("This user does not have a warrant on them.");
     msg.channel.send("Arresting " + bot.courtThing.displayName + "...")
         .then(m => {
             let warrant = msg.guild.roles.find(r => r.name === "warrant");
