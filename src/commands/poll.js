@@ -1,6 +1,7 @@
 exports.run = (msg, bot, args) => {
     const Discord = require("discord.js");
-    if (msg.member.roles.find(r => r.name === "Bot Admin") || msg.member.roles.ind(r => r.name === "Bot Owner") || msg.member.roles.ind(r => r.name === "President")) {
+    if (!msg.member.roles.find(r => r.name === "Bot Admin") && !msg.member.roles.find(r => r.name === "Bot Owner") && !msg.member.roles.find(r => r.name === "President"))
+        return msg.channel.send("You lack permissions to use this command.");
         msg.channel.send("Creating poll...")
             .then(m => {
                 msg.delete();
@@ -63,7 +64,4 @@ exports.run = (msg, bot, args) => {
                         });
                 }
             });
-    } else {
-        msg.channel.send("You lack permissions to use this command.");
-    }
 };
