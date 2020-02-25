@@ -3,7 +3,7 @@ exports.run = (msg, bot, args) => {
     if (args.length < 4) return msg.channel.send("Please insert more arguments.")
     let num = args[0]; // this saves some space too
     let pos = args[1];
-    if (!msg.member.roles.find(r => r.name === "President") || !msg.member.roles.find(r => r.name === "Bot Owner")) 
+    if (!msg.member.roles.find(r => r.name === "President") && !msg.member.roles.find(r => r.name === "Bot Owner")) 
   return msg.channel.send("You must be the President or a Bot Owner to use this command.");
     msg.delete();
     msg.channel.send("Creating election...")
