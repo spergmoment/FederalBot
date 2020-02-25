@@ -15,7 +15,7 @@ exports.run = (msg, bot, args) => {
                 .addField(";resign", "For anyone in a governmental position to resign from their positions.")
                 .addField(";detain", "For Officers to detain someone for breaking a law. " +
                     "A Judge must use `;approve` the detained user to put them in court.")
-                .addField(";approve", "For Judges to approve any detainments put on by officers, which sends them to court.")
+                .addField(";approve", "For Judges to approve any detainments put on by Officers, which sends them to court.")
                 .addField(";reset", "For bot owners to stop the process of FederalBot.")
                 .addField(";guilty", "For the judge of a case to rule the defendant as `guilty`.")
                 .addField(";innocent", "For the judge of a case to rule the defendant as `not guilty`.")
@@ -27,7 +27,7 @@ exports.run = (msg, bot, args) => {
                 .addField(";update", "For bot owners/admins to display updates to the bot.")
                 .addField(";module", "Displays the various modules of FederalBot.")
                 .addField(";bill", "Creates a bill in Congress.")
-                .addField(";eval", "For owners to evaluate, or execute, code.")
+                .addField(";eval", "For Bot Owners to evaluate, or execute, code.")
                 .addField(";clear", "For Congress members to clear up to 100 messages in a channel.")
                 .addField(";ping", "Get various pings from the API or Client to the message, API/Client, or your client.")
                 .addField(";warrant", "Grant a warrant for arrest.")
@@ -61,7 +61,7 @@ exports.run = (msg, bot, args) => {
                     .setFooter(';elect command');
             } else if (args[0] === "poll") {
                 help.setTitle(";poll")
-                    .setDescription("For bot owners/admins to create polls with an upvote and downvote option.")
+                    .setDescription("For Bot Owners/Admins to create polls with an upvote and downvote option.")
                     .addField("Usage", ";poll (poll message) (upvote option) (downvote option)")
                     .addField("Example", ";poll \"Should we separate the Speaker of the House " +
                         "into one for House and one for Senate?\" " +
@@ -74,8 +74,8 @@ exports.run = (msg, bot, args) => {
                     .setFooter(';resign command');
             } else if (args[0] === "detain") {
                 help.setTitle(";detain")
-                    .setDescription("For officers to detain someone who has broken the law. " +
-                        "A judge must `;approve` the detainment within 5 minutes," +
+                    .setDescription("For Officers to detain someone who has broken the law. " +
+                        "A Judge must `;approve` the detainment within 5 minutes," +
                         " where they will be promptly sent to court. If no judge approves it, " +
                         "the Officer is impeached!")
                     .addField("Usage", ";detain (member) (reason)")
@@ -84,7 +84,7 @@ exports.run = (msg, bot, args) => {
                     .setFooter(';detain command');
             } else if (args[0] === "approve") {
                 help.setTitle(";approve")
-                    .setDescription("For a judge to approve a detained user. If they aren't detained, the command will fail.")
+                    .setDescription("For a Judge to approve a detained user. If they aren't detained, the command will fail.")
                     .addField("Usage", ";approve (member)")
                     .addField("Example", ";approve @nigward#6969 // Approves the detainment set on member \"nigward#6969\", " +
                         "which creates a channel in court and sends a message there.")
@@ -141,9 +141,9 @@ exports.run = (msg, bot, args) => {
                     .setFooter(';right command');
             } else if (args[0] === "update") {
                 help.setTitle(";update")
-                    .setDescription("For bot owners or admins to display bot updates.")
+                    .setDescription("For Bot Owners or Admins to display bot updates.")
                     .addField("Usage", ";update (update syntax)")
-                    .addField("Examples", ";update Added a new command, ;update, for bot owners/admins to display updates. " +
+                    .addField("Examples", ";update Added a new command, ;update, for Bot Owners/Admins to display updates. " +
                         "// the bot will send the update. \n\n;update 1 // There are 3 predefined updates: " +
                         "Bug fixes, code cleanup, and Permissions object updates.")
                     .setFooter(';update command');
@@ -163,7 +163,7 @@ exports.run = (msg, bot, args) => {
                     .setFooter(';bill command');
             } else if (args[0] === "eval") {
                 help.setTitle(";eval")
-                    .setDescription("For Owners to evaluate JS code. Can also be used as a calculator.")
+                    .setDescription("For Bot Owners to evaluate JS code. Can also be used as a calculator.")
                     .addField("Usage", ";eval (code)")
                     .addField("Example", ";eval function run() {\n   " +
                         "return Math.PI\*4;\n}\nrun();" +
@@ -185,7 +185,7 @@ exports.run = (msg, bot, args) => {
                     .setFooter(";ping command");
             } else if (args[0] === "warrant") {
                 help.setTitle(";warrant")
-                    .setDescription("Grant a warrant to be `;arrest`ed by an officer.")
+                    .setDescription("Grant a warrant to be `;arrest`ed by an Officer.")
                     .addField("Usage", ";warrant (member) (law) (evidence)")
                     .addField("Example", ";warrant @sperg#6969 3 (link to image of him using the wrong alt) " +
                         "(link to another image) // grants a warrant against sperg, for law 3, " +
@@ -193,7 +193,7 @@ exports.run = (msg, bot, args) => {
                     .setFooter(";warrant command");
             } else if (args[0] === "arrest") {
                 help.setTitle(";arrest")
-                    .setDescription("Arrests a warrant that was granted by a judge with `;warrant`.")
+                    .setDescription("Arrests a warrant that was granted by a Judge with `;warrant`.")
                     .addField("Usage", ";arrest (member)")
                     .addField("Example", ";arrest @sperg#6969 // arrests sperg, creating a court case.")
                     .setFooter(";arrest command");

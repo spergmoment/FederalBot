@@ -25,7 +25,7 @@ exports.run = async (msg, bot, args) => {
                 return msg.channel.send("Time limit reached, try again.");
             });
     }
-    if (!args[1]) {
+    if (!args[1]||parseInt(args[1],10)>=bot.laws.length||parseInt(args[1], 10) < 1) {
         if (!member) return;
         msg.channel.send("Which law did they break?");
         await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {

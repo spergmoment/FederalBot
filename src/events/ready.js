@@ -53,7 +53,9 @@ module.exports = (bot) => {
         "**Law 6: Slander**\Attempting to damage someone's reputation in a serious, harmful, or aggressive nature is prohibited. (Felony)",
         "**Law 7: Corruption**\nGovernment officials participating in dishonest actions, bribery, or otherwise seriously threatening others in a way that directly benefits themselves is very strictly prohibited. (Felony, Impeachment)",
         "**Law 8: Obstruction**\nDestroying evidence in any such way that it can be used for your own advantage is strictly prohibited. (Automatic loss of case, Impeachment (Both I/A))",
-        "**Law 9: Invite**\nPurposefully sending any valid invite link to any server other than our own is prohibited. (Misdemeanor)"
+        "**Law 9: Invite**\nPurposefully sending any valid invite link to any server other than our own is prohibited. (Misdemeanor)",
+        "**Law 10: Ping**\nPinging @everyone without permission is prohibited. (Felony)",
+        "**Law 11: Impersonation\nImpersonating anyone in a serious manner is prohibited. (Misdemeanor)"
     ];
     bot.rights = [
         "**Right 1**\n The people have the right to freedom of speech.",
