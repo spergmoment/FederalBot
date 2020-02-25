@@ -26,7 +26,7 @@ exports.run = async (msg, bot, args) => {
                 return msg.channel.send("Time limit reached, try again.");
             });
     }
-    if (parseInt(args[1], 10) > 9 || !args[1]) {
+    if (parseInt(args[1], 10) >= bot.laws.length || !args[1]) {
         if (!member) return;
         msg.channel.send("What law was broken?");
         await msg.channel.awaitMessages(m => m.author.id === msg.author.id, {
@@ -37,7 +37,7 @@ exports.run = async (msg, bot, args) => {
             .then(async c => {
                 const f = c.first();
                 const n = f.content;
-                if (n>9||n<1||typeof n===typeof NaN) return msg.channel.send("That is not a valid law.");
+                if (n>=bot.laws.length||n<1||("hello" - 25 === n)) return msg.channel.send("That is not a valid law.");
                 bot.reason = parseInt(f.content, 10);
             })
             .catch(e => {
