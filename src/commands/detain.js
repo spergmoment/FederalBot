@@ -1,6 +1,9 @@
 module.exports = {
     name: 'detain',
-    desc: "For Officers to detain someone who has broken the law. " + "A Judge must `;approve` the detainment within 5 minutes," + " where they will be promptly sent to court. If no judge approves it, " + "the Officer is impeached!",
+    desc: "For Officers to detain someone who has broken the law. " + 
+    "A Judge must `;approve` the detainment within 5 minutes," + 
+    " where they will be promptly sent to court. If no judge approves it, " + 
+    "the Officer is impeached!",
     usage: ';detain (member) (law broken) (evidence)',
     examples: ";detain @nigward#6969 3 (evidence) // Detains member \"nigward#6969\", " + "which can be approved by a Judge.",
     async execute(msg, bot, args) {
@@ -74,7 +77,7 @@ module.exports = {
                 });
         }
         if (!member || !bot.reason || !bot.evidence) return;
-        msg.channel.send("Detaining " + member.displayName + "...")
+        msg.channel.send(`Detaining ${member.displayName}...`)
             .then(m => {
                 const det = new Discord.RichEmbed()
                     .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -82,7 +85,10 @@ module.exports = {
                     .setColor('RANDOM');
                 bot.detainer = msg.member;
                 let role = msg.guild.roles.find(r => r.name === "Detained");
-                det.setDescription(`${msg.member.displayName}, I have detained ${member.displayName}` + `, for reason ${bot.reason}, with evidence ${bot.evidence}. ` + `A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!`)
+                det.setDescription(`${msg.member.displayName}, I have detained ${member.displayName}` + 
+                                   `, for reason ${bot.reason}, with evidence ${bot.evidence}. ` + 
+                                   `A judge must **;approve** this detain within **5 minutes** ` +
+                                   `or you will be IMPEACHED!`)
                     .setFooter(`User ${member.displayName} has been detained.`);
                     console.log(bot.logsEmbed);
                 bot.logEmbed
