@@ -30,8 +30,9 @@ module.exports = {
                 });
         }
         if (!bot.courtThing) return;
-        if (!bot.courtThing.roles.find(r => r.name === "warrant")) return msg.channel.send("This user does not have a warrant on them.");
-        msg.channel.send("Arresting " + bot.courtThing.displayName + "...")
+        if (!bot.courtThing.roles.find(r => r.name === "warrant")) 
+            return msg.channel.send("This user does not have a warrant on them.");
+        msg.channel.send(`Arresting ${bot.courtThing.displayName}...`)
             .then(m => {
                 let warrant = msg.guild.roles.find(r => r.name === "warrant");
                 bot.courtThing.removeRole(warrant);
@@ -42,14 +43,15 @@ module.exports = {
                     .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
                     .setTimestamp()
                     .setColor("RANDOM")
-                    .setDescription(sender.displayName + ", " + bot.courtThing.displayName + " has been PUT IN COURT.")
-                    .setFooter('Put ' + bot.courtThing.displayName + ' in court.');
+                    .setDescription(`${sender.displayName}, ${bot.courtThing.displayName} has been PUT IN COURT.`)
+                    .setFooter(`Put ${bot.courtThing.displayName} in court.`);
                 var judgesStuff = []; // blank array
                 msg.guild.fetchMembers();
                 msg.guild.members.forEach(member => {
                     if (member.roles.find(r => r.name === "Judge")) {
                         if (member !== bot.courtThing && member !== msg.member) {
-                            judgesStuff.push(member); // puts the member in the array if they're a judge, aren't the detained person, and aren't the approver
+                            judgesStuff.push(member); /* puts the member in the array if they're a judge, 
+                            aren't the detained person, and aren't the approver */
                         } else {
                             console.log(member.displayName, bot.courtThing.displayName);
                         }
@@ -59,7 +61,7 @@ module.exports = {
                 console.log(bot.judgeToUse.user.tag);
                 var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
                 var cp = msg.guild.roles.find(r => r.name === "Chief of Police");
-                msg.guild.createChannel(msg.member.displayName + "-vs-" + bot.courtThing.displayName, {
+                msg.guild.createChannel(`${msg.member.displayName}-vs-${bot.courtThing.displayName}`, {
                         type: 'text',
                         permissionOverwrites: [{
                             id: msg.guild.defaultRole.id,
@@ -86,15 +88,30 @@ module.exports = {
                         if (!category) {
                             throw new Error("Category channel does not exist");
                         }
-                        var lawChannel = msg.guild.channels.find(c => c.name === "laws");
-                        var rightChannel = msg.guild.channels.find(c => c.name === "rights");
-                        var interChannel = msg.guild.channels.find(c => c.name === "interpretation");
                         await channel.setParent(category.id);
-                        var thing = "**Court Case:** \n\n" + bot.detainer + " vs. " + bot.courtThing.user + ". Reason for court case: " + bot.reason + "\n\n";
-                        if (bot.evidence) thing += `Evidence: ${bot.evidence}`;
-                        thing += (`\n${bot.judgeToUse.user} will be looking over this case.\n\n${bot.judgeToUse.displayName}` + ", please remember a few things before delivering your verdict:\n " + `1. Read the ${lawChannel}, ${rightChannel}, and ${interChannel}.\n` + "2. Listen to evidence from both sides. Do *NOT* take prejudice against the defendant or prosecutor.\n" + "3. Everything in this case is subjective. Please declare your verdicts before using the `;guilty` or `;innocent` commands.\n" + "4. feel free to ping Sperg (bug), the President, VP, CJ, or CP to get any help needed.\n\n" + `${bot.detainer.displayName}, please remember a few things:\n` + "1. Your opinion is your opinion. Don't try to sway the lawyer's opinion.\n" + "2. Never, EVER force the judge to adapt to your opinions.\n\n" + "And finally, for everyone, BE CIVIL!\n" + "\n\nNow, we don\'t have infinite time, **GET GOING!**");
-                        channel.send(thing)
-                            .catch(console.error);
+                                var thing = `**Court Case:**\n\n${bot.detainer} vs. ` +
+                                    `${bot.courtThing.user}. Law broken: ${bot.reason}`;
+                                if (bot.evidence) thing += `Evidence: ${bot.evidence}\n`;
+                                var lawChannel = msg.guild.channels.find(c => c.name === "laws");
+                                var rightChannel = msg.guild.channels.find(c => c.name === "rights");
+                                var interChannel = msg.guild.channels.find(c => c.name === "interpretation");
+                                thing += (`${bot.judgeToUse.user} will be looking over this case.` +
+                                          `\n\n${bot.judgeToUse.displayName}` + 
+                                          ", please remember a few things before delivering your verdict:\n " + 
+                                          `1. Read the ${lawChannel}, ${rightChannel}, and ${interChannel}.\n` + 
+                                          "2. Listen to evidence from both sides. " +
+                                          "Do *NOT* take prejudice against the defendant or prosecutor.\n" + 
+                                          "3. Everything in this case is subjective. Please declare your " +
+                                          "verdicts before using the `;guilty` or `;innocent` commands.\n" + 
+                                          "4. feel free to ping Sperg (bug), the President, " +
+                                          "VP, CJ, or CP to get any help needed.\n\n" + 
+                                          `${bot.detainer.displayName}, please remember a few things:\n` + 
+                                          "1. Your opinion is your opinion. Don't try to sway the lawyer's opinion.\n" + 
+                                          "2. Never, EVER force the judge to adapt to your opinions.\n\n" + 
+                                          "And finally, for everyone, BE CIVIL!\n" + 
+                                          "Now, we don\'t have infinite time, **GET GOING!**");
+                                channel.send(thing)
+                                    .catch(console.error);
                         bot.logEmbed.setTitle("Arrest Warrant")
                             .addField("User", bot.courtThing.user.tag)
                             .addField("Perpetrator", msg.member.user.tag);
