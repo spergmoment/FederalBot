@@ -2,8 +2,10 @@ module.exports = {
     name: 'impeach',
     desc: 'For CP, CJ, or Speaker to impeach a member from Officer, Judge, or Congress respectively.',
     usage: ';impeach (member)',
-    examples: ';impeach @sperg#6969 // Impaches member \"sperg#6969\" " + "from Judge, Officer, or Congress.',
-    extraNotes: 'Unlike ;nominate, Congress members are " + "automatically impeached from their respective house.',
+    examples: ';impeach @sperg#6969 // Impaches member \"sperg#6969\" ' + 
+    "from Judge, Officer, or Congress.",
+    extraNotes: 'Unlike ;nominate, Congress members are ' + 
+    "automatically impeached from their respective house.",
     aliases: ['peach'],
     async execute(msg, bot, args) {
         const Discord = require("discord.js");
@@ -43,8 +45,10 @@ module.exports = {
             role = msg.guild.roles.find(r => r.name === "Officer");
         }
         if (!role) return msg.channel.send("You lack permission to use this role.");
-        if (!member.roles.find(r => r.name === role.name)) return msg.channel.send("You either do not have the correct role for you to impeach " + member.user.username + ", or another error has occured. Please try again later.");
-        msg.channel.send("Impeaching " + member.displayName + "...")
+        if (!member.roles.find(r => r.name === role.name)) 
+            return msg.channel.send("You either do not have the correct role for you to impeach " + 
+            `${member.user.username}, or another error has occured. Please try again later.`);
+        msg.channel.send(`Impeaching ${member.displayName}...`)
             .then(async m => {
                 member.removeRole(role)
                     .catch(console.error); // lol
@@ -56,8 +60,9 @@ module.exports = {
                         member.removeRole(msg.guild.roles.find(r => r.name === "Senate"));
                     }
                 }
-                peach.setDescription(msg.member.displayName + ", I have impeached " + member.displayName + " from " + role.name + ".");
-                peach.setFooter('Impeached ' + member.displayName + ' from ' + role.name + ".");
+                peach.setDescription(`${msg.member.displayName}, I have ` +
+                                     `impeached ${member.displayName} from ${role.name}.`);
+                peach.setFooter(`Impeached ${member.displayName} from ${role.name}.`);
                 bot.logEmbed.setTitle("Impeach")
                     .addField("User", member.user.tag)
                     .addField("Perpetrator", msg.member.user.tag)
