@@ -7,14 +7,14 @@ module.exports = (bot, m) => {
     .setDescription("")
     .setTitle("");
     const logs = m.guild.channels.find(r => r.name === ("logs"));
+    const t = new Date();
     if (logs) {
         logsEmbed
         .setTitle("Deleted Message")
             .addField("Author", m.author.tag)
             .addField("Content", m.content)
             .addField("Channel", m.channel.name)
-            .addField("Message Time", bot.dateConvert(m.createdAt))
-            .addField("Time Deleted", bot.dateConvert(Date()))
+            .addField("Time Deleted", bot.dateConvert(t))
             .addField("IDs", "```Message ID: " + m.id + "\nUser ID: " + m.author.id + "```");
         logs.send(logsEmbed);
     }

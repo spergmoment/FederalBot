@@ -1,5 +1,5 @@
 module.exports = (bot) => {
-    bot.dateConvert = function(n) {
+    bot.dateConvert = function(x) {
         var months = [
     'January',
     'February',
@@ -23,24 +23,27 @@ module.exports = (bot) => {
   'Friday',
   'Saturday'
   ];
-        var time = n;
+        var time = x;
         var yr = time.getFullYear();
         var mon = time.getMonth();
         mon = months[mon];
-        var day = time.getDate(); // gets the day, e.g 27
-        var hr = time.getHours(); // gets the current hour, e.g 9, it is in 24 hour time and formatting it to 12 hour time has bad side effects, like making anything ≥ 10 be 0
-        var min = time.getMinutes(); // gets the current minutes, e.g. 12
-        var sec = time.getSeconds(); // gets current seconds, e.g. 34
-        var week = time.getDay(); // gets day of week, e.g. monday
+        var day = time.getDate();
+        var hr = time.getHours();
+        var min = time.getMinutes();
+        var sec = time.getSeconds();
+        var week = time.getDay();
         week = weeks[week];
         if (hr < 10) {
-            hr = "0" + hr.toString().charAt(0);
+            hr = "0" + hr.toString()
+                .charAt(0);
         }
         if (min < 10) {
-            min = "0" + min.toString().charAt(0);
+            min = "0" + min.toString()
+                .charAt(0);
         }
         if (sec < 10) {
-            sec = "0" + sec.toString().charAt(0);
+            sec = "0" + sec.toString()
+                .charAt(0);
         }
         return week + ", " + mon + " " + day + ", " + yr + ", at " + hr + ":" + min + ":" + sec;
     }
@@ -55,7 +58,7 @@ module.exports = (bot) => {
         "**Law 8: Obstruction**\nDestroying evidence in any such way that it can be used for your own advantage is strictly prohibited. (Automatic loss of case, Impeachment (Both I/A))",
         "**Law 9: Invite**\nPurposefully sending any valid invite link to any server other than our own is prohibited. (Misdemeanor)",
         "**Law 10: Ping**\nPinging @everyone without permission is prohibited. (Felony)",
-        "**Law 11: Impersonation\nImpersonating anyone in a serious manner is prohibited. (Misdemeanor)"
+        "**Law 11: Impersonation**\nImpersonating anyone in a serious manner is prohibited. (Misdemeanor)"
     ];
     bot.rights = [
         "**Right 1**\n The people have the right to freedom of speech.",
@@ -69,7 +72,6 @@ module.exports = (bot) => {
         "**Right 9**\n The people shall not be subject to vague or unreasonable legislation, including \"annoying\", pushing, or otherwise unlawful behavior against someone.",
         "**Right 10**\n Individual conduct in a court proceeding shall have no bearing on the verdict."
     ];
-    const Discord = require("discord.js");
     const wait = require('util')
         .promisify(setTimeout);
     bot.invites = [];

@@ -1,17 +1,8 @@
 const Discord = require("discord.js");
-const Enmap = require("enmap");
 const fs = require("fs");
 const bot = new Discord.Client();
 const config = require("./config.json");
 bot.config = config;
-bot.logsEmbed = new Discord.RichEmbed()
-    .setColor('#' + (0x1000000 + (Math.random()) * 0xffffff)
-        .toString(16)
-        .substr(1, 6))
-    .setTimestamp()
-    .setDescription("")
-    .setTitle("")
-    .fields = [];
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
     files.forEach(file => {
@@ -21,16 +12,31 @@ fs.readdir("./events/", (err, files) => {
         bot.on(eventName, event.bind(null, bot));
     });
 });
-bot.commands = new Enmap();
-fs.readdir("./commands/", (err, files) => {
-    if (err) return console.error(err);
-    files.forEach(file => {
-        if (!file.endsWith(".js")) return;
-        let props = require((`./commands/${file}`)
-            .trim());
-        let commandName = file.split(".")[0];
-        console.log(`Loading ${commandName}`);
-        bot.commands.set(commandName, props);
-    });
+bot.commands = new Discord.Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    bot.commands.set(command.name, command);
+}
+bot.on('message', msg => {
+    if (!msg.content.startsWith(config.prefix) || msg.author.bot) return;
+
+    const args = msg.content.slice(config.prefix.length).split(/ +/);
+    const commandName = args.shift().toLowerCase();
+    const command = bot.commands.get(commandName)
+    || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    if (!command) return;
+    bot.logEmbed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setTimestamp()
+        .setDescription("")
+        .setTitle("");
+    bot.logs = msg.guild.channels.find(r => r.name === "logs" && r.type === "text")
+    try {
+        command.execute(msg, bot, args);
+    } catch (error) {
+        console.error(error);
+        msg.reply('there was an error trying to execute that command!');
+    }
 });
 bot.login(config.token);

@@ -1,6 +1,13 @@
-exports.run = (msg, bot, args) => {
-    const Discord = require("discord.js");
-    if (!msg.member.roles.find(r => r.name === "Bot Admin") && !msg.member.roles.find(r => r.name === "Bot Owner") && !msg.member.roles.find(r => r.name === "President"))
+module.exports = {
+    name: 'poll',
+    desc: 'For Bot Owners/Admins and President to create polls with an upvote and downvote option.',
+    usage: ';poll (poll message) (upvote option) (downvote option)',
+    examples: ";poll \"Should we separate the Speaker of the House " + 
+    "into one for House and one for Senate?\" " + 
+    '"Separate it!" "Don\'t separate the role" // Creates a poll with the content shown.',
+    execute(msg, bot, args) {
+        const Discord = require("discord.js");
+        if (!msg.member.roles.find(r => r.name === "Bot Admin") && !msg.member.roles.find(r => r.name === "Bot Owner") && !msg.member.roles.find(r => r.name === "President")) 
         return msg.channel.send("You lack permissions to use this command.");
         msg.channel.send("Creating poll...")
             .then(m => {
@@ -9,9 +16,9 @@ exports.run = (msg, bot, args) => {
                 let parsedArgs = argString.split('"'); // ...then splits it by the " keychar... 
                 console.log(parsedArgs); // ...and then...
                 parsedArgs.splice(0, 1) // ...removes the blank value in front...
-                .splice(1, 1) // ...removes the blank value after the first argument...
-                .splice(2, 1) // ...removes the blank value after the second argument...
-                .splice(3, 1); // ...and removes the blank value at the end!
+                    .splice(1, 1) // ...removes the blank value after the first argument...
+                    .splice(2, 1) // ...removes the blank value after the second argument...
+                    .splice(3, 1); // ...and removes the blank value at the end!
                 console.log(parsedArgs); // figured this out myself, pretty proud of it tbh
                 const upvote = msg.guild.emojis.find(e => e.name === "Upvote");
                 const downvote = msg.guild.emojis.find(e => e.name === "Downvote");
@@ -64,4 +71,5 @@ exports.run = (msg, bot, args) => {
                         });
                 }
             });
+    }
 };
