@@ -7,7 +7,8 @@ module.exports = {
     "Law 3 states that you may only have one alt in the server at ANY time, thus breaking Law 3. " + 
     "Sperg and his other alt will be put on trial accordingly.\" 24h // Rules the case `guilty`, " + 
     "sentences \"nigward#6969\" to a 1 day prison sentence, and closes the case.",
-    extraNotes: 'If a prison sentence is put on a 1st, 2nd, or 3rd misdemeanor, " + "you will be immediately impeached and the user will be freed.',
+    extraNotes: 'If a prison sentence is put on a 1st, 2nd, or 3rd misdemeanor, ' + 
+    "you will be immediately impeached and the user will be freed.",
     execute(msg, bot, args) {
         if (bot.judgeToUse && bot.detainer && bot.courtThing) {
             const Discord = require("discord.js");
@@ -15,15 +16,19 @@ module.exports = {
                 .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
                 .setTimestamp()
                 .setColor('RANDOM');
-            if (msg.channel.parent.name !== "court") return msg.channel.send("Please use this in a valid court case.");
-            if (msg.member.user.id !== bot.judgeToUse.user.id) return msg.channel.send("You must be the judge of a case to use this command.");
+            if (msg.channel.parent.name !== "court") 
+                return msg.channel.send("Please use this in a valid court case.");
+            if (msg.member.user.id !== bot.judgeToUse.user.id) 
+                return msg.channel.send("You must be the judge of a case to use this command.");
             // makes sure it's used in court by the selected judge
-            if (args.length === 0) return msg.channel.send("Please provide a reason.");
+            if (args.length === 0) 
+                return msg.channel.send("Please provide a reason.");
             msg.channel.send("Ruling case as guilty...")
                 .then(m => {
                     bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Muted"))
                         .removeRole(msg.guild.roles.find(r => r.name === "Court"));
-                    guilty.setDescription(msg.member.displayName + ", " + bot.courtThing.displayName + " has been found **GUILTY.**")
+                    guilty.setDescription(`${msg.member.displayName}, ` +
+                                          `${bot.courtThing.displayName} has been found **GUILTY.**`)
                         .setFooter('Ruled the case as guilty.');
                     msg.channel.send(guilty);
                     var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
