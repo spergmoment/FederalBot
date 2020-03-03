@@ -12,7 +12,7 @@ module.exports = {
                 .then(async m => {
                     try {
                         let result = eval(args.join(" "));
-                        if (result instanceof Promise) {
+                        while (result instanceof Promise) {
                             result = await result;
                         }
                         if (typeof result !== 'string') {
@@ -20,7 +20,7 @@ module.exports = {
                                 depth: 0
                             });
                         }
-                        result = result.replace(msg.client.token, '[TOKEN HIDDEN]');
+                        result = result.replace(msg.client.token, 'null');
                         const evalEmbed = new Discord.RichEmbed()
                             .setColor("RANDOM")
                             .addField('Eval', '```js\n' + args.join(" ") + '```')
