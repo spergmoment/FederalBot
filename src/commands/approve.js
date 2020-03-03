@@ -47,7 +47,7 @@ module.exports = {
                         bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Court"));
                         approve.setDescription(`${sender.displayName}, ` +
                                                `${bot.courtThing.displayName} has been PUT IN COURT.`)
-                            .setFooter('Put ' + bot.courtThing.displayName + ' in court.');
+                            .setFooter(`Put ${bot.courtThing.displayName} in court.`);
                         msg.channel.send(approve);
                         var judgesStuff = []; // blank array
                         msg.guild.fetchMembers();
@@ -99,7 +99,6 @@ module.exports = {
                                 var lawChannel = msg.guild.channels.find(c => c.name === "laws");
                                 var rightChannel = msg.guild.channels.find(c => c.name === "rights");
                                 var interChannel = msg.guild.channels.find(c => c.name === "interpretation");
-                                await channel.setParent(category.id);
                                 thing += (`${bot.judgeToUse.user} will be looking over this case.` +
                                           `\n\n${bot.judgeToUse.displayName}` + 
                                           ", please remember a few things before delivering your verdict:\n " + 
