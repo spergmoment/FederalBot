@@ -41,8 +41,7 @@ module.exports = {
                                 let start = Date.now();
                                 msg.channel.send("Pinging...")
                                     .then(m => {
-                                        m.edit("API to Message ping: " + (start - collected.first()
-                                            .createdTimestamp));
+                                        m.edit(`API to Message ping: ${start - collected.first().createdTimestamp}`);
                                     });
                             } else if (collected.first()
                                 .content.toLowerCase() === "client") {
@@ -54,8 +53,7 @@ module.exports = {
                                 .content.toLowerCase() === "discord") {
                                 msg.channel.send("Pinging...")
                                     .then(m => {
-                                        m.edit("API to Your Client ping: " + Math.round(collected.first()
-                                            .client.ping));
+                                        m.edit(`API to Your Client ping: ${Math.round(collected.first().client.ping)}`);
                                     });
                             } else {
                                 msg.channel.send("This isn't an option!");
@@ -86,22 +84,22 @@ module.exports = {
                                 let start = Date.now();
                                 msg.channel.send("Pinging...")
                                     .then(m => {
-                                        m.edit("Client to Message ping: " + Math.round(Date.now() - start));
+                                        m.edit(`Client to Message ping: ${Math.round(Date.now() - start)}`);
                                     });
                             } else if (collected.first()
                                 .content.toLowerCase() === "api") {
                                 msg.channel.send("Pinging...")
                                     .then(m => {
-                                        m.edit("Client to API ping: " + Math.round(bot.ping));
+                                        m.edit(`Client to API ping: ${Math.round(bot.ping)}`);
                                     });
                             } else if (collected.first()
                                 .content.toLowerCase() === "discord") {
                                 let start = Date.now();
                                 msg.channel.send("Pinging...")
                                     .then(m => {
-                                        m.edit("Client to Your Client ping: " + Math.round(Math.abs(collected.first()
-                                            .client.ping - (start - collected.first()
-                                                .createdTimestamp))));
+                                        m.edit("Client to Your Client ping: " +
+                                        Math.round(Math.abs(collected.first().client.ping - 
+                                                                      (start - collected.first().createdTimestamp))));
                                     });
                             } else {
                                 msg.channel.send("This isn't an option!");
