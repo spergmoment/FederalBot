@@ -11,7 +11,8 @@ module.exports = {
         bot.reason = parseInt(args[1], 10);
         bot.evidence = args.slice(2);
         bot.detainer = msg.member;
-        if (!msg.member.roles.find(r => r.name === "Judge") && !msg.member.roles.find(r => r.name === "Chief Justice")) {
+        if (!msg.member.roles.find(r => r.name === "Judge") && 
+            !msg.member.roles.find(r => r.name === "Chief Justice")) {
             return msg.channel.send("You must be a Judge to use this command.");
         }
         if (!member) {
@@ -45,7 +46,8 @@ module.exports = {
                 .then(async c => {
                     const f = c.first();
                     const n = f.content;
-                    if (n >= bot.laws.length || n < 1 || ("hello" - 25 === n)) return msg.channel.send("That is not a valid law.");
+                    if (n >= bot.laws.length || n < 1 || ("hello" - 25 === n)) 
+                        return msg.channel.send("That is not a valid law.");
                     bot.reason = parseInt(f.content, 10);
                 })
                 .catch(e => {
@@ -82,7 +84,9 @@ module.exports = {
                     .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
                     .setTimestamp()
                     .setColor('RANDOM')
-                    .setDescription(msg.author.username + ", I have granted a warrant against " + member.user.username + ". An officer must **;arrest** this person for a case to take place.");
+                    .setDescription(`${msg.author.username}, I have granted a warrant against ` + 
+                                    `${member.user.username}. An officer must **;arrest** this ` +
+                                    "person for a case to take place.");
                 msg.channel.send(w);
                 bot.logEmbed.setTitle("Grant Warrant")
                     .addField("User", member.user.tag)
@@ -93,7 +97,8 @@ module.exports = {
                 setTimeout(() => {
                     if (member.roles.find(r => r.name === "warrant")) {
                         member.removeRole(msg.guild.roles.find(r => r.name === "warrant"));
-                        msg.channel.send(msg.author + ", your warrant against " + member.user + " has not been arrested. The warrant is now gone.");
+                        msg.channel.send(`${msg.author}, your warrant against ` +
+                                         `${member.user} has not been arrested. The warrant is now gone.`);
                     }
                 }, 48 * 60 * 60 * 1000);
                 m.delete();
