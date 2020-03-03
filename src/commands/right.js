@@ -4,8 +4,9 @@ module.exports = {
     usage: 'right (right)',
     examples: ';right 1 // returns right 1, the freedom of speech.',
     execute(msg, bot, args) {
-        if (args[0] > 10 || args[0] < 1) return msg.channel.send("That is not a valid right.");
-        msg.channel.send("Fetching right " + args[0] + "...")
+        if (args[0] > 10 || args[0] < 1) 
+            return msg.channel.send("That is not a valid right.");
+        msg.channel.send(`Fetching right ${args[0]}...`)
             .then(m => {
                 const Discord = require("discord.js");
                 var rightThing = (bot.rights[args[0] - 1]);
