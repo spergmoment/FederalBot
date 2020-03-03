@@ -47,7 +47,7 @@ module.exports = {
                         .setFooter('General Module');
                 } else {
                     module.setDescription("Invalid module!")
-                        .setFooter('Error in syntax: module "' + args.join(" ") + '" is invalid or not available.');
+                        .setFooter(`Error in syntax: "module ${args.join(" ")}" is invalid or not available.`);
                 }
                 msg.channel.send(module);
                 m.delete();
