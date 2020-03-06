@@ -10,7 +10,7 @@ module.exports = async (bot, e) => {
     });
     const en = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Create Emoji")
+        logsEmbed.setTitle("Create Emoji")
             .addField("Emoji Name", e.name)
             .addField("Author", en.executor.tag)
             .addField("URL", e.url)
