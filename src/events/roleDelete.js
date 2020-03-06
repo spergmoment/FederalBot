@@ -15,9 +15,9 @@ module.exports = async (bot, r) => {
             .addField("Position", r.calculatedPosition)
             .addField("Hex", r.hexColor)
             .addField("Perpetrator", e.executor.tag)
-            .addField("Time Created", bot.dateConvert(r.createdAt))
-            .addField("Time Deleted", bot.dateConvert(Date()))
-            .addField("IDs", "```Role ID: " + r.id + "```");
+            .addField("Time Created", bot.format(r.createdAt))
+            .addField("Time Deleted", bot.format(Date()))
+            .addField("IDs", `\`\`\`Role: ${r.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };
