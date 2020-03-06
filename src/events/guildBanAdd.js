@@ -13,8 +13,8 @@ module.exports = async (bot, g, m) => {
         logsEmbed.setTitle("Action: Ban")
             .addField("Banned User", m.tag)
             .addField("Perpetrator", e.executor.tag)
-            .addField("Time Banned", bot.dateConvert(e.createdAt))
-            .addField("IDs", "```User ID: " + m.id + "```");
+            .addField("Time Banned", bot.format(e.createdAt))
+            .addField("IDs", `\`\`\`User: ${m.id}\nPerpetrator: ${e.executor.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };
