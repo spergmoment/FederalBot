@@ -11,7 +11,7 @@ module.exports = async (bot, ch) => {
     });
     const e = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Delete Channel")
+        logsEmbed.setTitle("Delete Channel")
             .addField("Channel Name", ch.name)
             .addField("Perpetrator", e.executor.tag)
             .addField("Time Created", bot.format(ch.createdAt))
