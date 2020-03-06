@@ -10,11 +10,11 @@ module.exports = async (bot, g, m) => {
     });
     const e = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Unban")
+        logsEmbed.setTitle("Unban User")
             .addField("Unbanned User", m.tag)
             .addField("Perpetrator", e.executor.tag)
-            .addField("Time Unbanned", bot.dateConvert(e.createdAt))
-            .addField("IDs", "```User ID: " + m.id + "```");
+            .addField("Time Unbanned", bot.format(e.createdAt))
+            .addField("IDs", `\`\`\`User: ${m.id}\nPerpetrator: ${e.executor.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };

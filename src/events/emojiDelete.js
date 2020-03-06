@@ -10,13 +10,13 @@ module.exports = async (bot, e) => {
     });
     const en = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Delete Emoji")
+        logsEmbed.setTitle("Delete Emoji")
             .addField("Emoji Name", e.name)
             .addField("Author", en.executor.tag)
             .addField("URL", e.url)
-            .addField("Time Created", bot.dateConvert(e.createdAt))
-            .addField("Time Deleted", bot.dateConvert(en.createdAt))
-            .addField("IDs", "```Emoji ID: " + e.id + "```");
+            .addField("Time Created", bot.format(e.createdAt))
+            .addField("Time Deleted", bot.format(en.createdAt))
+            .addField("IDs", `\`\`\`Emoji: ${e.id}\nPerpetrator: ${en.executor.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };
