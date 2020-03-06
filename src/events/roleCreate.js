@@ -10,7 +10,7 @@ module.exports = async (bot, r) => {
     });
     const e = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Create Role")
+        logsEmbed.setTitle("Create Role")
             .addField("Name", r.name)
             .addField("Position", r.calculatedPosition)
             .addField("Hex", r.hexColor)
