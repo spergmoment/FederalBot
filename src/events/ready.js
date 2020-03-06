@@ -1,6 +1,6 @@
 module.exports = (bot) => {
-    bot.dateConvert = function(x) {
-        var months = [
+    Date.prototype.format = function() {
+    let months = [
     'January',
     'February',
     'March',
@@ -14,7 +14,7 @@ module.exports = (bot) => {
     'November',
     'December'
   ];
-        var weeks = [
+    let weeks = [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -23,36 +23,38 @@ module.exports = (bot) => {
   'Friday',
   'Saturday'
   ];
-        var time = x;
-        var yr = time.getFullYear();
-        var mon = time.getMonth();
-        mon = months[mon];
-        var day = time.getDate();
-        var hr = time.getHours();
-        var min = time.getMinutes();
-        var sec = time.getSeconds();
-        var week = time.getDay();
-        week = weeks[week];
-        if (hr < 10) {
-            hr = "0" + hr.toString()
-                .charAt(0);
-        }
-        if (min < 10) {
-            min = "0" + min.toString()
-                .charAt(0);
-        }
-        if (sec < 10) {
-            sec = "0" + sec.toString()
-                .charAt(0);
-        }
-        return week + ", " + mon + " " + day + ", " + yr + ", at " + hr + ":" + min + ":" + sec;
+    let time = this;
+    if (time.toString()
+        .indexOf("Invalid") !== -1) return "Invalid input."
+    let yr = time.getFullYear();
+    let mon = time.getMonth();
+    mon = months[mon];
+    let day = time.getDate();
+    let hr = time.getHours();
+    let min = time.getMinutes();
+    let sec = time.getSeconds();
+    let week = time.getDay();
+    week = weeks[week];
+    if (hr < 10) {
+        hr = "0" + hr.toString()
+            .charAt(0);
     }
+    if (min < 10) {
+        min = "0" + min.toString()
+            .charAt(0);
+    }
+    if (sec < 10) {
+        sec = "0" + sec.toString()
+            .charAt(0);
+    }
+    return week + ", " + mon + " " + day + ", " + yr + ", at " + hr + ":" + min + ":" + sec;
+}
     bot.laws = [
         "**Law 1: Spam**\nSending an unreasonably large amount of messages in a short amount of time. (Misdemeanor)",
         "**Law 2: Raid**\nSending a massive amount of messages in a very short time, or otherwise participating in a large attack on our server, is prohibited. (Banishment)",
         "**Law 3: Alt**\nUsing more than a single alternative account, or otherwise using an alt to your advantage, is prohibited. (Felony)",
         "**Law 4: Misconduct**\nMisuse of government powers is hereby prohibited. (Misdemeanor, Felony, or Impeachment depending on severity)",
-        "**Law 5: NSFW/L**\nSending NSFW outside of <#644334931434274816>, or NSFL absolutely anywhere is prohibited. (Felony)",
+        "**Law 5: NSFW/L**\nSending NSFW outside of ${guild.channels.find(c=>c.name==='nsfw')}, or NSFL absolutely anywhere is prohibited. (Felony)",
         "**Law 6: Slander**\Attempting to damage someone's reputation in a serious, harmful, or aggressive nature is prohibited. (Felony)",
         "**Law 7: Corruption**\nGovernment officials participating in dishonest actions, bribery, or otherwise seriously threatening others in a way that directly benefits themselves is very strictly prohibited. (Felony, Impeachment)",
         "**Law 8: Obstruction**\nDestroying evidence in any such way that it can be used for your own advantage is strictly prohibited. (Automatic loss of case, Impeachment (Both I/A))",
