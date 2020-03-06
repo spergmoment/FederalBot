@@ -14,8 +14,8 @@ module.exports = (bot, m) => {
             .addField("Author", m.author.tag)
             .addField("Content", m.content)
             .addField("Channel", m.channel.name)
-            .addField("Time Deleted", bot.dateConvert(t))
-            .addField("IDs", "```Message ID: " + m.id + "\nUser ID: " + m.author.id + "```");
+            .addField("Time Deleted", bot.format(t))
+            .addField("IDs", `\`\`\`Message: ${m.id}\nUser: ${m.author.id}\`\`\``);
         logs.send(logsEmbed);
     }
 }
