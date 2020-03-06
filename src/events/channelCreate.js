@@ -15,7 +15,7 @@ module.exports = async (bot, ch) => {
                 logsEmbed.setTitle("Action: Create Channel")
                     .addField("Channel Name", ch.name)
                     .addField("Perpetrator", e.executor.tag)
-                    .addField("Time Created", bot.dateConvert(ch.createdAt))
+                    .addField("Time Created", bot.format(ch.createdAt))
                     .addField("IDs", "```Channel: " + ch.id + "```");
                 logs.send(logsEmbed);
             }
