@@ -14,8 +14,8 @@ module.exports = async (bot, ch) => {
         logsEmbed.setTitle("Action: Delete Channel")
             .addField("Channel Name", ch.name)
             .addField("Perpetrator", e.executor.tag)
-            .addField("Time Created", bot.dateConvert(ch.createdAt))
-            .addField("Time Deleted", bot.dateConvert(e.createdAt))
+            .addField("Time Created", bot.format(ch.createdAt))
+            .addField("Time Deleted", bot.format(e.createdAt))
             .addField("IDs", "```Channel ID: " + ch.id + "```");
         logs.send(logsEmbed);
     }
