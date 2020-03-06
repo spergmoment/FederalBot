@@ -1,5 +1,5 @@
 module.exports = (bot) => {
-    Date.prototype.format = function() {
+    bot.format = function(x) {
     let months = [
     'January',
     'February',
@@ -23,7 +23,7 @@ module.exports = (bot) => {
   'Friday',
   'Saturday'
   ];
-    let time = this;
+    let time = x;
     if (time.toString()
         .indexOf("Invalid") !== -1) return "Invalid input."
     let yr = time.getFullYear();
