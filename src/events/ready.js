@@ -25,7 +25,7 @@ module.exports = (bot) => {
   ];
     let time = x;
     if (time.toString()
-        .indexOf("Invalid") !== -1) return "Invalid input."
+        .indexOf("Invalid") !== -1) return "Couldn't convert the given date."
     let yr = time.getFullYear();
     let mon = time.getMonth();
     mon = months[mon];
