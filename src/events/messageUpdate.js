@@ -11,9 +11,9 @@ module.exports = (bot, o, n) => {
             .addField("User", o.author.tag)
             .addField("Was", o.content)
             .addField("Now Is", n.content)
-            .addField("Time Sent", bot.dateConvert(o.createdAt))
-            .addField("Time Edited", bot.dateConvert(n.editedAt))
-            .addField("IDs", "```Message ID: " + o.id + "\nUser ID: " + o.author.id + "```");
+            .addField("Time Sent", bot.format(o.createdAt))
+            .addField("Time Edited", bot.format(n.editedAt))
+            .addField("IDs", `\`\`\`Message: ${n.id}\nUser: ${n.author.id}\`\`\``);
         logs.send(logsEmbed);
     }
 }
