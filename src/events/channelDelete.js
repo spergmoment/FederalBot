@@ -16,7 +16,7 @@ module.exports = async (bot, ch) => {
             .addField("Perpetrator", e.executor.tag)
             .addField("Time Created", bot.format(ch.createdAt))
             .addField("Time Deleted", bot.format(e.createdAt))
-            .addField("IDs", "```Channel ID: " + ch.id + "```");
+            .addField("IDs", `\`\`\`Channel: ${ch.id}\nPerpetrator: ${e.executor.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };
