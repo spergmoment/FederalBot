@@ -10,7 +10,7 @@ module.exports = async (bot, g, m) => {
     });
     const e = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Ban")
+        logsEmbed.setTitle("Ban User")
             .addField("Banned User", m.tag)
             .addField("Perpetrator", e.executor.tag)
             .addField("Time Banned", bot.format(e.createdAt))
