@@ -111,7 +111,7 @@ module.exports = {
                             member.removeRole(role)
                                 .catch(console.error);
                             det.setDescription(`${msg.member.displayName}, you have been impeached` + 
-                                               ` because no judges approved this detainment in the 5 minutes.`)
+                                ` because no judges approved this detainment in the 5 minutes.`)
                                 .setFooter('Impeached from Officer.');
                         }
                     }, 300000); // waits 5 minutes to check whether they have been approved, 

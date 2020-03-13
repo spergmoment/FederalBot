@@ -9,12 +9,13 @@ module.exports = {
         if (!msg.member.roles.find(r => r.name === "Congress") && !msg.member.roles.find(r => r.name === "Bot Owner")) 
           return msg.channel.send("You must be in Congress to use this command.");
         await msg.delete();
+        if(isNaN(args[0])) return msg.channel.send("The input isn't a number.");
         await msg.channel.send("Clearing...")
             .then(async m => {
                 try {
                     if (args[0]) {
                         await msg.channel.fetchMessages({
-                                limit: args[0],
+                                limit: parseInt(args[0], 10) + 1,
                             })
                             .then(async msgs => {
                                 await msg.channel.bulkDelete(msgs)
@@ -28,7 +29,7 @@ module.exports = {
                             });
                     } else {
                         await msg.channel.fetchMessages({
-                                limit: 20,
+                                limit: 21,
                             })
                             .then(async msgs => {
                                 await msg.channel.bulkDelete(msgs)

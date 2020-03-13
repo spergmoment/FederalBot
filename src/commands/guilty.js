@@ -2,7 +2,13 @@ module.exports = {
     name: 'guilty',
     desc: 'For the judge of a case to rule the defendant `guilty`.',
     usage: ';guilty (reason) (prison sentence)',
-    examples: ";guilty \"Proven to be Sperg's alt. " + "Sperg already has another alt in the server, bug." + "Law 3 states that you may only have one alt in the server at ANY time, thus breaking Law 3. " + "Sperg and his other alt will be put on trial accordingly.\" 24h // Rules the case `guilty`, " + "sentences \"nigward#6969\" to a 1 day prison sentence, and closes the case.",
+    examples: ";guilty \"Proven to be Sperg's alt. " + 
+    "Sperg already has another alt in the server, bug." + 
+    "Law 3 states that you may only have one alt in the server at ANY time, thus breaking Law 3. " + 
+    "Sperg and his other alt will be put on trial accordingly.\" 24h // Rules the case `guilty`, " + 
+    "sentences \"nigward#6969\" to a 1 day prison sentence, and closes the case.",
+    extraNotes: 'If a prison sentence is put on a 1st, 2nd, or 3rd misdemeanor, ' + 
+    "you will be immediately impeached and the user will be freed.",
     execute(msg, bot, args) {
         if (bot.judgeToUse && bot.detainer && bot.courtThing) {
             var send = `${msg.member.displayName}, ${bot.courtThing.displayName} has been found **GUILTY.**`;

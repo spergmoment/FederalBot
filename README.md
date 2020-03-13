@@ -23,7 +23,7 @@ discord.js [reference](https://discord.js.org) ([github](https://www.github.com/
 API [reference](https://www.discordapp.com/developers/docs/intro) ([github](https://github.com/discordapp/discord-api-docs))
 
 Looked through those and still don't understand? Here are your options:
-* Contact me on Discord (I'm bug on the server)
+* Contact me on Discord (AA#1228)
 * Look up other guides
 * Go to dedicated JS servers
 
@@ -70,18 +70,18 @@ Q: What's the point?
 * A: Democracy. It doesn't work in the real world because free speech was a mistake, but works great on discord.
 
 Q: Do you have other bots?
-* A: Many. I may release them on github soon, but for now just this is here.
+* A: Yep! I may release some soon. For now, however, just this is here.
 
 Q: Can I add this to my own server?
-* A: Absolutely! Contact me on discord (shown at the top section) and I will tell you how you can set up the bot for your own server.
+* A: Yes. Contact me on Discord and I will help you.
 
 Ask me any questions on the discord server and I will happily answer them!
 # Extra Info
 
-Version currently running: v1.1.4.2
+Version currently running: v1.1.5-Sequelize
 
-Running on: Arch linux 5.4.15, LXDE desktop env
+Running on: Arch linux 5.5.6, LXDE desktop env
 
-Currently working on: The dreaded ping command, SQL dbs, performance
+Currently working on: Sequelize Databases
 
 Current prefix: ;
