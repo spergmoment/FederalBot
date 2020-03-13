@@ -11,12 +11,12 @@ module.exports = async (bot, ch) => {
     });
     const e = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Delete Channel")
+        logsEmbed.setTitle("Delete Channel")
             .addField("Channel Name", ch.name)
             .addField("Perpetrator", e.executor.tag)
-            .addField("Time Created", bot.dateConvert(ch.createdAt))
-            .addField("Time Deleted", bot.dateConvert(e.createdAt))
-            .addField("IDs", "```Channel ID: " + ch.id + "```");
+            .addField("Time Created", bot.format(ch.createdAt))
+            .addField("Time Deleted", bot.format(e.createdAt))
+            .addField("IDs", `\`\`\`Channel: ${ch.id}\nPerpetrator: ${e.executor.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };

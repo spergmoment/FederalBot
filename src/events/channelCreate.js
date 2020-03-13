@@ -12,11 +12,11 @@ module.exports = async (bot, ch) => {
             const e = entry.entries.first();
             if(!e) e = "Unknown";
             if (logs) {
-                logsEmbed.setTitle("Action: Create Channel")
+                logsEmbed.setTitle("Create Channel")
                     .addField("Channel Name", ch.name)
                     .addField("Perpetrator", e.executor.tag)
-                    .addField("Time Created", bot.dateConvert(ch.createdAt))
-                    .addField("IDs", "```Channel: " + ch.id + "```");
+                    .addField("Time Created", bot.format(ch.createdAt))
+                    .addField("IDs", `\`\`\`Channel: ${ch.id}\nPerpetrator: ${e.executor.id} \`\`\``);
                 logs.send(logsEmbed);
             }
 };

@@ -18,7 +18,9 @@ module.exports = {
         let speaker = msg.member.roles.find(r => r.name === "Speaker of the House");
         let vp = msg.member.roles.find(r => r.name === "Vice President");
         let pres = msg.member.roles.find(r => r.name === "President");
-        if (!officer && !congress && !judge && !cj && !cp && !speaker && !vp && !pres) return msg.channel.send("You are currently unable to resign. If you are in a position " + "which you believe you should be able to resign, please contact Sperg.");
+        if (!officer && !congress && !judge && !cj && !cp && !speaker && !vp && !pres) 
+            return msg.channel.send("You are currently unable to resign. If you are in a position " + 
+                                    "which you believe you should be able to resign, please contact Sperg.");
         if (officer) {
             pos = "Officer";
         }
@@ -54,8 +56,9 @@ module.exports = {
             .then(m => {
                 msg.member.removeRole(msg.guild.roles.find(r => r.name === pos))
                     .catch(console.error);
-                resign.setDescription(msg.member.displayName + ", you have successfully resigned from the position of " + pos + ".")
-                    .setFooter('Resigned from ' + pos);
+                resign.setDescription(`${msg.member.displayName}, you have successfully resigned ` +
+                                      `from the position of ${pos}.`)
+                    .setFooter(`Resigned from ${pos}`);
                 bot.logEmbed.setTitle("Action: Resign")
                     .addField("Perpetrator", msg.member.user.tag)
                     .addField("Position", pos);

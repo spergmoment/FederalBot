@@ -1,13 +1,18 @@
 module.exports = {
     name: 'detain',
-    desc: "For Officers to detain someone who has broken the law. " + "A Judge must `;approve` the detainment within 5 minutes," + " where they will be promptly sent to court. If no judge approves it, " + "the Officer is impeached!",
+    desc: "For Officers to detain someone who has broken the law. " + 
+    "A Judge must `;approve` the detainment within 5 minutes," + 
+    " where they will be promptly sent to court. If no judge approves it, " + 
+    "the Officer is impeached!",
     usage: ';detain (member) (law broken) (evidence)',
-    examples: ";detain @nigward#6969 3 (evidence) // Detains member \"nigward#6969\", " + "which can be approved by a Judge.",
+    examples: ";detain @nigward#6969 3 (evidence) // Detains member \"nigward#6969\", " + 
+    "which can be approved by a Judge.",
     async execute(msg, bot, args) {
         const Discord = require("discord.js");
         let member = msg.mentions.members.first();
         bot.evidence = args.slice(2);
-        if (!msg.member.roles.find(r => r.name === "Officer") && !msg.member.roles.find(r => r.name === "Chief of Police")) {
+        if (!msg.member.roles.find(r => r.name === "Officer") && 
+            !msg.member.roles.find(r => r.name === "Chief of Police")) {
             return msg.channel.send("You can not use this command!");
         }
         if (!member) {
@@ -74,7 +79,7 @@ module.exports = {
                 });
         }
         if (!member || !bot.reason || !bot.evidence) return;
-        msg.channel.send("Detaining " + member.displayName + "...")
+        msg.channel.send(`Detaining ${member.displayName}...`)
             .then(m => {
                 const det = new Discord.RichEmbed()
                     .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
@@ -82,7 +87,10 @@ module.exports = {
                     .setColor('RANDOM');
                 bot.detainer = msg.member;
                 let role = msg.guild.roles.find(r => r.name === "Detained");
-                det.setDescription(`${msg.member.displayName}, I have detained ${member.displayName}` + `, for reason ${bot.reason}, with evidence ${bot.evidence}. ` + `A judge must **;approve** this detain within **5 minutes** or you will be IMPEACHED!`)
+                det.setDescription(`${msg.member.displayName}, I have detained ${member.displayName}` + 
+                                   `, for reason ${bot.reason}, with evidence ${bot.evidence}. ` + 
+                                   `A judge must **;approve** this detain within **5 minutes** ` +
+                                   `or you will be IMPEACHED!`)
                     .setFooter(`User ${member.displayName} has been detained.`);
                     console.log(bot.logsEmbed);
                 bot.logEmbed
@@ -96,15 +104,18 @@ module.exports = {
                     .catch(console.error);
                 setTimeout(
                     () => {
-                        if (!member.roles.find(r => r.name === "Court")) { // checks if the detainment was approved by a judge or not
+                        if (!member.roles.find(r => r.name === "Court")) { 
+                            // checks if the detainment was approved by a judge or not
                             msg.member.removeRole(msg.guild.roles.find(r => r.name === "Officer"))
                                 .catch(console.error);
                             member.removeRole(role)
                                 .catch(console.error);
-                            det.setDescription(msg.member.displayName + ", you have been impeached because no judges approved this detainment in the 5 minutes.")
+                            det.setDescription(`${msg.member.displayName}, you have been impeached` + 
+                                               ` because no judges approved this detainment in the 5 minutes.`)
                                 .setFooter('Impeached from Officer.');
                         }
-                    }, 300000); // waits 5 minutes to check whether they have been approved, does nothing if it has but impeaches you if it hasn't
+                    }, 300000); // waits 5 minutes to check whether they have been approved, 
+                                // does nothing if it has but impeaches you if it hasn't
                 msg.channel.send(det);
                 m.delete();
             });

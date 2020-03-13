@@ -10,13 +10,13 @@ module.exports = async (bot, r) => {
     });
     const e = entry.entries.first();
     if (logs) {
-        logsEmbed.setTitle("Action: Create Role")
+        logsEmbed.setTitle("Create Role")
             .addField("Name", r.name)
             .addField("Position", r.calculatedPosition)
             .addField("Hex", r.hexColor)
             .addField("Perpetrator", e.executor.tag)
-            .addField("Time Created", bot.dateConvert(r.createdAt))
-            .addField("IDs", "```Role ID: " + r.id + "```");
+            .addField("Time Created", bot.format(r.createdAt))
+            .addField("IDs", `\`\`\`Role: ${r.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };

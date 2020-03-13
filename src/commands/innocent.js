@@ -14,12 +14,16 @@ module.exports = {
                 .setAuthor(msg.author.tag, msg.author.avatarURL, msg.author.avatarURL)
                 .setTimestamp()
                 .setColor("RANDOM");
-            if (msg.channel.parent.name !== "court") return msg.channel.send("Please use this in a valid court case.");
-            if (msg.member.user.id !== bot.judgeToUse.user.id) return msg.channel.send("You must be the judge of a case to use this command.");
-            if (args.length === 0) return msg.channel.send("Please provide a reason.");
+            if (msg.channel.parent.name !== "court") 
+                return msg.channel.send("Please use this in a valid court case.");
+            if (msg.member.user.id !== bot.judgeToUse.user.id) 
+                return msg.channel.send("You must be the judge of a case to use this command.");
+            if (args.length === 0) 
+                return msg.channel.send("Please provide a reason.");
             msg.channel.send("Ruling case as innocent...")
                 .then(m => {
-                    inno.setDescription(msg.member.displayName + ", " + bot.courtThing.displayName + " has been found **INNOCENT.**")
+                    inno.setDescription(`${msg.member.displayName}, ` +
+                                        `${bot.courtThing.displayName} has been found **INNOCENT.**`)
                         .setFooter('Ruled this case as innocent.');
                     msg.channel.send(inno);
                     bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Court"));

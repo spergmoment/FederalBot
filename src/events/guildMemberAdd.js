@@ -14,10 +14,10 @@ module.exports = (bot, mem) => {
                 logsEmbed.setTitle("User Joined")
                     .addField("User", mem.user.tag)
                     .addField("Avatar URL", mem.user.avatarURL)
-                    .addField("Account Creation Date", bot.dateConvert(mem.user.createdAt))
-                    .addField("Time Joined", bot.dateConvert(mem.joinedAt))
-                    .addField("Invite Used", invite.code + " created by " + inviter.tag + ", used " + invite.uses + " times.")
-                    .addField("IDs", "```User ID: " + mem.user.id + "\nInviter ID: " + inviter.id + "```");
+                    .addField("Account Creation Date", bot.format(mem.user.createdAt))
+                    .addField("Time Joined", bot.format(mem.joinedAt))
+                    .addField("Invite Used", `${invite.code}, created by ${inviter.tag}, used ${invite.uses} times.`)
+                    .addField("IDs", `\`\`\`User: ${mem.user.id}\nInviter: ${inviter.id}\`\`\``);
                 logs.send(logsEmbed);
             }
         });

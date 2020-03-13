@@ -20,7 +20,7 @@ module.exports = {
                                 await msg.channel.bulkDelete(msgs)
                                     .catch(error => console.log(error.stack));
                             });
-                        await m.edit("Cleared " + args[0] + " messages.")
+                        await m.edit(`Cleared ${args[0]} messages.`)
                             .then(async m => {
                                 setTimeout(async () => {
                                     await m.delete();
@@ -42,7 +42,7 @@ module.exports = {
                             });
                     }
                 } catch (err) {
-                    msg.channel.send("An error occurred:\n" + err);
+                    msg.channel.send(`An error occurred:\n${err}`);
                 }
             });
     }

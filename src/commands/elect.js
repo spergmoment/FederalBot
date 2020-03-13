@@ -2,16 +2,20 @@ module.exports = {
     name: 'elect',
     desc: 'For Pres or Bot Owners to create elections for CJ, CP, Speaker, Pres, or VP.',
     usage: ';elect (Number of candidates) (Position to elect for) (Candidates...)',
-    examples: ';elect 2 President @bruh#2366 @sperg#6969 // Creates an election with 2 slots, " + "the position being President, and the candidates being bruh and sperg',
+    examples: ';elect 2 President @bruh#2366 @sperg#6969 // Creates an election with 2 slots, ' +
+    "the position being President, and the candidates being bruh and sperg",
     execute(msg, bot, args) {
         if (args.length < 4) return msg.channel.send("Please insert more arguments.");
         let num = args[0]; // this saves some space too
         let pos = args[1];
-        if (!msg.member.roles.find(r => r.name === "President") && !msg.member.roles.find(r => r.name === "Bot Owner")) return msg.channel.send("You must be the President or a Bot Owner to use this command.");
+        if (!msg.member.roles.find(r => r.name === "President") && 
+            !msg.member.roles.find(r => r.name === "Bot Owner")) 
+            return msg.channel.send("You must be the President or a Bot Owner to use this command.");
         msg.delete();
         msg.channel.send("Creating election...")
             .then(async ms => {
-                let electTo = "Yo @everyone, it's election time. Vote here for the " + pos + ". Note: Using alts to vote is *not* allowed and will get you disqualified.";
+                let electTo = "Yo @everyone, it's election time. Vote here for the " + 
+                    `${pos}. Note: Using alts to vote is *not* allowed and will get you disqualified.`;
                 for (let i = 0; i < num; i++) {
                     electTo += ("\n\n" + (i + 1) + ": " + args[i + 2]); // basically the number of the candidate
                 }
