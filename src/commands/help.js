@@ -21,11 +21,11 @@ module.exports = {
                 .addField(";reset", "For bot owners to stop the process of FederalBot.")
                 .addField(";guilty", "For the judge of a case to rule the defendant as `guilty`.")
                 .addField(";innocent", "For the judge of a case to rule the defendant as `not guilty`.")
+                .addField(";mistrial", "For the judge of a case to rule the case as a `mistrial`.")
                 .setFooter('Page 1 of 2');
             msg.channel.send(help);
         } else if (args[0] === '2') {
-            help.addField(";mistrial", "For the judge of a case to rule the case as a `mistrial`.")
-                .addField(";law", "Displays any of the 9 current laws.")
+            help.addField(";law", "Displays any of the 9 current laws.")
                 .addField(";right", "Displays any of the 10 current rights.")
                 .addField(";update", "For bot owners/admins to display updates to the bot.")
                 .addField(";module", "Displays the various modules of FederalBot.")
@@ -35,6 +35,7 @@ module.exports = {
                 .addField(";ping", "Get various pings from the API or Client to the message, API/Client, or your client.")
                 .addField(";warrant", "Grant a warrant for arrest.")
                 .addField(";arrest", "Arrest on a granted warrant.")
+                .addField(";misdemeanors", "Get the amount of misdemeanors on you or another member.")
                 .setFooter('Page 2 of 2');
             msg.channel.send(help);
         } else {

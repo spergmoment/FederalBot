@@ -15,7 +15,7 @@ module.exports = async (bot, e) => {
             .addField("Author", en.executor.tag)
             .addField("URL", e.url)
             .addField("Time Created", bot.format(e.createdAt))
-            .addField("IDs", `\`\`\`Emoji: ${e.id}\nPerpetrator: ${en.executor.id)\`\`\``);
+            .addField("IDs", `\`\`\`Emoji: ${e.id}\nPerpetrator: ${en.executor.id}\`\`\``);
         logs.send(logsEmbed);
     }
 };
