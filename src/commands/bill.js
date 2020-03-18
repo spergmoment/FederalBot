@@ -18,12 +18,7 @@ module.exports = {
         msg.channel.send("Creating bill...")
             .then(async m => {
                 const billMsg = args.join(" ");
-                bill.setTitle(`Bill in Congress by ${msg.member.user.tag}.`)
-                    .setDescription(billMsg)
-                    .setFooter('Bill proposed!');
-                msg.delete()
-                    .catch(O_o => {});
-                msg.channel.send(bill)
+                msg.channel.send(billMsg)
                     .then(async msg => {
                         try {
                             await msg.pin();
@@ -32,7 +27,6 @@ module.exports = {
                             await msg.channel.send(`${msg.guild.roles.find(r => r.name === "Congress")} bill in $` +
                                                    `{msg.guild.channels.find(c => c.name === "congress" 
                                                     && c.type === "text")}`); 
-                            // @Congress bill in #congress
                         } catch (error) {
                             console.log(error);
                         }

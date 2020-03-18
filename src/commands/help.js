@@ -30,7 +30,6 @@ module.exports = {
                 .addField(";update", "For bot owners/admins to display updates to the bot.")
                 .addField(";module", "Displays the various modules of FederalBot.")
                 .addField(";bill", "Creates a bill in Congress.")
-                .addField(";eval", "For Bot Owners to evaluate, or execute, code.")
                 .addField(";clear", "For Congress members to clear up to 100 messages in a channel.")
                 .addField(";ping", "Get various pings from the API or Client to the message, API/Client, or your client.")
                 .addField(";warrant", "Grant a warrant for arrest.")
@@ -52,7 +51,7 @@ module.exports = {
                 }
             }
             if (command.extraNotes) help.addField("Extra notes", command.extraNotes);
-            msg.channel.send(help);
+            if (command.name !== "help" && command.name !== "eval") msg.channel.send(help);
         }
     }
 };
