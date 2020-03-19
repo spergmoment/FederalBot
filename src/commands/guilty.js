@@ -23,7 +23,7 @@ module.exports = {
                 if (bot.reason == 1 || bot.reason == 9 || bot.reason == 10 || bot.reason == 11) {
                     var mrmeanor = await bot.Misdemeanors.findOne({
                         where: {
-                            name: bot.courtThing.id
+                            user: bot.courtThing.id
                         }
                     });
                     if (!mrmeanor) {
@@ -31,11 +31,10 @@ module.exports = {
                             user: bot.courtThing.id,
                             username: bot.courtThing.user.username,
                             guild: msg.guild.id,
-                            misdemeanors: 1,
+                            misdemeanors: 0,
                         });
-                    } else {
-                        mrmeanor.increment("misdemeanors");
                     }
+                    mrmeanor.increment('misdemeanors');
                     send += ` and charged with a MISDEMEANOR. This is misdemeanor **${mrmeanor.misdemeanors}**.`;
                     if (mrmeanor.misdemeanors > 3) {
                         if (args[args.length - 1]) {
@@ -43,10 +42,12 @@ module.exports = {
                             send += " They have also been charged with a FELONY.";
                         } else {
                             return msg.channel.send("Please give a time of imprisonment!");
+                            mrmeanor.decrement('misdemeanors');
                         }
                     }
                 }
-                bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Muted")).removeRole(msg.guild.roles.find(r => r.name === "Court"));
+                bot.courtThing.addRole(msg.guild.roles.find(r => r.name === "Muted"));
+                bot.courtThing.removeRole(msg.guild.roles.find(r => r.name === "Court"));
                 guilty.setDescription(send).setFooter('Ruled the case as guilty.');
                 msg.channel.send(guilty);
                 var cj = msg.guild.roles.find(r => r.name === "Chief Justice");
