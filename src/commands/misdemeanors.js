@@ -23,7 +23,9 @@ module.exports = {
             });
         }
         if (!mrmeanor) return msg.channel.send("I either couldn't find any misdemeanors for that user, or another error has occured.");
-        const mEmbed = new Discord.RichEmbed().setDescription(`${msg.author.tag}, ${msg.author.id===mrmeanor.name ? `you have ` : `${msg.mentions.members.first().displayName} has `} **${mrmeanor.misdemeanors}** misdemeanors.`).setAuthor(msg.author, msg.author.displayAvatarURL, msg.author.displayAvatarURL).setTimestamp();
+        const mEmbed = new Discord.RichEmbed()
+        .setDescription(`${msg.author.tag}, ${msg.author.id===mrmeanor.name ? `you have ` : `${msg.mentions.members.first().displayName} has `} **${mrmeanor.misdemeanors}** misdemeanors.`)
+        .setAuthor(msg.author.tag, msg.author.displayAvatarURL, msg.author.displayAvatarURL).setTimestamp();
         msg.channel.send(mEmbed);
     }
 };

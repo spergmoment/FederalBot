@@ -90,7 +90,7 @@ module.exports = {
                         }
                         await channel.setParent(category.id);
                                 var thing = `**Court Case:**\n\n${bot.detainer} vs. ` +
-                                    `${bot.courtThing.user}. Law broken: ${bot.reason}`;
+                                    `${bot.courtThing.user}. Law broken: ${bot.reason}\n`;
                                 if (bot.evidence) thing += `Evidence: ${bot.evidence}\n`;
                                 var lawChannel = msg.guild.channels.find(c => c.name === "laws");
                                 var rightChannel = msg.guild.channels.find(c => c.name === "rights");
