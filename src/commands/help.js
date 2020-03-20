@@ -1,6 +1,7 @@
 /* jshint esversion: 8 */
 module.exports = {
     name: 'help',
+    noDocs: true,
     execute(msg, bot, args) {
         const Discord = require("discord.js");
         const help = new Discord.RichEmbed()
@@ -40,6 +41,7 @@ module.exports = {
         } else {
             const command = commands.get(args[0]) || commands.find(c => c.aliases && c.aliases.includes(args[0]));
             if (!command) return msg.channel.send("That is not a valid command.");
+            if(command.noDocs) return msg.channel.send("That command exists, but does not have documentation. If you believe this is in error, please contact a bot owner by DMing me a ;ticket.");
             if (command.name) help.setTitle(`;${command.name}`);
             if (command.desc) help.setDescription(command.desc);
             if (command.usage) help.addField("Usage", command.usage);
@@ -51,7 +53,7 @@ module.exports = {
                 }
             }
             if (command.extraNotes) help.addField("Extra notes", command.extraNotes);
-            if (command.name !== "help" && command.name !== "eval") msg.channel.send(help);
+            msg.channel.send(help);
         }
     }
 };
