@@ -1,9 +1,6 @@
 module.exports = {
     name: "eval",
-    desc: 'For Bot Owners to evaluate JS code. Can also be used as a calculator.',
-    usage: ';eval (code)',
-    examples: ";eval Math.PI*4 // Outputs a response containing the input, and returns 12.68.",
-    extraNotes: 'If the code detects an error, it returns that error.',
+    noDocs: true,
     execute(msg, bot, args) {
         const util = require("util");
         const Discord = require("discord.js");
@@ -23,15 +20,15 @@ module.exports = {
                         result = result.replace(msg.client.token, 'null');
                         const evalEmbed = new Discord.RichEmbed()
                             .setColor("RANDOM")
-                            .addField("Eval```js\n" + args.join(" ") + "```")
-                            .addField("Returns```js\n" + result + "`````");
+                            .addField("Eval", "```js\n" + args.join(" ") + "```")
+                            .addField("Returns", "```js\n" + result + "```");
                         msg.channel.send(evalEmbed);
                         m.delete();
                     } catch (err) {
                         const evalEmbed = new Discord.RichEmbed()
                             .setColor("RED")
-                            .addField("Eval```js\n" + args.join(" ") + "```")
-                            .addField("Error```js\n" + err + "`````");
+                            .addField("Eval", "```js\n" + args.join(" ") + "```")
+                            .addField("Error", "```js\n" + err + "```");
                         msg.channel.send(evalEmbed);
                         m.delete();
                     }

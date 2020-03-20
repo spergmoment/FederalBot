@@ -1,3 +1,4 @@
+/* jshint esversion: 8 */
 const Discord = require("discord.js");
 const fs = require("fs");
 const bot = new Discord.Client();
@@ -40,30 +41,30 @@ for (const file of commandFiles) {
 }
 bot.once('ready', () => {
     bot.Misdemeanors.sync();
-    bot.format = function(x) {
+    bot.format = function (x) {
         let months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
         let weeks = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday'
-  ];
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday'
+        ];
         let time = x;
         if (time.toString().indexOf("Invalid") !== -1) return "Couldn't convert the given date.";
         let yr = time.getFullYear();
@@ -121,14 +122,23 @@ bot.once('ready', () => {
         });
     });
 });
-bot.on('message', msg => {
+bot.on('message', async msg => {
+    if (msg.channel.type === "dm") {
+        if (!msg.content.includes(";help") && !msg.content.includes(";ticket") && msg.author.id !== "670803998432952320" && msg.author.id !== "628041675851300864" && msg.author.id !== bot.user.id) {
+            return msg.channel.send("Hey! If you need any help, please do `;ticket` and I'll relay your help to the bot owners!");
+        } else if (msg.content.includes(";help") || msg.content.includes(";ticket")) {
+            var h;
+        } else {
+            return;
+        }
+    }
     if (!msg.content.startsWith(config.prefix) || msg.author.bot) return;
     const args = msg.content.slice(config.prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command = bot.commands.get(commandName) || bot.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
     if (!command) return;
     bot.logEmbed = new Discord.RichEmbed().setColor('RANDOM').setTimestamp().setDescription("").setTitle("");
-    bot.logs = msg.guild.channels.find(r => r.name === "logs" && r.type === "text");
+    if (msg.guild) bot.logs = msg.guild.channels.find(r => r.name === "logs" && r.type === "text");
     try {
         command.execute(msg, bot, args);
     } catch (error) {
