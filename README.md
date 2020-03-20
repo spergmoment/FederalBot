@@ -78,10 +78,10 @@ Q: Can I add this to my own server?
 Ask me any questions on the discord server and I will happily answer them!
 # Extra Info
 
-Version currently running: v1.1.5-Sequelize
+Version currently running: v1.1.6
 
 Running on: Arch linux 5.5.6, LXDE desktop env
 
-Currently working on: Sequelize Databases
+Currently working on: Major rework (check #33)
 
 Current prefix: ;
